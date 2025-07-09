@@ -1,0 +1,308 @@
+{
+  "page": {
+    "title": "CDR Reports",
+    "description": "View and analyze call detail records with advanced filtering and export capabilities",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "cdrReports": "CDR Reports"
+    }
+  },
+  "loading": {
+    "title": "Loading CDR Reports",
+    "subtitle": "Fetching call detail records..."
+  },
+  "errors": {
+    "loadingTitle": "Error Loading CDR Reports",
+    "loadingDescription": "There was an error loading the CDR data",
+    "tryAgain": "Try Again",
+    "noSippyAccountTitle": "No Sippy Account ID",
+    "noSippyAccountDescription": "Your user account doesn't have a Sippy Account ID configured.",
+    "noSippyAccountMessage": "Please contact an administrator to set up your Sippy account."
+  },
+  "header": {
+    "title": "Call Detail Records",
+    "recordCount": "{count} record for account {accountId}",
+    "recordCountPlural": "{count} records for account {accountId}",
+    "filteredBy": "Filtered by: {filter}",
+    "hiddenRecords": "({count} hidden)",
+    "lastUpdated": "Last updated {time}",
+    "buttons": {
+      "filters": "Filters",
+      "refresh": "Refresh",
+      "exportCsv": "Export CSV"
+    }
+  },
+  "stats": {
+    "totalRecords": {
+      "title": "Total Records",
+      "value": "{count}"
+    },
+    "totalCost": {
+      "title": "Total Cost",
+      "value": "{amount}"
+    },
+    "avgDuration": {
+      "title": "Avg Duration",
+      "value": "{duration}"
+    },
+    "successRate": {
+      "title": "Success Rate",
+      "value": "{rate}%",
+      "subtitle": "{successful} of {total} calls"
+    }
+  },
+  "filters": {
+    "title": "Filters",
+    "close": "Close",
+    "fields": {
+      "type": {
+        "label": "Type",
+        "placeholder": "Select type",
+        "options": {
+          "nonZeroAndErrors": "Non-zero and Errors",
+          "nonZero": "Non-zero Duration",
+          "all": "All",
+          "complete": "Completed Calls",
+          "incomplete": "Incomplete Calls",
+          "errors": "Errors"
+        }
+      },
+      "resultType": {
+        "label": "Result Type",
+        "placeholder": "All result types",
+        "options": {
+          "all": "All Result Types",
+          "success": "✅ Successful Calls",
+          "billing": "💰 Billing Issues",
+          "rateLimiting": "⚡ Rate Limiting",
+          "translation": "🔄 Translation Errors",
+          "capacity": "📊 Capacity Issues",
+          "routing": "🛣️ Routing Problems",
+          "protocol": "📡 Protocol Errors",
+          "account": "👤 Account Issues",
+          "compliance": "⚖️ Compliance (DNC)",
+          "clientError": "❌ Client Errors (4xx)",
+          "serverError": "🔥 Server Errors (5xx)"
+        }
+      },
+      "startDate": {
+        "label": "Start Date"
+      },
+      "endDate": {
+        "label": "End Date"
+      },
+      "cli": {
+        "label": "CLI",
+        "placeholder": "Filter by CLI"
+      },
+      "cld": {
+        "label": "CLD",
+        "placeholder": "Filter by CLD"
+      }
+    },
+    "buttons": {
+      "apply": "Apply Filters",
+      "clear": "Clear Filters",
+      "searching": "Searching..."
+    }
+  },
+  "table": {
+    "title": "Call Detail Records",
+    "showing": "Showing {start}-{end} of {total} records",
+    "headers": {
+      "call": "Call",
+      "connectTime": "Connect Time",
+      "duration": "Duration",
+      "cost": "Cost",
+      "country": "Country",
+      "protocol": "Protocol",
+      "result": "Result",
+      "remoteIp": "Remote IP"
+    },
+    "row": {
+      "billed": "Billed: {duration}",
+      "na": "N/A"
+    },
+    "empty": {
+      "title": "No CDR Records Found",
+      "description": "No call detail records found for account {accountId}. Try adjusting your filters or date range."
+    }
+  },
+  "pagination": {
+    "showing": "Showing {start}-{end} of {total} records",
+    "recordsPerPage": "Records per page:",
+    "page": "Page {current} of {total}",
+    "buttons": {
+      "first": "First page",
+      "previous": "Previous page",
+      "next": "Next page",
+      "last": "Last page"
+    }
+  },
+  "resultCodes": {
+    "title": "Understanding Result Codes",
+    "description": "Common result codes and their meanings to help you understand call outcomes",
+    "categories": {
+      "successful": {
+        "title": "Successful Calls"
+      },
+      "commonIssues": {
+        "title": "Common Issues"
+      },
+      "systemErrors": {
+        "title": "System Errors"
+      }
+    }
+  },
+  "resultLabels": {
+    "success": "Success",
+    "externalTranslatorRejected": "External Translator Rejected",
+    "bodylessInvite": "Body-less INVITE",
+    "accountExpired": "Account Expired",
+    "connectionCapacityExceeded": "Connection Capacity Exceeded",
+    "malformedSdp": "Malformed SDP",
+    "unsupportedContentType": "Unsupported Content-Type",
+    "unacceptableCodec": "Unacceptable Codec",
+    "invalidCldTranslationAuth": "Invalid CLD Translation (Auth)",
+    "invalidCliTranslationAuth": "Invalid CLI Translation (Auth)",
+    "invalidCldTranslationAccount": "Invalid CLD Translation (Account)",
+    "invalidCliTranslationAccount": "Invalid CLI Translation (Account)",
+    "cannotFindSession": "Cannot Find Session",
+    "invalidCliTranslationDid": "Invalid CLI Translation (DID)",
+    "noRateFound": "No Rate Found",
+    "callLoopDetected": "Call Loop Detected",
+    "tooManySessions": "Too Many Sessions",
+    "accountInUse": "Account In Use",
+    "cpsLimitAccount": "CPS Limit (Account)",
+    "cpsLimitSystem": "CPS Limit (System)",
+    "insufficientBalance": "Insufficient Balance",
+    "forbiddenDestination": "Destination Forbidden",
+    "noCustomerRate": "No Customer Rate",
+    "lossProtection": "Loss Protection",
+    "addressIncomplete": "Address Incomplete",
+    "noRoutesFound": "No Routes Found",
+    "cpsLimitConnection": "CPS Limit (Connection)",
+    "invalidAssertedId": "Invalid Asserted ID",
+    "cldInDncList": "CLD in DNC List",
+    "invalidCldTranslationDid": "Invalid CLD Translation (DID)",
+    "callCanceled": "Call Canceled",
+    "cpsLimitCustomer": "CPS Limit (Customer)",
+    "tooManySessionsCustomer": "Too Many Sessions (Customer)",
+    "cpsLimitAuthRule": "CPS Limit (Auth Rule)",
+    "tooManySessionsAuthRule": "Too Many Sessions (Auth Rule)",
+    "invalidCliTranslationPreRouting": "Invalid CLI Translation (Pre-Routing)",
+    "invalidCldTranslationPreRouting": "Invalid CLD Translation (Pre-Routing)",
+    "cliInDncList": "CLI in DNC List",
+    "trying": "Trying",
+    "ringing": "Ringing",
+    "callBeingForwarded": "Call Being Forwarded",
+    "queued": "Queued",
+    "sessionProgress": "Session Progress",
+    "ok": "OK",
+    "accepted": "Accepted",
+    "multipleChoices": "Multiple Choices",
+    "movedPermanently": "Moved Permanently",
+    "movedTemporarily": "Moved Temporarily",
+    "useProxy": "Use Proxy",
+    "alternativeService": "Alternative Service",
+    "busyHere": "Busy Here",
+    "numberNotFound": "Number Not Found",
+    "serverErrors": "Server Errors"
+  },
+  "resultDescriptions": {
+    "success": "Call completed successfully",
+    "externalTranslatorRejected": "External Translator Rejected The Call",
+    "bodylessInvite": "Body-less INVITE",
+    "accountExpired": "Account Expired",
+    "connectionCapacityExceeded": "Connection Capacity Exceeded",
+    "malformedSdp": "Malformed SDP",
+    "unsupportedContentType": "Unsupported Content-Type",
+    "unacceptableCodec": "Unacceptable Codec",
+    "invalidCldTranslationAuth": "Invalid CLD Translation Rule In The Authentication Rule",
+    "invalidCliTranslationAuth": "Invalid CLI Translation Rule In The Authentication Rule",
+    "invalidCldTranslationAccount": "Invalid CLD Translation Rule In The Account",
+    "invalidCliTranslationAccount": "Invalid CLI Translation Rule In The Account",
+    "cannotFindSession": "Cannot Find The Session To Bind To",
+    "invalidCliTranslationDid": "Invalid CLI Translation Rule In The DID",
+    "noRateFound": "No Rate Found In Tariff",
+    "callLoopDetected": "Call Loop Detected",
+    "tooManySessions": "Too Many Sessions",
+    "accountInUse": "Account Is In Use",
+    "cpsLimitAccount": "Call Per Second (CPS) Limit On Account Exceeded",
+    "cpsLimitSystem": "Call Per Second (CPS) System Limit Exceeded",
+    "insufficientBalance": "Insufficient Balance",
+    "forbiddenDestination": "Destination Is Forbidden",
+    "noCustomerRate": "No Rate Found In Customer's Tariff",
+    "lossProtection": "Loss Protection",
+    "addressIncomplete": "Address Is Incomplete",
+    "noRoutesFound": "No Routes Found",
+    "cpsLimitConnection": "Call Per Second (CPS) Limit On Connection Exceeded",
+    "invalidAssertedId": "Invalid Asserted ID Translation Rule In The Account",
+    "cldInDncList": "CLD is in the Do Not Call List",
+    "invalidCldTranslationDid": "Invalid CLD Translation Rule In The DID",
+    "callCanceled": "Call has been canceled by calling party",
+    "cpsLimitCustomer": "Call Per Second (CPS) Limit On Customer Exceeded",
+    "tooManySessionsCustomer": "Too Many Sessions For Customer",
+    "cpsLimitAuthRule": "Call Per Second (CPS) Limit On Auth Rule Exceeded",
+    "tooManySessionsAuthRule": "Too Many Sessions For Auth Rule",
+    "invalidCliTranslationPreRouting": "Invalid CLI Translation Rule In The Pre-Routing Rule",
+    "invalidCldTranslationPreRouting": "Invalid CLD Translation Rule In The Pre-Routing Rule",
+    "cliInDncList": "CLI is in the Do Not Call List",
+    "trying": "Trying",
+    "ringing": "Ringing",
+    "callBeingForwarded": "Call Is Being Forwarded",
+    "queued": "Queued",
+    "sessionProgress": "Session Progress",
+    "ok": "OK",
+    "accepted": "Accepted",
+    "multipleChoices": "Multiple Choices",
+    "movedPermanently": "Moved Permanently",
+    "movedTemporarily": "Moved Temporarily",
+    "useProxy": "Use Proxy",
+    "alternativeService": "Alternative Service"
+  },
+  "categories": {
+    "successful": "Successful",
+    "translation": "Translation",
+    "protocol": "Protocol",
+    "account": "Account",
+    "capacity": "Capacity",
+    "media": "Media",
+    "session": "Session",
+    "billing": "Billing",
+    "routing": "Routing",
+    "rateLimiting": "Rate Limiting",
+    "quality": "Quality",
+    "addressing": "Addressing",
+    "compliance": "Compliance",
+    "userAction": "User Action",
+    "provisional": "Provisional",
+    "success": "Success",
+    "redirection": "Redirection",
+    "clientError": "Client Error",
+    "serverError": "Server Error",
+    "globalFailure": "Global Failure"
+  },
+  "tooltips": {
+    "tip": "Tip:",
+    "billing": "Check account balance and billing configuration",
+    "rateLimiting": "Consider adjusting CPS limits or contact support",
+    "translation": "Review CLI/CLD translation rules configuration"
+  },
+  "export": {
+    "csvHeaders": {
+      "callId": "Call ID",
+      "connectTime": "Connect Time",
+      "duration": "Duration",
+      "billedDuration": "Billed Duration",
+      "cli": "CLI",
+      "cld": "CLD",
+      "cost": "Cost",
+      "country": "Country",
+      "description": "Description",
+      "result": "Result",
+      "protocol": "Protocol",
+      "remoteIp": "Remote IP"
+    }
+  }
+} 

@@ -1,0 +1,101 @@
+phoneNumber,firstName,lastName,address,city,zipCode,company,department,notes
++33123456789,Test,Success,1 Rue Test,Paris,75001,Test Company,Test,Always succeeds in simulation
++33987654321,Test,Fail,2 Rue Test,Lyon,69001,Test Company,Test,Always fails in simulation
++33555666777,Test,Blacklist,3 Rue Test,Marseille,13001,Test Company,Test,Blacklisted in simulation
++33444555666,Test,RateLimit,4 Rue Test,Toulouse,31000,Test Company,Test,Rate limited in simulation
++33710763809,Olivier,Garnier,396 Avenue de la Liberté,Brest,15070,Stratégie Digitale,Marketing,Contact professionnel de Stratégie Digitale
++33717818970,Jean,Morel,376 Rue de la République,Limoges,92711,Innovation Solutions,Support,Contact professionnel de Innovation Solutions
++33729818543,Valérie,Bonnet,446 Rue Victor Hugo,Metz,07539,Développement Plus,Direction,Contact professionnel de Développement Plus
++33776026577,Pierre,Leroy,637 Avenue Montaigne,Dijon,63480,Stratégie Digitale,IT,Contact professionnel de Stratégie Digitale
++33638542511,Philippe,Lambert,953 Avenue Montaigne,Clermont-Ferrand,89517,Digital Pro,Comptabilité,Contact professionnel de Digital Pro
++33643112213,Patrick,Moreau,778 Boulevard Voltaire,Lille,89607,France Business,Ventes,Contact professionnel de France Business
++33766312191,Patricia,Durand,39 Rue du Faubourg Saint-Honoré,Strasbourg,89729,Innovation Solutions,Support,Contact professionnel de Innovation Solutions
++33723596076,Frédéric,Bernard,767 Rue Victor Hugo,Nice,94945,Consulting Expert,Ventes,Contact professionnel de Consulting Expert
++33659602894,Sylvie,Thomas,18 Avenue de la Liberté,Reims,88172,Management Pro,Ventes,Contact professionnel de Management Pro
++33674768660,Sophie,Garnier,857 Boulevard Saint-Germain,Le Mans,52646,France Business,IT,Contact professionnel de France Business
++33690680071,Antoine,Vincent,795 Rue Nationale,Bordeaux,79714,Digital Pro,Marketing,Contact professionnel de Digital Pro
++33652565859,Dominique,Fournier,835 Rue de Rivoli,Perpignan,80261,Innovation Solutions,Direction,Contact professionnel de Innovation Solutions
++33711817992,Sandrine,Dubois,688 Rue de la Paix,Montpellier,92850,Management Pro,Direction,Contact professionnel de Management Pro
++33626945081,Chantal,Martinez,30 Rue Victor Hugo,Marseille,03474,Solutions Avancées,IT,Contact professionnel de Solutions Avancées
++33784570151,Alexandre,Lefèvre,705 Avenue des Champs-Élysées,Strasbourg,40317,Stratégie Digitale,Ventes,Contact professionnel de Stratégie Digitale
++33723684539,Pascal,Bernard,822 Rue Victor Hugo,Dijon,20526,France Business,Comptabilité,Contact professionnel de France Business
++33780018632,Alexandre,Vincent,829 Boulevard Saint-Germain,Limoges,44707,Développement Plus,IT,Contact professionnel de Développement Plus
++33603242553,Alexandre,Girard,362 Avenue Jean Jaurès,Le Havre,57314,Services Premium,IT,Contact professionnel de Services Premium
++33737079246,Françoise,Mercier,593 Avenue Jean Jaurès,Brest,61694,Solutions Avancées,Marketing,Contact professionnel de Solutions Avancées
++33603594512,Sophie,Bertrand,327 Avenue Jean Jaurès,Metz,67343,Management Pro,Ventes,Contact professionnel de Management Pro
++33703823025,Patricia,Martinez,39 Place de la Bastille,Dijon,18621,Management Pro,Support,Contact professionnel de Management Pro
++33650061883,Brigitte,Garcia,457 Rue Nationale,Metz,04105,Performance Solutions,Support,Contact professionnel de Performance Solutions
++33632104100,Antoine,Mercier,364 Avenue de la Liberté,Marseille,89012,Solutions Avancées,Comptabilité,Contact professionnel de Solutions Avancées
++33646794032,Sandrine,Michel,203 Rue Nationale,Amiens,82084,Consulting Expert,Support,Contact professionnel de Consulting Expert
++33642334244,Antoine,Petit,21 Place de la Bastille,Aix-en-Provence,57045,Digital Pro,Ventes,Contact professionnel de Digital Pro
++33735230209,Sandrine,Thomas,110 Rue de la Paix,Limoges,62320,Solutions Avancées,Comptabilité,Contact professionnel de Solutions Avancées
++33640057893,Nathalie,Martin,98 Rue de la République,Lille,25136,Innovation Solutions,Comptabilité,Contact professionnel de Innovation Solutions
++33709800323,Martine,Roux,229 Rue de Rivoli,Rennes,16239,Développement Plus,Direction,Contact professionnel de Développement Plus
++33798712838,Martine,Fournier,717 Boulevard de la République,Nîmes,36692,Innovation Solutions,Ventes,Contact professionnel de Innovation Solutions
++33697318964,Dominique,Petit,860 Rue Nationale,Marseille,14678,Consulting Expert,IT,Contact professionnel de Consulting Expert
++33731260713,David,Roux,394 Boulevard de la République,Saint-Étienne,20374,France Business,Ventes,Contact professionnel de France Business
++33713901652,Monique,Thomas,644 Rue du Faubourg Saint-Honoré,Rouen,54051,Management Pro,IT,Contact professionnel de Management Pro
++33695938392,Philippe,François,792 Place de la Bastille,Orléans,20016,Digital Pro,Direction,Contact professionnel de Digital Pro
++33638463543,Christophe,Simon,338 Boulevard Haussmann,Tours,46434,Services Premium,Support,Contact professionnel de Services Premium
++33625001063,Julien,Dupont,949 Rue de la Gare,Lille,36434,Consulting Expert,IT,Contact professionnel de Consulting Expert
++33684734210,Véronique,Fournier,2 Place de la Bastille,Montpellier,62029,Services Premium,Marketing,Contact professionnel de Services Premium
++33796447096,Pierre,Moreau,741 Avenue Montaigne,Nice,05710,Performance Solutions,Marketing,Contact professionnel de Performance Solutions
++33608276316,Thierry,Lefebvre,736 Avenue de la Liberté,Toulouse,80508,Consulting Expert,IT,Contact professionnel de Consulting Expert
++33788145265,Sophie,Thomas,586 Boulevard de la République,Toulouse,89528,Digital Pro,Support,Contact professionnel de Digital Pro
++33682837182,Olivier,Girard,282 Rue Nationale,Marseille,26676,Innovation Solutions,Marketing,Contact professionnel de Innovation Solutions
++33705972264,Catherine,Roux,566 Boulevard Voltaire,Brest,64114,Performance Solutions,Support,Contact professionnel de Performance Solutions
++33713638422,Dominique,Garnier,303 Avenue Jean Jaurès,Nantes,84925,Solutions Avancées,Marketing,Contact professionnel de Solutions Avancées
++33673831018,Alexandre,François,782 Avenue Montaigne,Marseille,79636,France Business,Comptabilité,Contact professionnel de France Business
++33780520914,Dominique,Simon,182 Rue de la Paix,Villeurbanne,94948,Innovation Solutions,Support,Contact professionnel de Innovation Solutions
++33762824200,Patrick,Simon,556 Boulevard Voltaire,Tours,89552,Développement Plus,IT,Contact professionnel de Développement Plus
++33715463286,Michel,Lambert,463 Rue du Faubourg Saint-Honoré,Toulon,71352,France Business,Direction,Contact professionnel de France Business
++33696526912,Catherine,Laurent,424 Avenue Jean Jaurès,Angers,36571,Solutions Avancées,Marketing,Contact professionnel de Solutions Avancées
++33646207616,Jean,Robert,617 Boulevard de la République,Angers,31881,Stratégie Digitale,Comptabilité,Contact professionnel de Stratégie Digitale
++33790532728,Thierry,Bernard,164 Boulevard de la République,Amiens,90058,Innovation Solutions,Comptabilité,Contact professionnel de Innovation Solutions
++33792255831,Julien,Vincent,453 Rue de la Paix,Toulon,36309,Services Premium,Marketing,Contact professionnel de Services Premium
++33666752797,David,Roux,481 Rue de Rivoli,Marseille,53394,France Business,Marketing,Contact professionnel de France Business
++33798419920,Pierre,Martin,647 Rue de la Gare,Nîmes,20682,Stratégie Digitale,Ventes,Contact professionnel de Stratégie Digitale
++33667943583,Monique,André,887 Rue Nationale,Orléans,84509,Développement Plus,IT,Contact professionnel de Développement Plus
++33688330098,Valérie,François,640 Rue de la Gare,Toulon,58741,Stratégie Digitale,Direction,Contact professionnel de Stratégie Digitale
++33636810260,Monique,Dupont,882 Rue Nationale,Bordeaux,36759,Management Pro,Comptabilité,Contact professionnel de Management Pro
++33761185008,Sophie,David,305 Avenue des Champs-Élysées,Grenoble,71460,France Business,Ventes,Contact professionnel de France Business
++33641072579,Sophie,Leroy,822 Rue de la Gare,Metz,85670,Performance Solutions,Comptabilité,Contact professionnel de Performance Solutions
++33723775478,Brigitte,Lefèvre,421 Rue Nationale,Villeurbanne,87486,Digital Pro,IT,Contact professionnel de Digital Pro
++33643498403,Dominique,Robert,331 Rue du Faubourg Saint-Honoré,Clermont-Ferrand,05496,Digital Pro,Support,Contact professionnel de Digital Pro
++33757099238,Brigitte,Legrand,141 Boulevard Haussmann,Dijon,27167,Management Pro,Support,Contact professionnel de Management Pro
++33774204514,Valérie,Dubois,703 Boulevard Voltaire,Angers,29355,Développement Plus,Comptabilité,Contact professionnel de Développement Plus
++33637508448,Chantal,Moreau,65 Boulevard Saint-Germain,Limoges,44762,Performance Solutions,Comptabilité,Contact professionnel de Performance Solutions
++33611208502,Michel,Roux,617 Place de la Bastille,Rouen,25929,Digital Pro,Ventes,Contact professionnel de Digital Pro
++33629121656,Philippe,Moreau,537 Rue Nationale,Rouen,65435,Développement Plus,Direction,Contact professionnel de Développement Plus
++33660117954,Sandrine,Girard,485 Avenue Montaigne,Metz,74247,Management Pro,IT,Contact professionnel de Management Pro
++33749357525,Brigitte,Petit,39 Boulevard de la République,Limoges,13259,Tech France SARL,Comptabilité,Contact professionnel de Tech France SARL
++33700374086,Philippe,Bertrand,103 Rue de la République,Tours,45266,France Business,Support,Contact professionnel de France Business
++33730131075,Laurent,Bonnet,81 Avenue de la Liberté,Reims,46165,Management Pro,Direction,Contact professionnel de Management Pro
++33753020671,Marie,Vincent,746 Rue de la Gare,Toulon,64608,Performance Solutions,Ventes,Contact professionnel de Performance Solutions
++33789901099,Catherine,Garcia,858 Avenue de la Liberté,Brest,43287,Consulting Expert,Marketing,Contact professionnel de Consulting Expert
++33625645355,Christine,Lefèvre,245 Place de la Bastille,Nantes,86738,Stratégie Digitale,Marketing,Contact professionnel de Stratégie Digitale
++33709215472,Brigitte,Roux,663 Avenue des Champs-Élysées,Metz,85013,Management Pro,Direction,Contact professionnel de Management Pro
++33681079770,Martine,Lefebvre,117 Place de la Bastille,Limoges,05392,Technologie Moderne,Ventes,Contact professionnel de Technologie Moderne
++33628865361,Dominique,Legrand,778 Boulevard Voltaire,Nîmes,90303,Consulting Expert,Ventes,Contact professionnel de Consulting Expert
++33628610560,Véronique,David,159 Avenue de la Liberté,Grenoble,16488,Développement Plus,Direction,Contact professionnel de Développement Plus
++33716287774,Sandrine,Bonnet,901 Boulevard Voltaire,Grenoble,93836,Management Pro,IT,Contact professionnel de Management Pro
++33617389378,Frédéric,Martin,808 Avenue Montaigne,Dijon,79334,Services Premium,IT,Contact professionnel de Services Premium
++33725820345,Sophie,Girard,665 Boulevard Saint-Germain,Bordeaux,15413,Performance Solutions,Marketing,Contact professionnel de Performance Solutions
++33786506783,Antoine,Thomas,201 Place de la Bastille,Le Havre,12702,Tech France SARL,IT,Contact professionnel de Tech France SARL
++33722512459,Jean,Bonnet,701 Rue Victor Hugo,Nantes,87947,Technologie Moderne,Direction,Contact professionnel de Technologie Moderne
++33735872946,Brigitte,Roux,559 Boulevard de la République,Rouen,83017,France Business,Direction,Contact professionnel de France Business
++33780869688,Chantal,Bonnet,285 Avenue de la Liberté,Lille,16246,Technologie Moderne,Support,Contact professionnel de Technologie Moderne
++33723540974,Pascal,Robert,335 Boulevard Voltaire,Strasbourg,62469,Services Premium,Support,Contact professionnel de Services Premium
++33657017818,Sylvie,Petit,282 Boulevard Haussmann,Paris,08962,Performance Solutions,Marketing,Contact professionnel de Performance Solutions
++33640220559,Patrick,Dupont,898 Rue de Rivoli,Grenoble,11741,Consulting Expert,Ventes,Contact professionnel de Consulting Expert
++33671888824,David,Legrand,548 Rue de la République,Nice,19162,Technologie Moderne,Direction,Contact professionnel de Technologie Moderne
++33684713136,Monique,Girard,864 Rue de la Paix,Tours,26693,France Business,Ventes,Contact professionnel de France Business
++33645430443,Brigitte,Petit,288 Rue du Faubourg Saint-Honoré,Toulouse,01681,Digital Pro,Direction,Contact professionnel de Digital Pro
++33624859125,Antoine,Dubois,63 Rue Nationale,Bordeaux,48386,Digital Pro,Direction,Contact professionnel de Digital Pro
++33679367411,Patricia,Roux,910 Boulevard de la République,Nîmes,84287,France Business,IT,Contact professionnel de France Business
++33720281407,Antoine,Bonnet,506 Rue de la Gare,Orléans,71071,Consulting Expert,Marketing,Contact professionnel de Consulting Expert
++33735471081,Martine,Simon,946 Avenue des Champs-Élysées,Angers,49582,Consulting Expert,Ventes,Contact professionnel de Consulting Expert
++33757656054,Jacqueline,Bertrand,425 Avenue des Champs-Élysées,Paris,76748,Innovation Solutions,Direction,Contact professionnel de Innovation Solutions
++33611453324,Antoine,Martinez,460 Rue de Rivoli,Nice,81990,Solutions Avancées,IT,Contact professionnel de Solutions Avancées
++33721522589,Thierry,Bertrand,216 Boulevard Saint-Germain,Reims,42913,Digital Pro,Ventes,Contact professionnel de Digital Pro
++33720434031,Antoine,Legrand,419 Rue de la Gare,Strasbourg,04324,Tech France SARL,IT,Contact professionnel de Tech France SARL

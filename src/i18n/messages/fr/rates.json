@@ -1,0 +1,277 @@
+{
+  "page": {
+    "title": "Gestion des Tarifs",
+    "description": "Consultez et gérez les tarifs de votre compte pour les appels, numéros et services SMS",
+    "breadcrumbs": {
+      "dashboard": "Tableau de Bord",
+      "rates": "Tarifs"
+    }
+  },
+  "tabs": {
+    "calls": "Tarifs d'Appels",
+    "numbers": "Tarifs de Numéros",
+    "sms": "Tarifs SMS"
+  },
+  "common": {
+    "actions": {
+      "refresh": "Actualiser",
+      "export": "Exporter",
+      "search": "Rechercher",
+      "filter": "Filtrer",
+      "clearFilters": "Effacer les Filtres",
+      "applyFilters": "Appliquer les Filtres",
+      "apply": "Appliquer les Filtres",
+      "clearAll": "Tout Effacer",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "add": "Ajouter",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "duplicate": "Dupliquer",
+      "copy": "Copier",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "close": "Fermer",
+      "view": "Voir",
+      "manage": "Gérer",
+      "assign": "Assigner des Utilisateurs",
+      "manageRates": "Gérer les Tarifs"
+    },
+    "states": {
+      "loading": "Chargement...",
+      "noData": "Aucune donnée disponible",
+      "error": "Erreur lors du chargement des données",
+      "errorDescription": "Une erreur s'est produite lors du chargement des données",
+      "lastRefresh": "Dernière actualisation",
+      "showingResults": "Affichage de {start} à {end} sur {total} résultats",
+      "recordsPerPage": "Enregistrements par page"
+    },
+    "filters": {
+      "title": "Filtres",
+      "name": "Nom",
+      "country": "Pays",
+      "prefix": "Préfixe",
+      "status": "Statut",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "all": "Tous",
+      "isDefault": "Par Défaut",
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "currency": {
+      "usd": "USD",
+      "eur": "EUR",
+      "gbp": "GBP",
+      "cad": "CAD"
+    }
+  },
+  "callRates": {
+    "title": "Tarifs d'Appels",
+    "description": "Consultez les tarifs d'appels de votre compte par destination",
+    "stats": {
+      "totalRates": "Total des Tarifs",
+      "averageRate": "Tarif Moyen",
+      "lowestRate": "Tarif le Plus Bas",
+      "highestRate": "Tarif le Plus Élevé",
+      "uniqueCountries": "Pays",
+      "currency": "Devise"
+    },
+    "table": {
+      "headers": {
+        "country": "Pays",
+        "prefix": "Préfixe",
+        "description": "Description",
+        "rate": "Tarif",
+        "localRate": "Tarif Local",
+        "type": "Type",
+        "rateDeck": "Plan Tarifaire",
+        "effectiveDate": "Date d'Effet"
+      }
+    },
+    "groupedView": {
+      "title": "Tarifs par Pays",
+      "averageRate": "Tarif Moyen",
+      "rateRange": "Plage de Tarifs",
+      "prefixes": "Préfixes",
+      "viewDetails": "Voir les Détails"
+    },
+    "viewModes": {
+      "countries": "Pays",
+      "table": "Tableau"
+    },
+    "countryDialog": {
+      "title": "Tarifs pour {country}",
+      "totalPrefixes": "Total des Préfixes : {count}",
+      "averageRate": "Tarif Moyen : {rate}",
+      "rateRange": "Plage de Tarifs : {min} - {max}"
+    },
+    "export": {
+      "filename": "tarifs-appels-{date}.csv",
+      "success": "Tarifs d'appels exportés avec succès",
+      "error": "Échec de l'exportation des tarifs d'appels"
+    },
+    "errors": {
+      "fetchFailed": "Échec de la récupération des tarifs d'appels",
+      "noRatesFound": "Aucun tarif d'appel trouvé pour votre compte"
+    }
+  },
+  "numberRates": {
+    "title": "Plans Tarifaires de Numéros",
+    "description": "Gérez les plans tarifaires de numéros et leurs assignations",
+    "stats": {
+      "totalDecks": "Total des Plans",
+      "activeDecks": "Plans Actifs",
+      "totalRates": "Total des Tarifs",
+      "assignedUsers": "Utilisateurs Assignés"
+    },
+    "table": {
+      "headers": {
+        "name": "Nom",
+        "description": "Description",
+        "currency": "Devise",
+        "rateCount": "Tarifs",
+        "assignedUsers": "Utilisateurs",
+        "status": "Statut",
+        "isDefault": "Par Défaut",
+        "created": "Créé",
+        "actions": "Actions"
+      }
+    },
+    "form": {
+      "title": {
+        "add": "Ajouter un Plan Tarifaire de Numéros",
+        "edit": "Modifier le Plan Tarifaire de Numéros"
+      },
+      "fields": {
+        "name": "Nom",
+        "namePlaceholder": "Saisir le nom du plan",
+        "description": "Description",
+        "descriptionPlaceholder": "Saisir la description du plan",
+        "currency": "Devise",
+        "isActive": "Actif",
+        "isDefault": "Définir par Défaut"
+      },
+      "validation": {
+        "nameRequired": "Le nom est requis",
+        "nameMinLength": "Le nom doit contenir au moins 3 caractères",
+        "descriptionRequired": "La description est requise"
+      }
+    },
+    "deleteDialog": {
+      "title": "Supprimer le Plan Tarifaire",
+      "message": "Êtes-vous sûr de vouloir supprimer le plan tarifaire \"{name}\" ? Cette action ne peut pas être annulée.",
+      "confirm": "Supprimer",
+      "cancel": "Annuler"
+    },
+    "duplicate": {
+      "success": "Plan tarifaire dupliqué avec succès",
+      "error": "Échec de la duplication du plan tarifaire"
+    },
+    "assignment": {
+      "title": "Assigner des Utilisateurs au Plan Tarifaire",
+      "description": "Sélectionnez les utilisateurs à assigner à ce plan tarifaire"
+    },
+    "userRates": {
+      "title": "Tarifs de Numéros Utilisateur",
+      "description": "Consultez les tarifs de numéros assignés aux utilisateurs",
+      "noAssignment": "Aucun plan tarifaire assigné",
+      "assignedDeck": "Plan Assigné : {name}"
+    },
+    "export": {
+      "filename": "plans-tarifaires-numeros-{date}.csv",
+      "success": "Plans tarifaires de numéros exportés avec succès",
+      "error": "Échec de l'exportation des plans tarifaires de numéros"
+    },
+    "errors": {
+      "fetchFailed": "Échec de la récupération des plans tarifaires de numéros",
+      "saveFailed": "Échec de l'enregistrement du plan tarifaire",
+      "deleteFailed": "Échec de la suppression du plan tarifaire",
+      "noDecksFound": "Aucun plan tarifaire de numéros trouvé"
+    },
+    "success": {
+      "created": "Plan tarifaire créé avec succès",
+      "updated": "Plan tarifaire mis à jour avec succès",
+      "deleted": "Plan tarifaire supprimé avec succès"
+    }
+  },
+  "smsRates": {
+    "title": "Plans Tarifaires SMS",
+    "description": "Gérez les plans tarifaires SMS et leurs assignations",
+    "stats": {
+      "totalDecks": "Total des Plans",
+      "activeDecks": "Plans Actifs",
+      "totalRates": "Total des Tarifs",
+      "assignedUsers": "Utilisateurs Assignés"
+    },
+    "table": {
+      "headers": {
+        "name": "Nom",
+        "description": "Description",
+        "currency": "Devise",
+        "rateCount": "Tarifs",
+        "assignedUsers": "Utilisateurs",
+        "status": "Statut",
+        "isDefault": "Par Défaut",
+        "created": "Créé",
+        "actions": "Actions"
+      }
+    },
+    "form": {
+      "title": {
+        "add": "Ajouter un Plan Tarifaire SMS",
+        "edit": "Modifier le Plan Tarifaire SMS"
+      },
+      "fields": {
+        "name": "Nom",
+        "namePlaceholder": "Saisir le nom du plan",
+        "description": "Description",
+        "descriptionPlaceholder": "Saisir la description du plan",
+        "currency": "Devise",
+        "isActive": "Actif",
+        "isDefault": "Définir par Défaut"
+      },
+      "validation": {
+        "nameRequired": "Le nom est requis",
+        "nameMinLength": "Le nom doit contenir au moins 3 caractères",
+        "descriptionRequired": "La description est requise"
+      }
+    },
+    "deleteDialog": {
+      "title": "Supprimer le Plan Tarifaire SMS",
+      "message": "Êtes-vous sûr de vouloir supprimer le plan tarifaire SMS \"{name}\" ? Cette action ne peut pas être annulée.",
+      "confirm": "Supprimer",
+      "cancel": "Annuler"
+    },
+    "duplicate": {
+      "success": "Plan tarifaire SMS dupliqué avec succès",
+      "error": "Échec de la duplication du plan tarifaire SMS"
+    },
+    "assignment": {
+      "title": "Assigner des Utilisateurs au Plan Tarifaire SMS",
+      "description": "Sélectionnez les utilisateurs à assigner à ce plan tarifaire SMS"
+    },
+    "userRates": {
+      "title": "Tarifs SMS Utilisateur",
+      "description": "Consultez les tarifs SMS assignés aux utilisateurs",
+      "noAssignment": "Aucun plan tarifaire SMS assigné",
+      "assignedDeck": "Plan Assigné : {name}"
+    },
+    "export": {
+      "filename": "plans-tarifaires-sms-{date}.csv",
+      "success": "Plans tarifaires SMS exportés avec succès",
+      "error": "Échec de l'exportation des plans tarifaires SMS"
+    },
+    "errors": {
+      "fetchFailed": "Échec de la récupération des plans tarifaires SMS",
+      "saveFailed": "Échec de l'enregistrement du plan tarifaire SMS",
+      "deleteFailed": "Échec de la suppression du plan tarifaire SMS",
+      "noDecksFound": "Aucun plan tarifaire SMS trouvé"
+    },
+    "success": {
+      "created": "Plan tarifaire SMS créé avec succès",
+      "updated": "Plan tarifaire SMS mis à jour avec succès",
+      "deleted": "Plan tarifaire SMS supprimé avec succès"
+    }
+  }
+} 

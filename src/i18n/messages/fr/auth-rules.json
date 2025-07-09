@@ -1,0 +1,54 @@
+{
+  "modal": {
+    "title": "Règles d'Authentification - Compte #{accountId}",
+    "close": "Fermer"
+  },
+  "form": {
+    "title": "Ajouter une Règle d'Authentification",
+    "remoteIp": {
+      "label": "Adresse IP Distante *",
+      "placeholder": "ex: 192.168.1.100 ou 10.0.0.0/8",
+      "description": "Entrez l'adresse IP ou la plage CIDR qui devrait être autorisée à s'authentifier. Les autres paramètres utiliseront des valeurs par défaut sécurisées (Protocole: SIP, Sessions: Illimité, APS: Illimité)."
+    },
+    "actions": {
+      "cancel": "Annuler",
+      "addRule": "Ajouter Règle",
+      "adding": "Ajout en cours..."
+    }
+  },
+  "table": {
+    "title": "Règles d'Authentification",
+    "headers": {
+      "protocol": "Protocole",
+      "remoteIp": "IP Distante",
+      "cli": "CLI",
+      "cld": "CLD",
+      "toDomain": "Vers Domaine",
+      "fromDomain": "De Domaine",
+      "maxSessions": "Sessions Max",
+      "maxCps": "APS Max"
+    }
+  },
+  "states": {
+    "loading": "Chargement des règles d'authentification...",
+    "noRules": {
+      "title": "Aucune règle d'authentification",
+      "description": "Aucune règle d'authentification n'a été configurée pour ce compte.",
+      "addFirst": "Ajouter Première Règle"
+    },
+    "unlimited": "Illimité"
+  },
+  "actions": {
+    "addRule": "Ajouter Règle"
+  },
+  "errors": {
+    "fetchFailed": "Échec de la récupération des règles d'authentification",
+    "createFailed": "Échec de la création de la règle d'authentification",
+    "remoteIpRequired": "L'adresse IP distante est requise"
+  },
+  "protocols": {
+    "sip": "SIP",
+    "iax2": "IAX2",
+    "callingCard": "PIN Carte d'Appel"
+  }
+} 

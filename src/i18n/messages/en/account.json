@@ -1,0 +1,92 @@
+{
+  "page": {
+    "title": "My Account",
+    "description": "View and manage your account details and profile information"
+  },
+  "profile": {
+    "title": "Profile Details",
+    "refresh": "Refresh"
+  },
+  "tabs": {
+    "account": "Account",
+    "company": "Company",
+    "contact": "Contact",
+    "services": "Services",
+    "security": "Security"
+  },
+  "account": {
+    "title": "Account Information",
+    "description": "Your basic account details and settings",
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "role": "Role",
+    "accountId": "Account ID",
+    "verified": "Verified",
+    "notVerified": "Not Verified"
+  },
+  "company": {
+    "title": "Company Information",
+    "description": "Business details from your onboarding",
+    "companyName": "Company Name",
+    "businessPhone": "Business Phone",
+    "businessAddress": "Business Address",
+    "expectedTrafficVolume": "Expected Traffic Volume",
+    "additionalNotes": "Additional Notes",
+    "noCompanyInfo": "No Company Information",
+    "noCompanyInfoDescription": "Complete your onboarding to add company details",
+    "completeOnboarding": "Complete Onboarding",
+    "per": "per"
+  },
+  "contact": {
+    "title": "Contact Preferences",
+    "description": "How you prefer to be contacted",
+    "noContactPreferences": "No Contact Preferences",
+    "noContactPreferencesDescription": "No contact methods have been configured",
+    "email": "Email",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "other": "Other"
+  },
+  "services": {
+    "title": "Services of Interest",
+    "description": "Services you're interested in or currently using",
+    "noServicesSelected": "No Services Selected",
+    "noServicesSelectedDescription": "No services have been selected during onboarding",
+    "countries": "Countries",
+    "serviceNames": {
+      "outbound_calls": "Outbound Calls",
+      "inbound_calls": "Inbound Calls",
+      "did_numbers": "DID Numbers",
+      "sms": "SMS Services",
+      "emailing": "Email Services",
+      "whatsapp_business": "WhatsApp Business",
+      "other": "Other Services"
+    }
+  },
+  "security": {
+    "title": "Security Settings",
+    "description": "Change your account password and manage security settings",
+    "changePassword": "Change Password",
+    "passwordRequirements": "Update your password to keep your account secure. Your new password must be at least 8 characters long and contain at least one letter and one digit.",
+    "currentPassword": "Current Password",
+    "currentPasswordPlaceholder": "Enter your current password",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPassword": "Confirm New Password",
+    "confirmPasswordPlaceholder": "Confirm your new password",
+    "updatePassword": "Update Password",
+    "updating": "Updating...",
+    "validation": {
+      "allFieldsRequired": "All password fields are required",
+      "passwordsDoNotMatch": "New passwords do not match",
+      "passwordTooShort": "New password must be at least 8 characters long",
+      "passwordComplexity": "New password must contain at least one letter and one digit"
+    },
+    "success": "Password changed successfully",
+    "error": "Failed to change password"
+  },
+  "roles": {
+    "admin": "Admin",
+    "client": "Client"
+  }
+} 

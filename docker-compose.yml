@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    # If you need to connect to MongoDB on host machine from Docker
+    # Uncomment the next line if your MongoDB is on the same machine
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway" 

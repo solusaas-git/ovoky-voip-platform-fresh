@@ -1,0 +1,95 @@
+{
+  "page": {
+    "title": "Active Calls",
+    "description": "Monitor live calls in real-time with automatic refresh every 5 seconds",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "activeCalls": "Active Calls"
+    }
+  },
+  "activeCalls": {
+    "loading": {
+      "title": "Loading Active Calls",
+      "description": "Fetching real-time call data..."
+    },
+    "error": {
+      "title": "Error Loading Active Calls",
+      "description": "There was an error loading the active calls data",
+      "tryAgain": "Try Again"
+    },
+    "noSippyAccount": {
+      "title": "No Sippy Account ID",
+      "description": "Your user account doesn't have a Sippy Account ID configured.",
+      "contactAdmin": "Please contact an administrator to set up your Sippy account."
+    },
+    "header": {
+      "realTimeMonitoring": "Real-time Monitoring",
+      "callCount": "{count} active call for account {accountId}",
+      "callCountPlural": "{count} active calls for account {accountId}",
+      "lastUpdated": "Last updated {time}",
+      "refresh": "Refresh",
+      "disconnectAll": "Disconnect All"
+    },
+    "stats": {
+      "totalCalls": "Total Calls",
+      "connected": "Connected",
+      "avgDuration": "Avg Duration",
+      "avgDelay": "Avg Delay",
+      "ofTotal": "{percentage}% of total"
+    },
+    "states": {
+      "title": "Call States Distribution",
+      "connected": {
+        "label": "Connected",
+        "description": "Call is active and in progress"
+      },
+      "arComplete": {
+        "label": "Connecting",
+        "description": "Authentication and routing complete, establishing connection"
+      },
+      "waitRoute": {
+        "label": "Routing",
+        "description": "Waiting for routing information"
+      },
+      "waitAuth": {
+        "label": "Authenticating",
+        "description": "Authentication in progress"
+      },
+      "idle": {
+        "label": "Idle",
+        "description": "Call received, processing started"
+      },
+      "disconnecting": {
+        "label": "Disconnecting",
+        "description": "Call is being disconnected"
+      },
+      "dead": {
+        "label": "Dead",
+        "description": "Call has ended or failed"
+      },
+      "unknown": {
+        "label": "Unknown",
+        "description": "Unknown state"
+      }
+    },
+    "emptyState": {
+      "title": "No Active Calls",
+      "description": "There are currently no active calls for account {accountId}"
+    },
+    "table": {
+      "title": "Active Calls Details",
+      "headers": {
+        "call": "Call",
+        "state": "State",
+        "duration": "Duration",
+        "setupTime": "Setup Time",
+        "direction": "Direction",
+        "ips": "IPs",
+        "delay": "Delay",
+        "actions": ""
+      },
+      "disconnectCall": "Disconnect Call",
+      "noValidCallId": "No valid call ID found"
+    }
+  }
+} 

@@ -1,0 +1,327 @@
+{
+  "page": {
+    "title": "Rapports CDR",
+    "description": "Consultez et analysez les enregistrements détaillés d'appels avec filtrage avancé et capacités d'export",
+    "breadcrumbs": {
+      "dashboard": "Tableau de Bord",
+      "cdrReports": "Rapports CDR"
+    }
+  },
+  "loading": {
+    "title": "Chargement des Rapports CDR",
+    "subtitle": "Récupération des enregistrements détaillés d'appels..."
+  },
+  "errors": {
+    "loadingTitle": "Erreur lors du Chargement des Rapports CDR",
+    "loadingDescription": "Une erreur s'est produite lors du chargement des données CDR",
+    "tryAgain": "Réessayer",
+    "noSippyAccountTitle": "Aucun ID de Compte Sippy",
+    "noSippyAccountDescription": "Votre compte utilisateur n'a pas d'ID de compte Sippy configuré.",
+    "noSippyAccountMessage": "Veuillez contacter un administrateur pour configurer votre compte Sippy."
+  },
+  "header": {
+    "title": "Enregistrements Détaillés d'Appels",
+    "recordCount": "{count} enregistrement pour le compte {accountId}",
+    "recordCountPlural": "{count} enregistrements pour le compte {accountId}",
+    "filteredBy": "Filtré par : {filter}",
+    "hiddenRecords": "({count} masqués)",
+    "lastUpdated": "Dernière mise à jour {time}",
+    "buttons": {
+      "filters": "Filtres",
+      "refresh": "Actualiser",
+      "exportCsv": "Exporter CSV"
+    }
+  },
+  "stats": {
+    "totalRecords": {
+      "title": "Total Enregistrements",
+      "value": "{count}"
+    },
+    "totalCost": {
+      "title": "Coût Total",
+      "value": "{amount}"
+    },
+    "avgDuration": {
+      "title": "Durée Moyenne",
+      "value": "{duration}"
+    },
+    "successRate": {
+      "title": "Taux de Réussite",
+      "value": "{rate}%",
+      "subtitle": "{successful} sur {total} appels"
+    }
+  },
+  "filters": {
+    "title": "Filtres",
+    "close": "Fermer",
+    "fields": {
+      "type": {
+        "label": "Type",
+        "placeholder": "Sélectionnez le type",
+        "options": {
+          "nonZeroAndErrors": "Durée Non-Nulle et Erreurs",
+          "nonZero": "Durée Non-Nulle",
+          "all": "Tous",
+          "complete": "Appels Terminés",
+          "incomplete": "Appels Incomplets",
+          "errors": "Erreurs"
+        }
+      },
+      "resultType": {
+        "label": "Type de Résultat",
+        "placeholder": "Tous les types de résultat",
+        "options": {
+          "all": "Tous les Types de Résultat",
+          "success": "✅ Appels Réussis",
+          "billing": "💰 Problèmes de Facturation",
+          "rateLimiting": "⚡ Limitation de Débit",
+          "translation": "🔄 Erreurs de Traduction",
+          "capacity": "📊 Problèmes de Capacité",
+          "routing": "🛣️ Problèmes de Routage",
+          "protocol": "📡 Erreurs de Protocole",
+          "account": "👤 Problèmes de Compte",
+          "compliance": "⚖️ Conformité (DNC)",
+          "clientError": "❌ Erreurs Client (4xx)",
+          "serverError": "🔥 Erreurs Serveur (5xx)"
+        }
+      },
+      "startDate": {
+        "label": "Date de Début"
+      },
+      "endDate": {
+        "label": "Date de Fin"
+      },
+      "cli": {
+        "label": "CLI",
+        "placeholder": "Filtrer par CLI"
+      },
+      "cld": {
+        "label": "CLD",
+        "placeholder": "Filtrer par CLD"
+      }
+    },
+    "buttons": {
+      "apply": "Appliquer les Filtres",
+      "clear": "Effacer les Filtres",
+      "searching": "Recherche..."
+    }
+  },
+  "table": {
+    "title": "Enregistrements Détaillés d'Appels",
+    "showing": "Affichage de {start}-{end} sur {total} enregistrements",
+    "headers": {
+      "call": "Appel",
+      "connectTime": "Heure de Connexion",
+      "duration": "Durée",
+      "cost": "Coût",
+      "country": "Pays",
+      "protocol": "Protocole",
+      "result": "Résultat",
+      "remoteIp": "IP Distante"
+    },
+    "row": {
+      "billed": "Facturé : {duration}",
+      "na": "N/A"
+    },
+    "empty": {
+      "title": "Aucun Enregistrement CDR Trouvé",
+      "description": "Aucun enregistrement détaillé d'appel trouvé pour le compte {accountId}. Essayez d'ajuster vos filtres ou la plage de dates."
+    }
+  },
+  "pagination": {
+    "showing": "Affichage de {start}-{end} sur {total} enregistrements",
+    "recordsPerPage": "Enregistrements par page :",
+    "page": "Page {current} sur {total}",
+    "buttons": {
+      "first": "Première page",
+      "previous": "Page précédente",
+      "next": "Page suivante",
+      "last": "Dernière page"
+    }
+  },
+  "resultCodes": {
+    "title": "Comprendre les codes de résultat",
+    "description": "Codes de résultat courants et leurs significations pour vous aider à comprendre les résultats d'appels",
+    "categories": {
+      "successful": {
+        "title": "Appels réussis",
+        "codes": [
+          "0, 200:Appel terminé avec succès",
+          "1xx:Réponses provisoires (tentative, sonnerie)"
+        ]
+      },
+      "commonIssues": {
+        "title": "Problèmes courants",
+        "codes": [
+          "-20:Solde insuffisant",
+          "-18 à -19:Limites de taux d'appels dépassées",
+          "486:Occupé ici",
+          "404:Numéro introuvable"
+        ]
+      },
+      "systemErrors": {
+        "title": "Erreurs système",
+        "codes": [
+          "5xx:Erreurs serveur",
+          "-4, -16:Capacité dépassée",
+          "-25:Aucune route trouvée",
+          "488:Incompatibilité de codec"
+        ]
+      }
+    }
+  },
+  "resultLabels": {
+    "success": "Succès",
+    "externalTranslatorRejected": "Traducteur Externe Rejeté",
+    "bodylessInvite": "INVITE sans Corps",
+    "accountExpired": "Compte Expiré",
+    "connectionCapacityExceeded": "Capacité de Connexion Dépassée",
+    "malformedSdp": "SDP Mal Formé",
+    "unsupportedContentType": "Type de Contenu Non Supporté",
+    "unacceptableCodec": "Codec Inacceptable",
+    "invalidCldTranslationAuth": "Traduction CLD Invalide (Auth)",
+    "invalidCliTranslationAuth": "Traduction CLI Invalide (Auth)",
+    "invalidCldTranslationAccount": "Traduction CLD Invalide (Compte)",
+    "invalidCliTranslationAccount": "Traduction CLI Invalide (Compte)",
+    "cannotFindSession": "Session Introuvable",
+    "invalidCliTranslationDid": "Traduction CLI Invalide (DID)",
+    "noRateFound": "Aucun Tarif Trouvé",
+    "callLoopDetected": "Boucle d'Appel Détectée",
+    "tooManySessions": "Trop de Sessions",
+    "accountInUse": "Compte Utilisé",
+    "cpsLimitAccount": "Limite CPS (Compte)",
+    "cpsLimitSystem": "Limite CPS (Système)",
+    "insufficientBalance": "Solde Insuffisant",
+    "forbiddenDestination": "Destination Interdite",
+    "noCustomerRate": "Aucun Tarif Client",
+    "lossProtection": "Protection contre les Pertes",
+    "addressIncomplete": "Adresse Incomplète",
+    "noRoutesFound": "Aucune Route Trouvée",
+    "cpsLimitConnection": "Limite CPS (Connexion)",
+    "invalidAssertedId": "ID Déclaré Invalide",
+    "cldInDncList": "CLD dans Liste DNC",
+    "invalidCldTranslationDid": "Traduction CLD Invalide (DID)",
+    "callCanceled": "Appel Annulé",
+    "cpsLimitCustomer": "Limite CPS (Client)",
+    "tooManySessionsCustomer": "Trop de Sessions (Client)",
+    "cpsLimitAuthRule": "Limite CPS (Règle Auth)",
+    "tooManySessionsAuthRule": "Trop de Sessions (Règle Auth)",
+    "invalidCliTranslationPreRouting": "Traduction CLI Invalide (Pré-Routage)",
+    "invalidCldTranslationPreRouting": "Traduction CLD Invalide (Pré-Routage)",
+    "cliInDncList": "CLI dans Liste DNC",
+    "trying": "Tentative",
+    "ringing": "Sonnerie",
+    "callBeingForwarded": "Appel en Cours de Transfert",
+    "queued": "En File d'Attente",
+    "sessionProgress": "Progression de Session",
+    "ok": "OK",
+    "accepted": "Accepté",
+    "multipleChoices": "Choix Multiples",
+    "movedPermanently": "Déplacé Définitivement",
+    "movedTemporarily": "Déplacé Temporairement",
+    "useProxy": "Utiliser Proxy",
+    "alternativeService": "Service Alternatif",
+    "busyHere": "Occupé Ici",
+    "numberNotFound": "Numéro Introuvable",
+    "serverErrors": "Erreurs Serveur"
+  },
+  "resultDescriptions": {
+    "success": "Appel terminé avec succès",
+    "externalTranslatorRejected": "Le Traducteur Externe a Rejeté l'Appel",
+    "bodylessInvite": "INVITE sans Corps",
+    "accountExpired": "Compte Expiré",
+    "connectionCapacityExceeded": "Capacité de Connexion Dépassée",
+    "malformedSdp": "SDP Mal Formé",
+    "unsupportedContentType": "Type de Contenu Non Supporté",
+    "unacceptableCodec": "Codec Inacceptable",
+    "invalidCldTranslationAuth": "Règle de Traduction CLD Invalide Dans la Règle d'Authentification",
+    "invalidCliTranslationAuth": "Règle de Traduction CLI Invalide Dans la Règle d'Authentification",
+    "invalidCldTranslationAccount": "Règle de Traduction CLD Invalide Dans le Compte",
+    "invalidCliTranslationAccount": "Règle de Traduction CLI Invalide Dans le Compte",
+    "cannotFindSession": "Impossible de Trouver la Session à Lier",
+    "invalidCliTranslationDid": "Règle de Traduction CLI Invalide Dans le DID",
+    "noRateFound": "Aucun Tarif Trouvé Dans le Tarif",
+    "callLoopDetected": "Boucle d'Appel Détectée",
+    "tooManySessions": "Trop de Sessions",
+    "accountInUse": "Le Compte est Utilisé",
+    "cpsLimitAccount": "Limite d'Appels Par Seconde (CPS) du Compte Dépassée",
+    "cpsLimitSystem": "Limite d'Appels Par Seconde (CPS) du Système Dépassée",
+    "insufficientBalance": "Solde Insuffisant",
+    "forbiddenDestination": "La Destination est Interdite",
+    "noCustomerRate": "Aucun Tarif Trouvé Dans le Tarif du Client",
+    "lossProtection": "Protection contre les Pertes",
+    "addressIncomplete": "L'Adresse est Incomplète",
+    "noRoutesFound": "Aucune Route Trouvée",
+    "cpsLimitConnection": "Limite d'Appels Par Seconde (CPS) de la Connexion Dépassée",
+    "invalidAssertedId": "Règle de Traduction d'ID Déclaré Invalide Dans le Compte",
+    "cldInDncList": "CLD est dans la Liste Ne Pas Appeler",
+    "invalidCldTranslationDid": "Règle de Traduction CLD Invalide Dans le DID",
+    "callCanceled": "L'appel a été annulé par la partie appelante",
+    "cpsLimitCustomer": "Limite d'Appels Par Seconde (CPS) du Client Dépassée",
+    "tooManySessionsCustomer": "Trop de Sessions Pour le Client",
+    "cpsLimitAuthRule": "Limite d'Appels Par Seconde (CPS) de la Règle d'Auth Dépassée",
+    "tooManySessionsAuthRule": "Trop de Sessions Pour la Règle d'Auth",
+    "invalidCliTranslationPreRouting": "Règle de Traduction CLI Invalide Dans la Règle de Pré-Routage",
+    "invalidCldTranslationPreRouting": "Règle de Traduction CLD Invalide Dans la Règle de Pré-Routage",
+    "cliInDncList": "CLI est dans la Liste Ne Pas Appeler",
+    "trying": "Tentative",
+    "ringing": "Sonnerie",
+    "callBeingForwarded": "L'Appel est en Cours de Transfert",
+    "queued": "En File d'Attente",
+    "sessionProgress": "Progression de Session",
+    "ok": "OK",
+    "accepted": "Accepté",
+    "multipleChoices": "Choix Multiples",
+    "movedPermanently": "Déplacé Définitivement",
+    "movedTemporarily": "Déplacé Temporairement",
+    "useProxy": "Utiliser Proxy",
+    "alternativeService": "Service Alternatif",
+    "busyHere": "Occupé Ici",
+    "numberNotFound": "Numéro Introuvable", 
+    "serverErrors": "Erreurs Serveur"
+  },
+  "categories": {
+    "successful": "Réussi",
+    "translation": "Traduction",
+    "protocol": "Protocole",
+    "account": "Compte",
+    "capacity": "Capacité",
+    "media": "Média",
+    "session": "Session",
+    "billing": "Facturation",
+    "routing": "Routage",
+    "rateLimiting": "Limitation de Débit",
+    "quality": "Qualité",
+    "addressing": "Adressage",
+    "compliance": "Conformité",
+    "userAction": "Action Utilisateur",
+    "provisional": "Provisoire",
+    "success": "Succès",
+    "redirection": "Redirection",
+    "clientError": "Erreur Client",
+    "serverError": "Erreur Serveur",
+    "globalFailure": "Échec Global"
+  },
+  "tooltips": {
+    "tip": "Conseil :",
+    "billing": "Vérifiez le solde du compte et la configuration de facturation",
+    "rateLimiting": "Envisagez d'ajuster les limites CPS ou contactez le support",
+    "translation": "Révisez la configuration des règles de traduction CLI/CLD"
+  },
+  "export": {
+    "csvHeaders": {
+      "callId": "ID Appel",
+      "connectTime": "Heure de Connexion",
+      "duration": "Durée",
+      "billedDuration": "Durée Facturée",
+      "cli": "CLI",
+      "cld": "CLD",
+      "cost": "Coût",
+      "country": "Pays",
+      "description": "Description",
+      "result": "Résultat",
+      "protocol": "Protocole",
+      "remoteIp": "IP Distante"
+    }
+  }
+} 

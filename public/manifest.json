@@ -1,0 +1,20 @@
+{
+  "name": "OVOKY - Enterprise Voice & SMS Platform",
+  "short_name": "OVOKY",
+  "description": "Enterprise-grade voice calls, SMS messaging, and DID numbers with global coverage and carrier-grade reliability.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["business", "communication", "productivity"]
+} 

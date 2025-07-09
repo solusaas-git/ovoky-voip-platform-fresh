@@ -1,0 +1,277 @@
+{
+  "page": {
+    "title": "Rates Management",
+    "description": "View and manage your account's rates for calls, numbers, and SMS services",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "rates": "Rates"
+    }
+  },
+  "tabs": {
+    "calls": "Call Rates",
+    "numbers": "Number Rates",
+    "sms": "SMS Rates"
+  },
+  "common": {
+    "actions": {
+      "refresh": "Refresh",
+      "export": "Export",
+      "search": "Search",
+      "filter": "Filter",
+      "clearFilters": "Clear Filters",
+      "applyFilters": "Apply Filters",
+      "apply": "Apply Filters",
+      "clearAll": "Clear All",
+      "previous": "Previous",
+      "next": "Next",
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "duplicate": "Duplicate",
+      "copy": "Copy",
+      "save": "Save",
+      "cancel": "Cancel",
+      "close": "Close",
+      "view": "View",
+      "manage": "Manage",
+      "assign": "Assign Users",
+      "manageRates": "Manage Rates"
+    },
+    "states": {
+      "loading": "Loading...",
+      "noData": "No data available",
+      "error": "Error loading data",
+      "errorDescription": "There was an error loading the data",
+      "lastRefresh": "Last refreshed",
+      "showingResults": "Showing {start} to {end} of {total} results",
+      "recordsPerPage": "Records per page"
+    },
+    "filters": {
+      "title": "Filters",
+      "name": "Name",
+      "country": "Country",
+      "prefix": "Prefix",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "all": "All",
+      "isDefault": "Default",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "currency": {
+      "usd": "USD",
+      "eur": "EUR",
+      "gbp": "GBP",
+      "cad": "CAD"
+    }
+  },
+  "callRates": {
+    "title": "Call Rates",
+    "description": "View your account's call rates by destination",
+    "stats": {
+      "totalRates": "Total Rates",
+      "averageRate": "Average Rate",
+      "lowestRate": "Lowest Rate",
+      "highestRate": "Highest Rate",
+      "uniqueCountries": "Countries",
+      "currency": "Currency"
+    },
+    "table": {
+      "headers": {
+        "country": "Country",
+        "prefix": "Prefix",
+        "description": "Description",
+        "rate": "Rate",
+        "localRate": "Local Rate",
+        "type": "Type",
+        "rateDeck": "Rate Deck",
+        "effectiveDate": "Effective Date"
+      }
+    },
+    "groupedView": {
+      "title": "Rates by Country",
+      "averageRate": "Avg Rate",
+      "rateRange": "Rate Range",
+      "prefixes": "Prefixes",
+      "viewDetails": "View Details"
+    },
+    "viewModes": {
+      "countries": "Countries",
+      "table": "Table"
+    },
+    "countryDialog": {
+      "title": "Rates for {country}",
+      "totalPrefixes": "Total Prefixes: {count}",
+      "averageRate": "Average Rate: {rate}",
+      "rateRange": "Rate Range: {min} - {max}"
+    },
+    "export": {
+      "filename": "call-rates-{date}.csv",
+      "success": "Call rates exported successfully",
+      "error": "Failed to export call rates"
+    },
+    "errors": {
+      "fetchFailed": "Failed to fetch call rates",
+      "noRatesFound": "No call rates found for your account"
+    }
+  },
+  "numberRates": {
+    "title": "Number Rate Decks",
+    "description": "Manage number rate decks and their assignments",
+    "stats": {
+      "totalDecks": "Total Decks",
+      "activeDecks": "Active Decks",
+      "totalRates": "Total Rates",
+      "assignedUsers": "Assigned Users"
+    },
+    "table": {
+      "headers": {
+        "name": "Name",
+        "description": "Description",
+        "currency": "Currency",
+        "rateCount": "Rates",
+        "assignedUsers": "Users",
+        "status": "Status",
+        "isDefault": "Default",
+        "created": "Created",
+        "actions": "Actions"
+      }
+    },
+    "form": {
+      "title": {
+        "add": "Add Number Rate Deck",
+        "edit": "Edit Number Rate Deck"
+      },
+      "fields": {
+        "name": "Name",
+        "namePlaceholder": "Enter deck name",
+        "description": "Description",
+        "descriptionPlaceholder": "Enter deck description",
+        "currency": "Currency",
+        "isActive": "Active",
+        "isDefault": "Set as Default"
+      },
+      "validation": {
+        "nameRequired": "Name is required",
+        "nameMinLength": "Name must be at least 3 characters",
+        "descriptionRequired": "Description is required"
+      }
+    },
+    "deleteDialog": {
+      "title": "Delete Rate Deck",
+      "message": "Are you sure you want to delete the rate deck \"{name}\"? This action cannot be undone.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "duplicate": {
+      "success": "Rate deck duplicated successfully",
+      "error": "Failed to duplicate rate deck"
+    },
+    "assignment": {
+      "title": "Assign Users to Rate Deck",
+      "description": "Select users to assign to this rate deck"
+    },
+    "userRates": {
+      "title": "User Number Rates",
+      "description": "View number rates assigned to users",
+      "noAssignment": "No rate deck assigned",
+      "assignedDeck": "Assigned Deck: {name}"
+    },
+    "export": {
+      "filename": "number-rate-decks-{date}.csv",
+      "success": "Number rate decks exported successfully",
+      "error": "Failed to export number rate decks"
+    },
+    "errors": {
+      "fetchFailed": "Failed to fetch number rate decks",
+      "saveFailed": "Failed to save rate deck",
+      "deleteFailed": "Failed to delete rate deck",
+      "noDecksFound": "No number rate decks found"
+    },
+    "success": {
+      "created": "Rate deck created successfully",
+      "updated": "Rate deck updated successfully",
+      "deleted": "Rate deck deleted successfully"
+    }
+  },
+  "smsRates": {
+    "title": "SMS Rate Decks",
+    "description": "Manage SMS rate decks and their assignments",
+    "stats": {
+      "totalDecks": "Total Decks",
+      "activeDecks": "Active Decks",
+      "totalRates": "Total Rates",
+      "assignedUsers": "Assigned Users"
+    },
+    "table": {
+      "headers": {
+        "name": "Name",
+        "description": "Description",
+        "currency": "Currency",
+        "rateCount": "Rates",
+        "assignedUsers": "Users",
+        "status": "Status",
+        "isDefault": "Default",
+        "created": "Created",
+        "actions": "Actions"
+      }
+    },
+    "form": {
+      "title": {
+        "add": "Add SMS Rate Deck",
+        "edit": "Edit SMS Rate Deck"
+      },
+      "fields": {
+        "name": "Name",
+        "namePlaceholder": "Enter deck name",
+        "description": "Description",
+        "descriptionPlaceholder": "Enter deck description",
+        "currency": "Currency",
+        "isActive": "Active",
+        "isDefault": "Set as Default"
+      },
+      "validation": {
+        "nameRequired": "Name is required",
+        "nameMinLength": "Name must be at least 3 characters",
+        "descriptionRequired": "Description is required"
+      }
+    },
+    "deleteDialog": {
+      "title": "Delete SMS Rate Deck",
+      "message": "Are you sure you want to delete the SMS rate deck \"{name}\"? This action cannot be undone.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "duplicate": {
+      "success": "SMS rate deck duplicated successfully",
+      "error": "Failed to duplicate SMS rate deck"
+    },
+    "assignment": {
+      "title": "Assign Users to SMS Rate Deck",
+      "description": "Select users to assign to this SMS rate deck"
+    },
+    "userRates": {
+      "title": "User SMS Rates",
+      "description": "View SMS rates assigned to users",
+      "noAssignment": "No SMS rate deck assigned",
+      "assignedDeck": "Assigned Deck: {name}"
+    },
+    "export": {
+      "filename": "sms-rate-decks-{date}.csv",
+      "success": "SMS rate decks exported successfully",
+      "error": "Failed to export SMS rate decks"
+    },
+    "errors": {
+      "fetchFailed": "Failed to fetch SMS rate decks",
+      "saveFailed": "Failed to save SMS rate deck",
+      "deleteFailed": "Failed to delete SMS rate deck",
+      "noDecksFound": "No SMS rate decks found"
+    },
+    "success": {
+      "created": "SMS rate deck created successfully",
+      "updated": "SMS rate deck updated successfully",
+      "deleted": "SMS rate deck deleted successfully"
+    }
+  }
+} 

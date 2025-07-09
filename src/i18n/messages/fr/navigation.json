@@ -1,0 +1,95 @@
+{
+  "sections": {
+    "main": "Principal",
+    "callManagement": "Gestion des Appels", 
+    "services": "Services",
+    "billing": "Facturation",
+    "support": "Support",
+    "account": "Compte"
+  },
+  "items": {
+    "dashboard": {
+      "label": "Tableau de Bord",
+      "description": "Vue d'ensemble et statistiques"
+    },
+    "activeCalls": {
+      "label": "Appels Actifs",
+      "description": "Surveiller les appels en cours"
+    },
+    "cdrReports": {
+      "label": "Rapports d'Appels",
+      "description": "Enregistrements détaillés des appels"
+    },
+    "phoneNumbers": {
+      "label": "Numéros de Téléphone",
+      "description": "Gérer les numéros de téléphone"
+    },
+    "numberRequests": {
+      "label": "Demandes de Numéros",
+      "description": "Demandes de numéros de téléphone"
+    },
+    "trunks": {
+      "label": "Trunks",
+      "description": "Gérer les trunks SIP"
+    },
+    "numbers": {
+      "label": "Numéros",
+      "description": "Vos numéros de téléphone"
+    },
+    "userTrunks": {
+      "label": "Mes Trunks",
+      "description": "Vos Trunks SIP"
+    },
+    "rates": {
+      "label": "Tarifs",
+      "description": "Tarifs d'appels et SMS"
+    },
+    "payments": {
+      "label": "Paiements",
+      "description": "Facturation et paiements"
+    },
+    "supportTickets": {
+      "label": "Support",
+      "description": "Aide et tickets de support"
+    },
+    "myAccount": {
+      "label": "Mon Compte",
+      "description": "Paramètres du compte"
+    },
+    "users": {
+      "label": "Utilisateurs",
+      "description": "Gérer les utilisateurs"
+    },
+    "customerNotifications": {
+      "label": "Notifications Client",
+      "description": "Gérer les notifications"
+    },
+    "notificationLogs": {
+      "label": "Journaux de Notifications",
+      "description": "Voir l'historique des notifications"
+    },
+    "settings": {
+      "label": "Paramètres",
+      "description": "Paramètres système"
+    },
+    "sms": {
+      "label": "SMS",
+      "description": "Envoyer et gérer les messages SMS"
+    },
+    "smsManagement": {
+      "label": "Gestion SMS",
+      "description": "Gérer les fournisseurs SMS, liste noire et système"
+    }
+  },
+  "client": {
+    "dashboard": "Tableau de Bord",
+    "accounts": "Comptes", 
+    "activeCalls": "Appels Actifs",
+    "cdrReports": "Rapports CDR",
+    "settings": "Paramètres",
+    "signOut": "Se Déconnecter"
+  },
+  "header": {
+    "dashboard": "Tableau de Bord"
+  }
+} 

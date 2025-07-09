@@ -1,0 +1,589 @@
+{
+  "page": {
+    "title": "Dashboard",
+    "description": "Overview of your account activity, call statistics, and system status"
+  },
+  "welcome": "Welcome back, {name}!",
+  "account": "account",
+  "settings": {
+    "title": "Dashboard Settings",
+    "editMode": {
+      "label": "Edit Mode",
+      "helpText": "Drag widgets to reorder • Click eye icons to show/hide • Use resize buttons to change sizes • Lock/unlock widgets"
+    },
+    "status": {
+      "editMode": "Edit Mode",
+      "unsaved": "Unsaved",
+      "lastUpdated": "Last updated: {time}"
+    },
+    "widgetStatus": {
+      "title": "Widget Status",
+      "enabled": "Enabled:",
+      "collapsed": "Collapsed:",
+      "locked": "Locked:",
+      "critical": "Critical:",
+      "autoRefresh": "Auto-refresh:"
+    },
+    "widgetVisibility": {
+      "title": "Widget Visibility",
+      "helpText": "Toggle widgets on/off. Locked and critical widgets cannot be hidden."
+    },
+    "missingWidgets": {
+      "title": "Missing Widgets",
+      "addButton": "Add Missing Widgets",
+      "helpText": "Automatically adds any new widgets that have been added to the system"
+    },
+    "layout": {
+      "title": "Layout",
+      "grid": "Grid Layout",
+      "list": "List Layout",
+      "masonry": "Masonry Layout",
+      "custom": "Custom Layout"
+    },
+    "gridColumns": {
+      "title": "Grid Columns",
+      "min": "6 cols",
+      "max": "24 cols"
+    },
+    "categories": {
+      "title": "Categories",
+      "available": "Available categories:"
+    },
+    "theme": {
+      "title": "Theme"
+    },
+    "advanced": {
+      "title": "Advanced Options",
+      "compactMode": "Compact Mode",
+      "autoSave": "Auto Save"
+    },
+    "backupRestore": {
+      "title": "Backup & Restore",
+      "export": "Export",
+      "import": "Import",
+      "importDialog": {
+        "title": "Import Dashboard Preferences",
+        "description": "Paste your exported dashboard preferences JSON data below.",
+        "placeholder": "Paste JSON data here...",
+        "cancel": "Cancel",
+        "import": "Import"
+      }
+    },
+    "actions": {
+      "saving": "Saving...",
+      "saveChanges": "Save Changes",
+      "autoSaved": "Auto-saved",
+      "saved": "Saved",
+      "resetToDefaults": "Reset to Defaults"
+    }
+  },
+  "widgets": {
+    "welcome": {
+      "title": "Welcome"
+    },
+    "balance": {
+      "title": "Account Balance",
+      "status": {
+        "critical": "Critical",
+        "warning": "Low",
+        "low": "Below Threshold",
+        "good": "Healthy",
+        "loading": "Loading"
+      },
+      "alerts": {
+        "critical": "Critical: Account balance is zero or negative",
+        "warning": "Warning: Balance is below €5.00",
+        "low": "Notice: Balance is below your threshold of €{threshold}",
+        "threshold": "Threshold",
+        "account": "Account:",
+        "updating": "Updating...",
+        "live": "Live",
+        "topupMessage": "Consider topping up your account to avoid service interruption.",
+        "statusLabel": "Status:",
+        "lastUpdated": "Last updated: {time}"
+      }
+    },
+    "costOfDay": {
+      "title": "Cost of Day",
+      "states": {
+        "noDataLoaded": {
+          "title": "No data loaded",
+          "subtitle": "Use the date selector to load metrics"
+        },
+        "loading": {
+          "title": "Loading metrics...",
+          "subtitle": "Please wait while we fetch your data"
+        },
+        "error": {
+          "title": "Error",
+          "subtitle": "Failed to load cost data"
+        },
+        "noActivity": {
+          "subtitle": "No calls made {date}",
+          "badge": "No Activity",
+          "waiting": "Waiting for call activity..."
+        }
+      },
+      "status": {
+        "badges": {
+          "lowCost": "Low Cost",
+          "moderate": "Moderate", 
+          "highCost": "High Cost",
+          "noData": "No Data"
+        },
+        "usage": {
+          "efficient": "Efficient",
+          "moderate": "Moderate",
+          "highUsage": "High Usage"
+        }
+      },
+      "labels": {
+        "totalChargedToday": "Total charged today",
+        "totalCalls": "Total Calls",
+        "avgPerCall": "Avg per Call",
+        "dailyUsage": "Daily Usage",
+        "liveData": "Live Data"
+      },
+      "dateFormats": {
+        "today": "today",
+        "yesterday": "yesterday", 
+        "onDate": "on {date}"
+      }
+    },
+    "asr": {
+      "title": "ASR (Success Rate)",
+      "states": {
+        "noDataLoaded": {
+          "title": "No data loaded",
+          "subtitle": "Use the date selector to load metrics"
+        },
+        "loading": {
+          "title": "Loading metrics...",
+          "subtitle": "Please wait while we fetch your data"
+        },
+        "error": {
+          "title": "Error",
+          "subtitle": "Failed to load ASR data"
+        },
+        "noActivity": {
+          "subtitle": "No calls to analyze {date}",
+          "badge": "No Activity",
+          "waiting": "Waiting for call activity..."
+        }
+      },
+      "status": {
+        "badges": {
+          "excellent": "Excellent",
+          "good": "Good", 
+          "fair": "Fair",
+          "poor": "Poor",
+          "critical": "Critical"
+        }
+      },
+      "labels": {
+        "successRate": "Success Rate",
+        "totalCalls": "Total Calls",
+        "successfulCalls": "Successful Calls",
+        "failedCalls": "Failed Calls",
+        "connectionQuality": "Connection Quality",
+        "liveData": "Live Data"
+      },
+      "dateFormats": {
+        "today": "today",
+        "yesterday": "yesterday",
+        "onDate": "on {date}"
+      }
+    },
+    "acd": {
+      "title": "ACD (Avg Call Duration)",
+      "states": {
+        "noDataLoaded": {
+          "title": "No data loaded",
+          "subtitle": "Use the date selector to load metrics"
+        },
+        "loading": {
+          "title": "Loading metrics...",
+          "subtitle": "Please wait while we fetch your data"
+        },
+        "error": {
+          "title": "Error",
+          "subtitle": "Failed to load ACD data"
+        },
+        "noActivity": {
+          "subtitle": "No successful calls {date}",
+          "badge": "No Activity",
+          "waiting": "Waiting for call activity..."
+        }
+      },
+      "status": {
+        "badges": {
+          "quickCalls": "Quick Calls",
+          "optimal": "Optimal",
+          "longCalls": "Long Calls",
+          "veryLong": "Very Long",
+          "noData": "No Data"
+        },
+        "indicators": {
+          "quick": "⚡ Quick",
+          "optimal": "✅ Optimal", 
+          "extended": "📞 Extended",
+          "veryLong": "⏳ Very Long"
+        }
+      },
+      "labels": {
+        "avgDuration": "Average Duration",
+        "totalCalls": "Total Calls",
+        "totalDuration": "Total Duration",
+        "shortestCall": "Shortest Call",
+        "longestCall": "Longest Call",
+        "durationTrend": "Duration Trend",
+        "liveData": "Live Data",
+        "basedOn": "Based on",
+        "successfulCalls": "successful calls",
+        "detailed": "Detailed",
+        "durationRange": "Duration Range"
+      },
+      "dateFormats": {
+        "today": "today",
+        "yesterday": "yesterday",
+        "onDate": "on {date}"
+      }
+    },
+    "totalMinutes": {
+      "title": "Total Day Minutes",
+      "states": {
+        "loading": {
+          "subtitle": "Loading minutes data..."
+        },
+        "error": {
+          "title": "Error",
+          "subtitle": "Failed to load data",
+          "badge": "Error",
+          "retry": "Please try refreshing the widget"
+        },
+        "noActivity": {
+          "subtitle": "No usage {date}",
+          "badge": "No Activity",
+          "waiting": "Waiting for call activity..."
+        },
+        "noData": {
+          "subtitle": "No data available",
+          "badge": "No Data"
+        }
+      },
+      "status": {
+        "badges": {
+          "lightUsage": "Light Usage",
+          "moderate": "Moderate",
+          "heavy": "Heavy Usage",
+          "veryHeavy": "Very Heavy"
+        }
+      },
+      "labels": {
+        "totalUsage": "Total Usage",
+        "avgPerCall": "Avg per Call",
+        "peakUsage": "Peak Usage",
+        "efficiency": "Efficiency",
+        "usageTrend": "Usage Trend",
+        "liveData": "Live Data"
+      },
+      "dateFormats": {
+        "today": "today",
+        "yesterday": "yesterday",
+        "onDate": "on {date}"
+      }
+    },
+    "userAttention": {
+      "title": "Users Requiring Attention",
+      "description": "Users missing Sippy account IDs or pending email verification",
+      "buttons": {
+        "refresh": "Refresh",
+        "manageAllUsers": "Manage All Users",
+        "viewAllUsers": "View all users"
+      },
+      "filters": {
+        "show": "Show:",
+        "all": "All Pending ({count})",
+        "missingSippy": "Missing Sippy ID ({count})",
+        "pendingVerification": "Pending Verification ({count})"
+      },
+      "limits": {
+        "5": "5 users",
+        "10": "10 users", 
+        "20": "20 users",
+        "50": "50 users"
+      },
+      "stats": {
+        "missingSippyId": "Missing Sippy ID",
+        "pendingVerification": "Pending Verification",
+        "totalPending": "Total Pending"
+      },
+      "badges": {
+        "noSippyId": "No Sippy ID",
+        "unverified": "Unverified",
+        "recent": "Recent",
+        "admin": "Admin",
+        "client": "Client",
+        "adminCreated": "Admin Created",
+        "selfSignup": "Self Signup"
+      },
+      "userInfo": {
+        "created": "Created:",
+        "sippyId": "Sippy ID:"
+      },
+      "emptyState": {
+        "title": "No users need attention",
+        "allClear": "All users have Sippy IDs and verified emails",
+        "noMatches": "No users match the current filter: {filter}"
+      },
+      "footer": {
+        "showing": "Showing {current} of {total} users requiring attention",
+        "viewAll": "View all users →"
+      },
+      "loading": "Loading..."
+    },
+    "lowBalanceUsers": {
+      "title": "Low Balance Users",
+      "threshold": {
+        "label": "Low Balance Threshold",
+        "description": "Users with balance below this amount will be shown as low balance.",
+        "placeholder": "5.00",
+        "currency": "EUR",
+        "below": "Below {amount} €"
+      },
+      "loading": "Loading users...",
+      "error": {
+        "title": "Error Loading Users",
+        "tryAgain": "Try Again"
+      },
+      "emptyState": {
+        "title": "All Good!",
+        "description": "No users have low balance (below {threshold} €)",
+        "refresh": "Refresh"
+      },
+      "header": {
+        "userCount": "{count} user with low balance",
+        "userCountPlural": "{count} users with low balance"
+      },
+      "userInfo": {
+        "lastActive": "Last active:",
+        "sippyId": "ID:",
+        "view": "View"
+      },
+      "footer": {
+        "totalAffected": "Total affected:",
+        "user": "user",
+        "users": "users",
+        "threshold": "Threshold:"
+      }
+    },
+    "dateSelector": {
+      "title": "Date Selector",
+      "buttons": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "pickDate": "Pick Date",
+        "load": "Load",
+        "refresh": "Refresh",
+        "loading": "Loading..."
+      },
+      "status": {
+        "calls": "{count} calls"
+      }
+    },
+    "unsolvedTickets": {
+      "title": "Unsolved Tickets",
+      "loading": "Loading tickets...",
+      "error": {
+        "title": "Error Loading Tickets",
+        "tryAgain": "Try Again"
+      },
+      "emptyState": {
+        "title": "All Caught Up!",
+        "description": "No unsolved tickets at the moment. Great work!",
+        "refresh": "Refresh"
+      },
+      "header": {
+        "ticketCount": "{count} unsolved ticket",
+        "ticketCountPlural": "{count} unsolved tickets",
+        "averageDays": "Avg {days} day open",
+        "averageDaysPlural": "Avg {days} days open"
+      },
+      "stats": {
+        "highPriority": "High Priority",
+        "oldest": "Oldest (days)"
+      },
+      "status": {
+        "open": "Open",
+        "inProgress": "In Progress",
+        "waitingUser": "Waiting User",
+        "waitingAdmin": "Waiting Admin"
+      },
+      "priority": {
+        "urgent": "URGENT",
+        "high": "HIGH", 
+        "medium": "MEDIUM",
+        "low": "LOW"
+      },
+      "services": {
+        "outboundCalls": "Outbound Calls",
+        "inboundCalls": "Inbound Calls",
+        "didNumbers": "DID Numbers",
+        "sms": "SMS",
+        "emailing": "Email",
+        "whatsappBusiness": "WhatsApp Business",
+        "billing": "Billing",
+        "technical": "Technical",
+        "other": "Other"
+      },
+      "timeAgo": {
+        "today": "Today",
+        "dayAgo": "1 day ago",
+        "daysAgo": "{days} days ago"
+      },
+      "ticketInfo": {
+        "unassigned": "Unassigned",
+        "view": "View",
+        "replies": "replies"
+      },
+      "footer": {
+        "showing": "Showing {current} of {total} unsolved ticket",
+        "showingPlural": "Showing {current} of {total} unsolved tickets", 
+        "urgentHigh": "{urgent} urgent, {high} high priority"
+      }
+    },
+    "phoneNumberRequests": {
+      "title": "Phone Number Requests"
+    },
+    "placeholder": {
+      "content": "Widget content for {widgetId}"
+    },
+    "editMode": {
+      "buttons": {
+        "settings": "Settings",
+        "visible": "Visible",
+        "hidden": "Hidden",
+        "dragTooltip": "Drag to reorder",
+        "refreshTooltip": "Refresh widget data",
+        "autoRefreshTooltip": "Auto-refresh in {time}",
+        "hideTooltip": "Hide widget",
+        "showTooltip": "Show widget"
+      }
+    },
+    "settings": {
+      "title": "Widget Settings",
+      "currentStatus": {
+        "title": "Current Status",
+        "visibility": "Visibility:",
+        "visible": "Visible",
+        "hidden": "Hidden",
+        "size": "Size:",
+        "category": "Category:",
+        "priority": "Priority:",
+        "badges": {
+          "criticalWidget": "Critical Widget",
+          "locked": "Locked",
+          "noCollapse": "No Collapse",
+          "autoRefresh": "Auto-refresh"
+        }
+      },
+      "visibilityBehavior": {
+        "title": "Visibility & Behavior",
+        "widgetEnabled": {
+          "label": "Widget Enabled",
+          "description": "Show or hide this widget on the dashboard"
+        },
+        "showTitle": {
+          "label": "Show Title",
+          "description": "Display the widget title header"
+        },
+        "allowCollapsing": {
+          "label": "Allow Collapsing",
+          "description": "Users can collapse this widget"
+        },
+        "lockWidget": {
+          "label": "Lock Widget",
+          "description": "Prevent moving or resizing"
+        },
+        "criticalNote": "This is a critical widget that cannot be hidden."
+      },
+      "layoutSizing": {
+        "title": "Layout & Sizing",
+        "width": {
+          "label": "Width (Columns)",
+          "badge": "{cols} of {total}",
+          "min": "1 col",
+          "max": "{total} cols"
+        },
+        "height": {
+          "label": "Height (Rows)",
+          "badge": "{rows} row",
+          "badgePlural": "{rows} rows",
+          "min": "1 row",
+          "max": "6 rows"
+        },
+        "aspectRatio": {
+          "label": "Aspect Ratio",
+          "auto": "Auto (Content-based)",
+          "square": "Square (1:1)",
+          "wide": "Wide (2:1)",
+          "tall": "Tall (1:2)"
+        }
+      },
+      "categoryPriority": {
+        "title": "Category & Priority",
+        "category": {
+          "label": "Category",
+          "general": "General",
+          "overview": "Overview",
+          "admin": "Admin",
+          "metrics": "Metrics",
+          "analytics": "Analytics",
+          "reports": "Reports",
+          "settings": "Settings"
+        },
+        "priority": {
+          "label": "Priority",
+          "min": "Low (0)",
+          "max": "High (10)",
+          "levels": {
+            "critical": "Critical",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "minimal": "Minimal"
+          }
+        }
+      },
+      "autoRefresh": {
+        "title": "Auto-Refresh Settings",
+        "interval": {
+          "label": "Refresh Interval",
+          "disabled": "Disabled",
+          "min": "Disabled",
+          "max": "1 hour"
+        },
+        "note": "Widget will auto-refresh every {time}",
+        "timeFormats": {
+          "seconds": "{count}s",
+          "minutes": "{count}m",
+          "hours": "{count}h"
+        }
+      },
+      "preview": {
+        "title": "Live Preview",
+        "widget": "Widget: {title}",
+        "details": "Size: {cols}×{rows} • Category: {category} • Priority: {priority}",
+        "badges": {
+          "visible": "Visible",
+          "hidden": "Hidden",
+          "titleShown": "Title Shown",
+          "titleHidden": "Title Hidden",
+          "collapsible": "Collapsible",
+          "locked": "Locked",
+          "autoRefresh": "Auto-refresh"
+        }
+      }
+    }
+  }
+} 

@@ -1,0 +1,175 @@
+{
+  "page": {
+    "title": "Trunks Management",
+    "description": "Manage SIP trunks and their assignments",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "admin": "Admin",
+      "trunks": "Trunks"
+    }
+  },
+  "actions": {
+    "createTrunk": "Create Trunk",
+    "viewDetails": "View details",
+    "editTrunk": "Edit trunk",
+    "deleteTrunk": "Delete trunk",
+    "manageAuthRules": "Manage authentication rules",
+    "previous": "Previous",
+    "next": "Next",
+    "back": "Back",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "copy": "Copy",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "stats": {
+    "totalTrunks": "Total Trunks",
+    "assignedTrunks": "Assigned Trunks",
+    "unassigned": "Unassigned",
+    "withSippyAccount": "With Sippy Account"
+  },
+  "filters": {
+    "title": "Filters",
+    "searchPlaceholder": "Search trunks..."
+  },
+  "table": {
+    "title": "Trunks",
+    "headers": {
+      "name": "Name",
+      "username": "Username",
+      "domain": "Domain",
+      "accountStatus": "Account Status",
+      "sipRegistration": "SIP Registration",
+      "assignedTo": "Assigned To",
+      "created": "Created",
+      "actions": "Actions"
+    }
+  },
+  "details": {
+    "overview": {
+      "title": "Trunk Overview",
+      "trunkName": "Trunk Name",
+      "created": "Created",
+      "description": "Description"
+    },
+    "connection": {
+      "title": "Connection Details",
+      "username": "Username",
+      "password": "Password",
+      "domain": "Domain",
+      "ipAddresses": "IP Addresses",
+      "port": "Port",
+      "authType": "Authentication Type",
+      "registrationRequired": "Registration Required",
+      "primary": "Primary",
+      "noIpAddresses": "No IP addresses configured",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "authRules": {
+      "title": "Authentication Rules",
+      "noSipAccount": "No SIP Account",
+      "noSipAccountDescription": "This trunk is not assigned to a user with a configured SIP account. Authentication rules will be available once the trunk is properly assigned and configured."
+    },
+    "codecs": {
+      "title": "Codec Configuration"
+    },
+    "assignment": {
+      "title": "Assignment Information",
+      "assignedUser": "Assigned User",
+      "company": "Company",
+      "assignedDate": "Assigned Date",
+      "notSpecified": "Not specified",
+      "notAssigned": "This trunk is not assigned to any user"
+    },
+    "adminNotes": {
+      "title": "Admin Notes"
+    },
+    "sippyIntegration": {
+      "title": "Sippy Integration",
+      "accountId": "Sippy Account ID",
+      "trunkId": "Sippy Trunk ID"
+    }
+  },
+  "edit": {
+    "title": "Edit Trunk",
+    "description": "Modify trunk configuration and settings",
+    "form": {
+      "basicInfo": "Basic Information",
+      "name": "Trunk Name",
+      "namePlaceholder": "Enter trunk name",
+      "description": "Description",
+      "descriptionPlaceholder": "Optional description",
+      "connectionSettings": "Connection Settings",
+      "username": "Username",
+      "usernamePlaceholder": "SIP username",
+      "password": "Password",
+      "passwordPlaceholder": "SIP password",
+      "domain": "Domain",
+      "domainPlaceholder": "SIP domain",
+      "port": "Port",
+      "portPlaceholder": "5060",
+      "ipAddresses": "IP Addresses",
+      "ipAddressPlaceholder": "Enter IP address",
+      "addIpAddress": "Add IP Address",
+      "removeIpAddress": "Remove",
+      "authSettings": "Authentication Settings",
+      "authType": "Authentication Type",
+      "authTypePassword": "Password",
+      "authTypeIp": "IP Address",
+      "authTypeBoth": "Both",
+      "registrationRequired": "Registration Required",
+      "codecSettings": "Codec Settings",
+      "selectCodecs": "Select supported codecs",
+      "assignmentSettings": "Assignment Settings",
+      "assignTo": "Assign to User",
+      "selectUser": "Select a user",
+      "capacityManagement": "Capacity Management",
+      "maxSessions": "Max Sessions",
+      "maxSessionsPlaceholder": "Enter max sessions or 'Unlimited'",
+      "maxCps": "Max CPS",
+      "maxCpsPlaceholder": "Enter max calls per second or 'Unlimited'",
+      "adminNotes": "Admin Notes",
+      "notesPlaceholder": "Internal notes for administrators"
+    },
+    "validation": {
+      "nameRequired": "Trunk name is required",
+      "usernameRequired": "Username is required",
+      "passwordRequired": "Password is required",
+      "domainRequired": "Domain is required",
+      "invalidPort": "Port must be a valid number",
+      "invalidIpAddress": "Invalid IP address format",
+      "codecRequired": "At least one codec must be selected"
+    }
+  },
+  "states": {
+    "loading": "Loading...",
+    "loadingTrunk": "Loading trunk details",
+    "saving": "Saving...",
+    "noTrunks": "No trunks found",
+    "unassigned": "Unassigned",
+    "showingResults": "Showing {start} to {end} of {total} results",
+    "trunkNotFound": "Trunk not found",
+    "error": "Error",
+    "failedToLoad": "Failed to load trunk details"
+  },
+  "confirmations": {
+    "deleteTrunk": "Are you sure you want to delete this trunk?",
+    "deleteTrunkNamed": "Are you sure you want to delete the trunk \"{name}\"?"
+  },
+  "errors": {
+    "fetchFailed": "Failed to fetch trunks",
+    "deleteFailed": "Failed to delete trunk",
+    "saveFailed": "Failed to save trunk",
+    "loadFailed": "Failed to load trunk details",
+    "copyFailed": "Failed to copy to clipboard"
+  },
+  "success": {
+    "trunkDeleted": "Trunk deleted successfully",
+    "trunkSaved": "Trunk saved successfully",
+    "copied": "Copied to clipboard"
+  }
+} 

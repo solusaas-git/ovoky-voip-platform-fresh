@@ -1,0 +1,95 @@
+{
+  "sections": {
+    "main": "Main",
+    "callManagement": "Call Management", 
+    "services": "Services",
+    "billing": "Billing",
+    "support": "Support",
+    "account": "Account"
+  },
+  "items": {
+    "dashboard": {
+      "label": "Dashboard",
+      "description": "Overview and statistics"
+    },
+    "activeCalls": {
+      "label": "Active Calls",
+      "description": "Monitor ongoing calls"
+    },
+    "cdrReports": {
+      "label": "Call Reports",
+      "description": "Call detail records"
+    },
+    "phoneNumbers": {
+      "label": "Phone Numbers",
+      "description": "Manage phone numbers"
+    },
+    "numberRequests": {
+      "label": "Number Requests",
+      "description": "Phone number requests"
+    },
+    "trunks": {
+      "label": "Trunks",
+      "description": "Manage SIP trunks"
+    },
+    "numbers": {
+      "label": "Numbers",
+      "description": "Your phone numbers"
+    },
+    "userTrunks": {
+      "label": "My Trunks",
+      "description": "Your SIP trunks"
+    },
+    "rates": {
+      "label": "Rates",
+      "description": "Call and SMS rates"
+    },
+    "payments": {
+      "label": "Payments",
+      "description": "Billing and payments"
+    },
+    "supportTickets": {
+      "label": "Support",
+      "description": "Help and support tickets"
+    },
+    "myAccount": {
+      "label": "My Account",
+      "description": "Account settings"
+    },
+    "users": {
+      "label": "Users",
+      "description": "Manage users"
+    },
+    "customerNotifications": {
+      "label": "Customer Notifications",
+      "description": "Manage notifications"
+    },
+    "notificationLogs": {
+      "label": "Notification Logs",
+      "description": "View notification history"
+    },
+    "settings": {
+      "label": "Settings",
+      "description": "System settings"
+    },
+    "sms": {
+      "label": "SMS",
+      "description": "Send and manage SMS messages"
+    },
+    "smsManagement": {
+      "label": "SMS Management",
+      "description": "Manage SMS providers, blacklist, and system"
+    }
+  },
+  "client": {
+    "dashboard": "Dashboard",
+    "accounts": "Accounts", 
+    "activeCalls": "Active Calls",
+    "cdrReports": "CDR Reports",
+    "settings": "Settings",
+    "signOut": "Sign Out"
+  },
+  "header": {
+    "dashboard": "Dashboard"
+  }
+} 

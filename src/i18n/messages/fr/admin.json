@@ -1,0 +1,267 @@
+{
+  "breadcrumbs": {
+    "admin": "Administration"
+  },
+  "sms": {
+    "title": "Gestion SMS",
+    "description": "Gérer les fournisseurs SMS, la liste noire, les statistiques et les paramètres système",
+    "tabs": {
+      "providers": "Fournisseurs",
+      "senderIds": "ID Expéditeur",
+      "blacklist": "Liste Noire",
+      "stats": "Statistiques",
+      "history": "Historique d'Envoi",
+      "users": "Utilisateurs",
+      "settings": "Paramètres",
+      "queue": "Moniteur de File",
+      "simulation": "Simulation"
+    },
+    "providers": {
+      "title": "Fournisseurs SMS",
+      "description": "Gérer les fournisseurs de passerelle SMS et leurs configurations",
+      "addProvider": "Ajouter un Fournisseur",
+      "loading": "Chargement des fournisseurs SMS...",
+      "empty": "Aucun fournisseur SMS configuré",
+      "emptyDescription": "Ajoutez votre premier fournisseur SMS pour commencer",
+      "form": {
+        "addTitle": "Ajouter un Fournisseur SMS",
+        "editTitle": "Modifier le Fournisseur SMS",
+        "addDescription": "Configurer un nouveau fournisseur de passerelle SMS",
+        "editDescription": "Mettre à jour la configuration du fournisseur de passerelle SMS",
+        "internalName": "Nom Interne",
+        "displayName": "Nom d'Affichage",
+        "providerType": "Type de Fournisseur",
+        "gatewayType": "Type de Passerelle",
+        "oneWay": "Unidirectionnel (Envoi Uniquement)",
+        "twoWay": "Bidirectionnel (Envoi et Réception)",
+        "apiEndpoint": "Point de Terminaison API (optionnel)",
+        "apiKey": "Clé API",
+        "apiSecret": "Secret API (optionnel)",
+        "rateLimits": "Limites de Taux",
+        "perSecond": "Par Seconde",
+        "perMinute": "Par Minute",
+        "perHour": "Par Heure",
+        "additionalSettings": "Paramètres Supplémentaires (JSON)",
+        "active": "Actif",
+        "cancel": "Annuler",
+        "create": "Créer le Fournisseur",
+        "update": "Mettre à Jour le Fournisseur",
+        "creating": "Création...",
+        "updating": "Mise à jour..."
+      },
+      "table": {
+        "name": "Nom",
+        "provider": "Fournisseur",
+        "type": "Type",
+        "status": "Statut",
+        "rateLimits": "Limites de Taux",
+        "countries": "Pays",
+        "actions": "Actions"
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
+      },
+      "messages": {
+        "providerCreated": "Fournisseur créé avec succès",
+        "providerUpdated": "Fournisseur mis à jour avec succès",
+        "providerDeleted": "Fournisseur supprimé avec succès",
+        "providerEnabled": "Fournisseur activé avec succès",
+        "providerDisabled": "Fournisseur désactivé avec succès",
+        "failedToLoad": "Échec du chargement des fournisseurs SMS",
+        "failedToSave": "Échec de la sauvegarde du fournisseur",
+        "failedToDelete": "Échec de la suppression du fournisseur",
+        "failedToUpdateStatus": "Échec de la mise à jour du statut du fournisseur",
+        "confirmDelete": "Êtes-vous sûr de vouloir supprimer \"{name}\" ? Cette action ne peut être annulée."
+      }
+    },
+    "blacklist": {
+      "title": "Liste Noire SMS Globale",
+      "description": "Gérer les numéros de téléphone mis sur liste noire globalement pour tous les utilisateurs",
+      "addToBlacklist": "Ajouter à la Liste Noire",
+      "loading": "Chargement des numéros sur liste noire...",
+      "empty": "Aucun numéro sur liste noire",
+      "emptyDescription": "Ajoutez des numéros de téléphone pour empêcher la livraison SMS globalement",
+      "table": {
+        "phoneNumber": "Numéro de Téléphone",
+        "reason": "Raison",
+        "type": "Type",
+        "addedBy": "Ajouté Par",
+        "added": "Ajouté",
+        "actions": "Actions"
+      },
+      "type": {
+        "global": "Global",
+        "user": "Utilisateur"
+      },
+      "noReason": "Aucune raison fournie",
+      "system": "Système",
+      "remove": "Supprimer"
+    },
+    "stats": {
+      "title": "Statistiques SMS",
+      "totalMessages": "Messages Totaux",
+      "activeUsers": "Utilisateurs Actifs",
+      "successRate": "Taux de Succès",
+      "blacklisted": "Sur Liste Noire",
+      "monthlyComparison": "Comparaison Mensuelle",
+      "systemHealth": "Santé du Système",
+      "allTimeMessages": "Messages SMS envoyés au total",
+      "usersWithAccess": "Utilisateurs avec accès SMS",
+      "deliveredSuccessfully": "Messages livrés avec succès",
+      "numbersInBlacklist": "Numéros dans la liste noire",
+      "messageVolume": "Comparaison du volume de messages",
+      "performanceMetrics": "Métriques de performance du système SMS",
+      "thisMonth": "Ce Mois",
+      "lastMonth": "Mois Dernier",
+      "change": "Changement",
+      "activeProviders": "Fournisseurs Actifs",
+      "failureRate": "Taux d'Échec"
+    },
+    "senderIds": {
+      "title": "Demandes d'ID Expéditeur",
+      "description": "Gérer toutes les demandes d'ID expéditeur dans le système",
+      "loading": "Chargement des ID expéditeur...",
+      "empty": "Aucune demande d'ID expéditeur",
+      "emptyDescription": "Les demandes d'ID expéditeur apparaîtront ici pour approbation",
+      "table": {
+        "senderId": "ID Expéditeur",
+        "user": "Utilisateur",
+        "status": "Statut",
+        "type": "Type",
+        "usage": "Utilisation",
+        "requested": "Demandé",
+        "actions": "Actions"
+      },
+      "status": {
+        "pending": "En Attente",
+        "approved": "Approuvé",
+        "rejected": "Rejeté",
+        "suspended": "Suspendu"
+      },
+      "actions": {
+        "approve": "Approuver l'ID expéditeur",
+        "reject": "Rejeter l'ID expéditeur",
+        "suspend": "Suspendre l'ID expéditeur"
+      },
+      "prompts": {
+        "rejectionReason": "Raison du rejet (optionnel) :",
+        "suspensionReason": "Raison de la suspension :"
+      },
+      "messages": {
+        "approved": "ID expéditeur approuvé avec succès",
+        "rejected": "ID expéditeur rejeté avec succès",
+        "failedToLoad": "Échec du chargement des ID expéditeur",
+        "failedToUpdate": "Échec de {action} l'ID expéditeur"
+      }
+    },
+    "userAssignments": {
+      "title": "Assignations Fournisseur Utilisateur",
+      "description": "Assigner des fournisseurs SMS aux utilisateurs et gérer leur accès et limites",
+      "assignProvider": "Assigner un Fournisseur",
+      "loading": "Chargement des assignations...",
+      "empty": "Aucune assignation trouvée",
+      "emptyDescription": "Aucune assignation de fournisseur n'a été créée pour le moment.",
+      "noAssignments": "Aucune assignation ne correspond à vos filtres actuels.",
+      "create": {
+        "title": "Assigner un Fournisseur SMS à un Utilisateur",
+        "description": "Créer une nouvelle assignation entre un utilisateur et un fournisseur SMS",
+        "user": "Utilisateur",
+        "userPlaceholder": "Sélectionner un utilisateur",
+        "provider": "Fournisseur SMS",
+        "providerPlaceholder": "Sélectionner un fournisseur",
+        "priority": "Priorité",
+        "priorityDescription": "Nombre plus bas = priorité plus élevée",
+        "dailyLimit": "Limite Quotidienne",
+        "monthlyLimit": "Limite Mensuelle",
+        "notes": "Notes",
+        "notesPlaceholder": "Notes optionnelles sur cette assignation",
+        "noLimit": "Aucune limite",
+        "createAssignment": "Créer l'Assignation"
+      },
+      "edit": {
+        "title": "Modifier l'Assignation",
+        "description": "Mettre à jour les paramètres d'assignation pour {user} → {provider}",
+        "updateAssignment": "Mettre à Jour l'Assignation",
+        "currentUsage": "Utilisation Actuelle",
+        "dailyUsage": "Utilisation Quotidienne",
+        "monthlyUsage": "Utilisation Mensuelle",
+        "messages": "messages"
+      },
+      "table": {
+        "user": "Utilisateur",
+        "provider": "Fournisseur",
+        "status": "Statut",
+        "priority": "Priorité",
+        "dailyUsage": "Utilisation Quotidienne",
+        "monthlyUsage": "Utilisation Mensuelle",
+        "assigned": "Assigné",
+        "actions": "Actions"
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
+      },
+      "filters": {
+        "search": "Rechercher utilisateurs, emails ou fournisseurs...",
+        "allStatus": "Tous les Statuts",
+        "allUsers": "Tous les Utilisateurs",
+        "allProviders": "Tous les Fournisseurs"
+      },
+      "messages": {
+        "created": "Assignation créée avec succès",
+        "updated": "Assignation mise à jour avec succès",
+        "deleted": "Assignation désactivée avec succès",
+        "activated": "Assignation activée",
+        "deactivated": "Assignation désactivée",
+        "failedToLoad": "Échec du chargement des assignations",
+        "failedToCreate": "Échec de la création de l'assignation",
+        "failedToUpdate": "Échec de la mise à jour de l'assignation",
+        "failedToDelete": "Échec de la désactivation de l'assignation",
+        "confirmDelete": "Êtes-vous sûr de vouloir désactiver cette assignation ?",
+        "userExists": "L'utilisateur est déjà assigné à ce fournisseur"
+      }
+    },
+    "settings": {
+      "title": "Paramètres Système SMS",
+      "description": "Configurer les paramètres et comportements globaux du système SMS",
+      "loading": "Chargement des paramètres SMS...",
+      "reset": "Réinitialiser",
+      "saveChanges": "Enregistrer les Modifications",
+      "saving": "Enregistrement...",
+      "general": {
+        "title": "Paramètres Généraux",
+        "enableSystem": "Activer le Système SMS",
+        "enableSystemDescription": "Interrupteur principal pour l'ensemble du système SMS",
+        "maxMessageLength": "Longueur Max des Messages",
+        "defaultRetryAttempts": "Tentatives de Reprise par Défaut"
+      },
+      "rateLimits": {
+        "title": "Limites de Taux Globales",
+        "perSecond": "Messages Par Seconde",
+        "perMinute": "Messages Par Minute",
+        "perHour": "Messages Par Heure"
+      },
+      "senderIdSettings": {
+        "title": "Paramètres ID Expéditeur",
+        "requireApproval": "Exiger l'Approbation des ID Expéditeur",
+        "requireApprovalDescription": "Toutes les demandes d'ID expéditeur doivent être approuvées par un administrateur"
+      },
+      "logging": {
+        "title": "Journalisation et Surveillance",
+        "enableLogging": "Activer la Journalisation SMS",
+        "enableLoggingDescription": "Enregistrer tous les messages SMS pour audit et débogage",
+        "enableDeliveryReports": "Activer les Rapports de Livraison",
+        "enableDeliveryReportsDescription": "Suivre le statut de livraison des messages SMS",
+        "logRetention": "Rétention des Journaux (Jours)",
+        "deliveryWebhook": "Webhook de Rapport de Livraison"
+      },
+      "messages": {
+        "updated": "Paramètres SMS mis à jour avec succès",
+        "failed": "Échec de la mise à jour des paramètres SMS",
+        "failedToLoad": "Échec du chargement des paramètres SMS",
+        "confirmReset": "Êtes-vous sûr de vouloir réinitialiser tous les paramètres aux valeurs par défaut ?"
+      }
+    }
+  }
+} 

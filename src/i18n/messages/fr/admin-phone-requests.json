@@ -1,0 +1,140 @@
+{
+  "page": {
+    "title": "Demandes de Numéros de Téléphone",
+    "description": "Gérer les demandes des utilisateurs pour l'achat, l'annulation et la modification de numéros de téléphone",
+    "breadcrumbs": {
+      "dashboard": "Tableau de Bord",
+      "admin": "Administration",
+      "phoneNumberRequests": "Demandes de Numéros"
+    }
+  },
+  "access": {
+    "denied": "Accès Refusé",
+    "deniedDescription": "Vous n'avez pas la permission d'accéder à cette page",
+    "deniedMessage": "Vous n'avez pas la permission d'accéder à cette page."
+  },
+  "loading": {
+    "title": "Chargement...",
+    "description": "Vérification des permissions",
+    "initializing": "Initialisation..."
+  },
+  "filters": {
+    "title": "Filtres",
+    "search": "Rechercher des demandes...",
+    "allStatuses": "Tous les Statuts",
+    "allTypes": "Tous les Types",
+    "allPriorities": "Toutes les Priorités"
+  },
+  "status": {
+    "pending": "En Attente",
+    "approved": "Approuvé",
+    "rejected": "Rejeté",
+    "completed": "Terminé",
+    "cancelled": "Annulé"
+  },
+  "requestTypes": {
+    "backorder": "Demande d'Achat",
+    "cancellation": "Annulation",
+    "transfer": "Transfert",
+    "suspend": "Suspension",
+    "modify": "Modification",
+    "purchaseRequests": "Demandes d'Achat",
+    "cancellations": "Annulations",
+    "transfers": "Transferts",
+    "suspensions": "Suspensions",
+    "modifications": "Modifications"
+  },
+  "priority": {
+    "urgent": "Urgent",
+    "high": "Élevée",
+    "medium": "Moyenne",
+    "low": "Faible"
+  },
+  "stats": {
+    "totalRequests": "Total des Demandes",
+    "purchaseRequests": "Demandes d'Achat",
+    "cancellations": "Annulations",
+    "pending": "En Attente",
+    "approved": "Approuvées",
+    "highPriority": "Priorité Élevée"
+  },
+  "table": {
+    "title": "Demandes de Numéros de Téléphone",
+    "headers": {
+      "requestNumber": "N° Demande",
+      "phoneNumber": "Numéro de Téléphone",
+      "user": "Utilisateur",
+      "type": "Type",
+      "status": "Statut",
+      "priority": "Priorité",
+      "created": "Créé",
+      "actions": "Actions"
+    },
+    "noCompany": "Aucune entreprise",
+    "pagination": {
+      "showing": "Affichage de",
+      "to": "à",
+      "of": "sur",
+      "results": "résultats",
+      "previous": "Précédent",
+      "next": "Suivant"
+    }
+  },
+  "modals": {
+    "details": {
+      "title": "Détails de la Demande",
+      "description": "Informations complètes sur la demande",
+      "fields": {
+        "requestNumber": "Numéro de Demande",
+        "status": "Statut",
+        "phoneNumber": "Numéro de Téléphone",
+        "requestType": "Type de Demande",
+        "priority": "Priorité",
+        "created": "Créé",
+        "user": "Utilisateur",
+        "reason": "Raison",
+        "businessJustification": "Justification Commerciale",
+        "description": "Description",
+        "expiresAt": "Expire le",
+        "scheduledDate": "Date Programmée",
+        "reviewNotes": "Notes de Révision",
+        "processingNotes": "Notes de Traitement",
+        "reviewedBy": "Révisé par",
+        "reviewedAt": "Révisé le"
+      },
+      "noCompany": "Aucune entreprise",
+      "notAvailable": "N/D"
+    },
+    "approve": {
+      "title": "Approuver la Demande",
+      "descriptionPurchase": "Approuver la demande d'achat pour",
+      "descriptionOther": "Approuver la demande de {type} pour",
+      "warningPurchase": "L'approbation de cette demande assignera le numéro de téléphone à l'utilisateur et créera des enregistrements de facturation.",
+      "warningOther": "L'approbation de cette demande traitera immédiatement l'action demandée sur le numéro de téléphone.",
+      "reviewNotes": "Notes de Révision",
+      "reviewNotesPlaceholder": "Notes optionnelles sur votre décision de révision...",
+      "processingNotes": "Notes de Traitement",
+      "processingNotesPlaceholder": "Notes optionnelles sur le traitement...",
+      "cancel": "Annuler",
+      "approve": "Approuver la Demande",
+      "approving": "Approbation..."
+    },
+    "reject": {
+      "title": "Rejeter la Demande",
+      "descriptionPurchase": "Rejeter la demande d'achat pour",
+      "descriptionOther": "Rejeter la demande de {type} pour",
+      "reviewNotes": "Notes de Révision *",
+      "reviewNotesPlaceholder": "Veuillez fournir une raison pour rejeter cette demande...",
+      "cancel": "Annuler",
+      "reject": "Rejeter la Demande",
+      "rejecting": "Rejet..."
+    }
+  },
+  "messages": {
+    "approveSuccess": "Demande approuvée avec succès",
+    "approveError": "Échec de l'approbation de la demande",
+    "rejectSuccess": "Demande rejetée avec succès",
+    "rejectError": "Échec du rejet de la demande",
+    "fetchError": "Échec de la récupération des demandes"
+  }
+} 

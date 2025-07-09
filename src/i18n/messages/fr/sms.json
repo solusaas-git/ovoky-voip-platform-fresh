@@ -1,0 +1,468 @@
+{
+  "page": {
+    "title": "Gestion SMS",
+    "description": "Envoyer des SMS, gérer les campagnes, contacts et modèles",
+    "breadcrumbs": {
+      "dashboard": "Tableau de bord",
+      "sms": "SMS"
+    }
+  },
+  "common": {
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "buttons": {
+      "cancel": "Annuler",
+      "save": "Enregistrer",
+      "delete": "Supprimer",
+      "edit": "Modifier",
+      "view": "Voir",
+      "create": "Créer",
+      "update": "Mettre à jour"
+    },
+    "messages": {
+      "loading": "Chargement...",
+      "error": "Erreur",
+      "success": "Succès",
+      "saving": "Enregistrement..."
+    },
+    "actions": "Actions"
+  },
+  "tabs": {
+    "send": "Envoyer SMS",
+    "campaigns": "Campagnes",
+    "contacts": "Contacts",
+    "templates": "Modèles",
+    "history": "Historique",
+    "settings": "Paramètres"
+  },
+  "send": {
+    "title": "Envoyer SMS",
+    "description": "Envoyer des messages SMS individuels",
+    "form": {
+      "recipient": {
+        "label": "Destinataire",
+        "placeholder": "Entrez le numéro de téléphone"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tapez votre message ici...",
+        "charactersLeft": "{count} caractères restants",
+        "maxLength": "Maximum {max} caractères"
+      },
+      "senderId": {
+        "label": "ID d'expéditeur",
+        "placeholder": "Sélectionner l'ID d'expéditeur"
+      },
+      "gateway": {
+        "label": "Passerelle SMS",
+        "placeholder": "Sélectionner la passerelle"
+      },
+      "preview": {
+        "title": "Aperçu",
+        "from": "De : {senderId}",
+        "to": "À : {recipient}",
+        "message": "Message : {message}",
+        "cost": "Coût estimé : {cost}"
+      },
+      "calculation": {
+        "empty": "Aucun message",
+        "characters": "{count} caractères",
+        "gsm": "Encodage GSM 7 bits",
+        "unicode": "Encodage Unicode (caractères spéciaux)",
+        "singleSms": "1 SMS",
+        "multiSms": "{count} SMS",
+        "extendedChars": "{count} caractères étendus (comptent pour 2)",
+        "unicodeChars": "{count} caractères spéciaux",
+        "remaining": "{count} caractères restants",
+        "encoding": "Encodage : {encoding}",
+        "parts": "Parties SMS : {count}"
+      }
+    },
+    "buttons": {
+      "send": "Envoyer SMS",
+      "sending": "Envoi en cours...",
+      "preview": "Aperçu"
+    },
+    "messages": {
+      "success": "SMS envoyé avec succès !",
+      "error": "Échec de l'envoi du SMS. Veuillez réessayer.",
+      "invalidPhone": "Veuillez entrer un numéro de téléphone valide",
+      "emptyMessage": "Veuillez entrer un message",
+      "selectSender": "Veuillez sélectionner un ID d'expéditeur",
+      "selectGateway": "Veuillez sélectionner une passerelle"
+    }
+  },
+  "campaigns": {
+    "title": "Campagnes SMS",
+    "description": "Créez et gérez des campagnes SMS pour envoyer des messages en masse",
+    "list": {
+      "title": "Vos Campagnes",
+      "empty": "Aucune campagne trouvée",
+      "columns": {
+        "name": "Nom de Campagne",
+        "status": "Statut",
+        "recipients": "Destinataires",
+        "sent": "Envoyés",
+        "scheduled": "Programmé",
+        "created": "Créé"
+      }
+    },
+    "create": {
+      "button": "Créer une Campagne",
+      "title": "Créer une Nouvelle Campagne",
+      "description": "Créez une nouvelle campagne SMS pour envoyer des messages à vos contacts",
+      "form": {
+        "name": {
+          "label": "Nom de la Campagne",
+          "placeholder": "Saisir le nom de la campagne"
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Description optionnelle de la campagne"
+        },
+        "contactList": {
+          "label": "Liste de Contacts",
+          "placeholder": "Sélectionner une liste de contacts"
+        },
+        "template": {
+          "label": "Modèle SMS",
+          "placeholder": "Sélectionner un modèle"
+        },
+        "senderId": {
+          "label": "ID d'Expéditeur",
+          "placeholder": "Sélectionner un ID d'expéditeur"
+        },
+        "gateway": {
+          "label": "Passerelle SMS",
+          "placeholder": "Sélectionner une passerelle"
+        },
+        "country": {
+          "label": "Pays de Destination",
+          "placeholder": "Sélectionner le pays de destination",
+          "description": "Sélectionnez parmi les pays disponibles dans votre plan tarifaire SMS assigné",
+          "noCountries": "Aucun pays disponible dans votre plan tarifaire assigné",
+          "validation": {
+            "required": "Veuillez sélectionner un pays de destination"
+          }
+        },
+        "scheduling": {
+          "label": "Programmer pour plus tard",
+          "date": "Date",
+          "time": "Heure"
+        }
+      },
+      "validation": {
+        "nameRequired": "Le nom de la campagne est requis",
+        "contactListRequired": "Veuillez sélectionner une liste de contacts",
+        "templateRequired": "Veuillez sélectionner un modèle",
+        "senderIdRequired": "Veuillez sélectionner un ID d'expéditeur",
+        "gatewayRequired": "Veuillez sélectionner une passerelle",
+        "countryRequired": "Veuillez sélectionner un pays",
+        "dateRequired": "Veuillez sélectionner une date",
+        "timeRequired": "Veuillez sélectionner une heure",
+        "futureTime": "L'heure programmée doit être dans le futur"
+      }
+    },
+    "status": {
+      "draft": "Brouillon",
+      "scheduled": "Programmé",
+      "sending": "En cours d'envoi",
+      "sent": "Envoyé",
+      "paused": "En pause",
+      "failed": "Échec",
+      "stopped": "Arrêté",
+      "completed": "Terminé",
+      "archived": "Archivé"
+    },
+    "actions": {
+      "start": "Démarrer",
+      "pause": "Pause",
+      "stop": "Arrêter",
+      "archive": "Archiver",
+      "restart": "Redémarrer",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "view": "Voir"
+    }
+  },
+  "contacts": {
+    "title": "Listes de Contacts",
+    "subtitle": "Gérez vos listes de contacts SMS et vos contacts",
+    "create": "Créer une Liste",
+    "createTitle": "Créer une Liste de Contacts",
+    "createDescription": "Créez une nouvelle liste de contacts pour organiser vos destinataires SMS",
+    "createFirst": "Créez votre première liste de contacts pour commencer",
+    "editTitle": "Modifier la Liste de Contacts",
+    "editDescription": "Mettre à jour les informations de la liste de contacts",
+    "deleteTitle": "Supprimer la Liste de Contacts",
+    "deleteDescription": "Êtes-vous sûr de vouloir supprimer '{name}' ?",
+    "deletingDescription": "Suppression de '{name}' et de tous ses contacts...",
+    "deleteWarning": "Cette action ne peut pas être annulée. Tous les contacts de cette liste seront définitivement supprimés.",
+    "deletingProgress": "Suppression de la liste de contacts et de tous les contacts...",
+    "deletingSubtext": "Veuillez patienter pendant que nous supprimons la liste et tous les contacts associés.",
+    "deleting": "Suppression...",
+    "name": "Nom de la Liste",
+    "namePlaceholder": "Entrez le nom de la liste",
+    "description": "Description",
+    "descriptionPlaceholder": "Entrez la description de la liste (optionnel)",
+    "noDescription": "Aucune description fournie",
+    "searchPlaceholder": "Rechercher des listes de contacts...",
+    "noLists": "Aucune liste de contacts trouvée",
+    "noContacts": "Aucun contact dans cette liste",
+    "loading": "Chargement des listes de contacts...",
+    "fetchError": "Échec du chargement des listes de contacts",
+    "createError": "Échec de la création de la liste de contacts",
+    "createSuccess": "Liste de contacts créée avec succès",
+    "updateError": "Échec de la mise à jour de la liste de contacts",
+    "updateSuccess": "Liste de contacts mise à jour avec succès",
+    "deleteError": "Échec de la suppression de la liste de contacts",
+    "deleteSuccess": "Liste de contacts supprimée avec succès",
+    "update": "Mettre à jour",
+    "delete": "Supprimer",
+    "inUse": "En cours d'utilisation",
+    "addContact": "Ajouter un contact",
+    "addContactTitle": "Ajouter un nouveau contact",
+    "addContactDescription": "Ajouter un nouveau contact à cette liste",
+    "addContactSuccess": "Contact ajouté avec succès",
+    "addContactError": "Échec de l'ajout du contact",
+    "editContactTitle": "Modifier le contact",
+    "editContactDescription": "Mettre à jour les informations du contact",
+    "updateContact": "Mettre à jour le contact",
+    "updateContactSuccess": "Contact mis à jour avec succès",
+    "updateContactError": "Échec de la mise à jour du contact",
+    "deleteContact": "Supprimer le contact",
+    "deleteContactTitle": "Supprimer le contact",
+    "deleteContactDescription": "Êtes-vous sûr de vouloir supprimer {name} ?",
+    "deleteContactSuccess": "Contact supprimé avec succès",
+    "deleteContactError": "Échec de la suppression du contact",
+    "deleteContactWarning": "Cette action ne peut pas être annulée.",
+    "fields": {
+      "name": "Nom",
+      "phone": "Numéro de téléphone",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "address": "Adresse",
+      "city": "Ville",
+      "zipCode": "Code postal",
+      "dateOfBirth": "Date de naissance",
+      "firstNamePlaceholder": "Entrez le prénom",
+      "lastNamePlaceholder": "Entrez le nom",
+      "addressPlaceholder": "Entrez l'adresse",
+      "cityPlaceholder": "Entrez la ville",
+      "zipCodePlaceholder": "Entrez le code postal"
+    }
+  },
+  "import": {
+    "title": "Importer des Contacts",
+    "description": "Téléchargez un fichier CSV et mappez les colonnes aux champs de contact",
+    "emptyFile": "Le fichier sélectionné est vide",
+    "error": "Échec de l'importation des contacts",
+    "columnMapping": "Mappage des Colonnes",
+    "selectColumn": "Sélectionner une colonne",
+    "skipColumn": "Ignorer cette colonne",
+    "column": "Colonne",
+    "options": "Options d'Importation",
+    "updateDuplicates": "Mettre à jour les contacts existants avec des numéros de téléphone en double",
+    "preview": "Aperçu des Données",
+    "moreRows": "... et {count} lignes de plus",
+    "start": "Importer les Contacts"
+  },
+  "templates": {
+    "title": "Modèles SMS",
+    "description": "Créer et gérer des modèles SMS réutilisables",
+    "list": {
+      "title": "Vos Modèles",
+      "create": "Créer un Modèle",
+      "empty": "Aucun modèle trouvé",
+      "emptySubtext": "Créez votre premier modèle SMS pour commencer",
+      "available": {
+        "single": "modèle disponible",
+        "multiple": "modèles disponibles"
+      },
+      "columns": {
+        "name": "Nom du Modèle",
+        "category": "Catégorie",
+        "variables": "Variables",
+        "used": "Fois Utilisé",
+        "created": "Créé"
+      }
+    },
+    "form": {
+      "name": {
+        "label": "Nom du Modèle",
+        "placeholder": "Entrez le nom du modèle"
+      },
+      "category": {
+        "label": "Catégorie",
+        "placeholder": "Sélectionnez une catégorie"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Brève description de ce modèle"
+      },
+      "message": {
+        "label": "Modèle de Message",
+        "placeholder": "Tapez le message de votre modèle...",
+        "variables": "Utilisez des variables comme {firstName}, {lastName}, {company}"
+      }
+    },
+    "dialogs": {
+      "create": {
+        "title": "Créer un Modèle",
+        "description": "Créez un nouveau modèle SMS que vous pouvez réutiliser pour les campagnes et les messages individuels."
+      },
+      "edit": {
+        "title": "Modifier le Modèle",
+        "description": "Mettez à jour les informations de votre modèle SMS et le contenu du message."
+      }
+    },
+    "editor": {
+      "specialChars": "Caractères spéciaux",
+      "charsRemaining": "caractères restants",
+      "unicode": "Unicode",
+      "gsm": "GSM",
+      "sms": "SMS",
+      "customFieldsNote": "Vous pouvez également utiliser tous les champs personnalisés de vos contacts en utilisant le format :",
+      "none": "Aucun"
+    },
+    "categories": {
+      "marketing": "Marketing",
+      "notification": "Notification",
+      "reminder": "Rappel",
+      "welcome": "Bienvenue",
+      "promotional": "Promotionnel",
+      "support": "Support",
+      "other": "Autre",
+      "none": "Aucune catégorie"
+    },
+    "variables": {
+      "title": "Variables Disponibles",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "fullName": "Nom Complet",
+      "phoneNumber": "Numéro de Téléphone",
+      "address": "Adresse",
+      "city": "Ville",
+      "zipCode": "Code Postal",
+      "dateOfBirth": "Date de Naissance",
+      "company": "Entreprise",
+      "department": "Département",
+      "notes": "Notes",
+      "custom": "Champs Personnalisés",
+      "usage": "Utilisez des variables comme {firstName}, {lastName}, {phoneNumber}, {city}, etc."
+    }
+  },
+  "settings": {
+    "title": "Paramètres SMS",
+    "description": "Gérer les ID expéditeur et la configuration SMS",
+    "senderIds": {
+      "title": "ID Expéditeur",
+      "description": "Gérer vos ID expéditeur approuvés",
+      "request": "Demander un Nouvel ID Expéditeur",
+      "empty": "Aucun ID expéditeur trouvé",
+      "columns": {
+        "senderId": "ID Expéditeur",
+        "status": "Statut",
+        "type": "Type",
+        "requested": "Demandé",
+        "approved": "Approuvé"
+      },
+      "status": {
+        "pending": "En Attente",
+        "approved": "Approuvé",
+        "rejected": "Rejeté"
+      },
+      "form": {
+        "senderId": {
+          "label": "ID Expéditeur",
+          "placeholder": "Entrez l'ID expéditeur (max 11 caractères)"
+        },
+        "type": {
+          "label": "Type",
+          "alphanumeric": "Alphanumérique",
+          "numeric": "Numérique"
+        },
+        "justification": {
+          "label": "Justification",
+          "placeholder": "Expliquez pourquoi vous avez besoin de cet ID expéditeur"
+        }
+      }
+    },
+    "providers": {
+      "title": "Passerelles SMS",
+      "description": "Passerelles SMS disponibles",
+      "empty": "Aucune passerelle assignée"
+    },
+    "blacklist": {
+      "title": "Numéros Bloqués",
+      "description": "Gérer les numéros de téléphone qui ne doivent pas recevoir de SMS",
+      "empty": "Aucun numéro bloqué",
+      "emptyDescription": "Ajoutez des numéros de téléphone pour empêcher l'envoi de SMS",
+      "addButton": "Ajouter à la Liste Noire",
+      "addTitle": "Ajouter un Numéro à la Liste Noire",
+      "addDescription": "Ajoutez un numéro de téléphone pour empêcher l'envoi de messages SMS.",
+      "phoneNumber": "Numéro de Téléphone",
+      "reason": "Raison (optionnel)",
+      "reasonPlaceholder": "Expliquez pourquoi ce numéro devrait être bloqué...",
+      "addAction": "Ajouter à la Liste Noire",
+      "adding": "Ajout en cours...",
+      "removeTitle": "Retirer de la Liste Noire",
+      "removeDescription": "Êtes-vous sûr de vouloir retirer ce numéro de téléphone de la liste noire ?",
+      "remove": "Retirer",
+      "table": {
+        "phoneNumber": "Numéro de Téléphone",
+        "reason": "Raison",
+        "type": "Type",
+        "added": "Ajouté",
+        "actions": "Actions",
+        "noReason": "Aucune raison fournie",
+        "global": "Global",
+        "personal": "Personnel"
+      }
+    }
+  },
+  "common": {
+    "actions": "Actions",
+    "buttons": {
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "create": "Créer",
+      "update": "Mettre à Jour",
+      "send": "Envoyer",
+      "preview": "Aperçu",
+      "import": "Importer",
+      "export": "Exporter",
+      "refresh": "Actualiser",
+      "back": "Retour",
+      "next": "Suivant",
+      "previous": "Précédent",
+      "close": "Fermer"
+    },
+    "messages": {
+      "success": "Opération terminée avec succès",
+      "error": "Une erreur s'est produite. Veuillez réessayer.",
+      "loading": "Chargement...",
+      "saving": "Enregistrement...",
+      "deleting": "Suppression...",
+      "noData": "Aucune donnée disponible",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet élément ?"
+    },
+    "validation": {
+      "required": "Ce champ est requis",
+      "invalidPhone": "Veuillez entrer un numéro de téléphone valide",
+      "invalidEmail": "Veuillez entrer une adresse e-mail valide",
+      "maxLength": "Maximum {max} caractères autorisés",
+      "minLength": "Minimum {min} caractères requis"
+    }
+  }
+} 

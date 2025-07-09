@@ -1,0 +1,893 @@
+{
+  "page": {
+    "title": "Numéros de Téléphone",
+    "description": "Gérez vos numéros de téléphone attribués et vos demandes de service",
+    "breadcrumbs": {
+      "dashboard": "Tableau de Bord",
+      "services": "Services",
+      "numbers": "Numéros"
+    }
+  },
+  "header": {
+    "buttons": {
+      "buyNumbers": "Acheter des Numéros"
+    }
+  },
+  "tabs": {
+    "myNumbers": "Mes Numéros",
+    "requests": "Demandes"
+  },
+  "filters": {
+    "title": "Filtres",
+    "searchPlaceholder": "Rechercher des numéros ou un pays...",
+    "statusFilter": {
+      "allStatuses": "Tous les Statuts",
+      "active": "Actif",
+      "pendingCancellation": "Annulation en Attente",
+      "suspended": "Suspendu"
+    }
+  },
+  "numbers": {
+    "statuses": {
+      "active": "Actif",
+      "assigned": "Actif",
+      "suspended": "Suspendu",
+      "pendingCancellation": "Annulation en Attente",
+      "available": "Disponible",
+      "reserved": "Réservé",
+      "cancelled": "Annulé"
+    },
+    "fields": {
+      "monthlyRate": "Tarif Mensuel",
+      "nextBilling": "Prochaine Facturation",
+      "capabilities": "Capacités",
+      "phoneNumber": "Numéro de Téléphone",
+      "country": "Pays",
+      "type": "Type",
+      "provider": "Fournisseur",
+      "setupFee": "Frais d'Installation"
+    },
+    "buttons": {
+      "viewDetails": "Voir les Détails",
+      "requestCancellation": "Demander l'Annulation",
+      "keepNumber": "Garder le Numéro"
+    },
+    "tooltips": {
+      "requestAlreadyPending": "Demande déjà en attente",
+      "requestCancellation": "Demander l'annulation"
+    },
+    "pendingRequest": {
+      "cancellationPending": "Demande d'annulation #{requestNumber} est {status}",
+      "scheduled": "Programmé : {date}"
+    },
+    "empty": {
+      "title": "Aucun numéro de téléphone trouvé",
+      "descriptionFiltered": "Essayez d'ajuster vos filtres pour voir plus de résultats.",
+      "descriptionEmpty": "Vous n'avez aucun numéro de téléphone attribué pour le moment."
+    }
+  },
+  "requests": {
+    "title": "Demandes de Service",
+    "description": "Consultez et gérez vos demandes de service pour les numéros de téléphone",
+    "types": {
+      "purchase": "Achat",
+      "cancel": "Annuler",
+      "modify": "Modifier",
+      "backorder": "Achat",
+      "purchaseRequest": "Demande d'Achat",
+      "cancellationRequest": "Demande d'Annulation",
+      "modificationRequest": "Demande de Modification"
+    },
+    "statuses": {
+      "pending": "en attente",
+      "approved": "approuvé",
+      "rejected": "rejeté",
+      "completed": "terminé",
+      "cancelled": "annulé"
+    },
+    "priorities": {
+      "low": "basse",
+      "medium": "moyenne",
+      "high": "haute",
+      "urgent": "urgente"
+    },
+    "table": {
+      "headers": {
+        "requestId": "ID de Demande",
+        "type": "Type",
+        "phoneNumber": "Numéro de Téléphone",
+        "status": "Statut",
+        "priority": "Priorité",
+        "submitted": "Soumis",
+        "actions": "Actions"
+      }
+    },
+    "buttons": {
+      "viewDetails": "Voir les Détails",
+      "keepNumber": "Garder le Numéro"
+    },
+    "empty": {
+      "title": "Aucune demande trouvée",
+      "description": "Vous n'avez encore soumis aucune demande de service."
+    }
+  },
+  "modals": {
+    "requestDetails": {
+      "title": "Détails de la Demande",
+      "descriptions": {
+        "backorder": "Votre demande d'achat d'un numéro de téléphone sur commande uniquement",
+        "cancel": "Votre demande d'annulation d'un numéro de téléphone",
+        "modify": "Votre demande de modification d'un numéro de téléphone"
+      },
+      "overview": {
+        "requestId": "ID de Demande",
+        "status": "Statut",
+        "priority": "Priorité",
+        "submitted": "Soumis",
+        "lastUpdated": "Dernière Mise à Jour",
+        "scheduledDate": "Date Programmée"
+      },
+      "phoneNumberInfo": {
+        "title": "Informations du Numéro de Téléphone",
+        "number": "Numéro",
+        "country": "Pays",
+        "type": "Type",
+        "provider": "Fournisseur",
+        "monthlyRate": "Tarif Mensuel",
+        "setupFee": "Frais d'Installation"
+      }
+    },
+    "numberDetails": {
+      "title": "Détails du Numéro de Téléphone",
+      "description": "Informations techniques et de facturation complètes pour {number}",
+      "scrollIndicator": "📋 Faites défiler vers le bas pour voir la section Configuration Technique",
+      "sections": {
+        "numberInfo": {
+          "title": "Informations du Numéro",
+          "fields": {
+            "phoneNumber": "Numéro de Téléphone",
+            "country": "Pays",
+            "type": "Type"
+          }
+        },
+        "billing": {
+          "title": "Informations de Facturation"
+        },
+        "technical": {
+          "title": "Configuration Technique"
+        },
+        "setupInstructions": {
+          "title": "Instructions d'Installation",
+          "ipRouting": "Configurez votre PBX pour router les appels depuis {ipAddress}:{port} pour ce numéro.",
+          "credentials": "Utilisez le nom d'utilisateur \"{login}\" avec le mot de passe fourni pour vous authentifier avec {domain}:{port}."
+        }
+      },
+      "buttons": {
+        "copyNumber": "Copier le Numéro",
+        "copied": "Copié !"
+      },
+      "badges": {
+        "backorderOnly": "Commande Uniquement"
+      }
+    },
+    "cancelRequest": {
+      "title": "Demander l'Annulation du Numéro",
+      "description": "Soumettre une demande d'annulation de ce numéro de téléphone. Cette action nécessite une approbation.",
+      "form": {
+        "reason": {
+          "label": "Raison de l'Annulation",
+          "placeholder": "Sélectionner une raison",
+          "options": {
+            "noLongerNeeded": "Plus nécessaire",
+            "costReduction": "Réduction des coûts",
+            "serviceIssues": "Problèmes de service",
+            "businessClosure": "Fermeture d'entreprise",
+            "other": "Autre"
+          }
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Fournir des détails supplémentaires sur votre demande d'annulation..."
+        },
+        "priority": {
+          "label": "Priorité",
+          "options": {
+            "low": "Basse",
+            "medium": "Moyenne",
+            "high": "Haute",
+            "urgent": "Urgente"
+          }
+        },
+        "scheduledDate": {
+          "label": "Date Programmée (Optionnel)",
+          "helper": "Laisser vide pour un traitement immédiat"
+        }
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "submit": "Soumettre la Demande",
+        "submitting": "Soumission..."
+      }
+    }
+  },
+  "reasons": {
+    "noLongerNeeded": "Plus nécessaire",
+    "costReduction": "Réduction des coûts",
+    "serviceIssues": "Problèmes de service",
+    "businessClosure": "Fermeture d'entreprise",
+    "other": "Autre"
+  },
+  "messages": {
+    "error": {
+      "loadNumbers": "Échec du chargement des numéros de téléphone",
+      "loadRequests": "Échec du chargement des demandes",
+      "submitRequest": "Échec de la soumission de la demande d'annulation",
+      "withdrawRequest": "Échec du retrait de la demande"
+    },
+    "success": {
+      "requestSubmitted": "Demande d'annulation soumise avec succès",
+      "requestWithdrawn": "Demande retirée avec succès. Votre numéro restera actif.",
+      "copiedToClipboard": "Copié dans le presse-papiers !"
+    }
+  },
+  "loading": {
+    "title": "Chargement...",
+    "details": "Chargement des détails..."
+  },
+  "buyNumbers": {
+    "page": {
+      "title": "Acheter des Numéros de Téléphone",
+      "description": "Achetez des numéros disponibles directement ou soumettez des demandes de commande pour les numéros nécessitant une approbation",
+      "breadcrumbs": {
+        "dashboard": "Tableau de Bord",
+        "services": "Services",
+        "numbers": "Numéros",
+        "buyNumbers": "Acheter des Numéros"
+      }
+    },
+    "filters": {
+      "title": "Recherche et Filtres",
+      "searchPlaceholder": "Rechercher des numéros...",
+      "selectAll": "Sélectionner Tout Achat Direct ({count}{maxText}) - Max 20",
+      "maxText": " sur {total}",
+      "allCountries": "Tous les Pays",
+      "allTypes": "Tous les Types",
+      "sortBy": "Trier par",
+      "sortOptions": {
+        "priceLowHigh": "Prix : Bas vers Haut",
+        "priceHighLow": "Prix : Haut vers Bas", 
+        "countryAZ": "Pays A-Z",
+        "countryZA": "Pays Z-A",
+        "numberAZ": "Numéro A-Z",
+        "numberZA": "Numéro Z-A"
+      },
+      "clearFilters": "Effacer les Filtres"
+    },
+    "stats": {
+      "totalNumbers": "Total Numéros",
+      "directPurchase": "Achat Direct",
+      "backorderOnly": "Commande Uniquement",
+      "countries": "Pays",
+      "startingFrom": "À partir de"
+    },
+    "numbers": {
+      "badges": {
+        "backorder": "Commande",
+        "available": "Disponible"
+      },
+      "descriptions": {
+        "backorderRequired": "Nécessite l'approbation de l'administrateur pour l'achat",
+        "fullNumberAfterPurchase": "Numéro complet affiché après l'achat"
+      },
+      "fields": {
+        "monthlyRate": "Tarif Mensuel",
+        "setupFee": "Frais d'Installation",
+        "capabilities": "Capacités",
+        "phoneNumber": "Numéro de Téléphone",
+        "country": "Pays",
+        "type": "Type"
+      },
+      "buttons": {
+        "requestBackorder": "Demander une Commande",
+        "purchaseNumber": "Acheter le Numéro",
+        "selectedForBulk": "Sélectionné pour l'Achat en Lot"
+      },
+      "empty": {
+        "title": "Aucun numéro disponible",
+        "descriptionFiltered": "Essayez d'ajuster vos filtres pour voir plus de résultats.",
+        "descriptionEmpty": "Aucun numéro de téléphone n'est actuellement disponible à l'achat."
+      }
+    },
+    "pagination": {
+      "showing": "Affichage {start} à {end} sur {total} résultats",
+      "previous": "Précédent",
+      "next": "Suivant"
+    },
+    "bulkActions": {
+      "selected": "{count} numéro sélectionné",
+      "selectedPlural": "{count} numéros sélectionnés",
+      "monthly": "Mensuel : {amount}",
+      "setup": " + Installation : {amount}",
+      "clear": "Effacer",
+      "purchase": "Acheter {count} Numéro",
+      "purchasePlural": "Acheter {count} Numéros"
+    },
+    "modals": {
+      "singlePurchase": {
+        "title": "Acheter un Numéro de Téléphone",
+        "description": "Confirmez votre achat de {number}",
+        "fields": {
+          "phoneNumber": "Numéro de Téléphone",
+          "fullNumberNote": "Numéro complet fourni après l'achat",
+          "country": "Pays",
+          "type": "Type",
+          "monthlyRate": "Tarif Mensuel",
+          "setupFee": "Frais d'Installation",
+          "free": "Gratuit"
+        },
+        "alerts": {
+          "billingStarts": "La facturation commence aujourd'hui : Votre premier cycle de facturation commencera aujourd'hui ({date}) et la facturation aura lieu {cycle}.",
+          "yearly": "annuellement",
+          "monthly": "mensuellement",
+          "termsAgreement": "En achetant ce numéro, vous acceptez les frais mensuels et les conditions de facturation. Vous pouvez annuler à tout moment via votre page de gestion des numéros."
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "purchase": "Acheter le Numéro",
+          "purchasing": "Achat en cours..."
+        }
+      },
+      "bulkPurchase": {
+        "title": "Confirmation d'Achat en Lot",
+        "description": "Confirmez l'achat de {count} numéros de téléphone",
+        "summary": {
+          "title": "Résumé d'Achat",
+          "totalNumbers": "Total Numéros",
+          "totalMonthly": "Coût Mensuel Total",
+          "totalSetup": "Frais d'Installation Totaux",
+          "grandTotal": "Total Général"
+        },
+        "numbersTitle": "Numéros à Acheter :",
+        "buttons": {
+          "cancel": "Annuler",
+          "purchase": "Acheter Tous les Numéros",
+          "purchasing": "Traitement de l'Achat..."
+        }
+      },
+      "bulkResult": {
+        "title": "Résultats d'Achat en Lot",
+        "summary": {
+          "successful": "{count} numéros achetés avec succès",
+          "failed": "Échec de l'achat de {count} numéros",
+          "totalCost": "Coût total : {amount}",
+          "setupFees": "Frais d'installation : {amount}"
+        },
+        "sections": {
+          "successful": "Achetés avec Succès",
+          "failed": "Achats Échoués"
+        },
+        "buttons": {
+          "close": "Fermer"
+        }
+      },
+      "backorder": {
+        "title": "Soumettre une Demande de Commande",
+        "description": "Demander l'approbation pour acheter {number}",
+        "form": {
+          "reason": {
+            "label": "Raison de la Demande",
+            "placeholder": "Pourquoi avez-vous besoin de ce numéro spécifique ?",
+            "options": {
+              "businessRequirement": "Exigence Commerciale",
+              "geographicPresence": "Présence Géographique",
+              "regulatoryCompliance": "Conformité Réglementaire",
+              "customerDemand": "Demande Client",
+              "other": "Autre"
+            }
+          },
+          "businessJustification": {
+            "label": "Justification Commerciale",
+            "placeholder": "Fournissez une justification commerciale détaillée pour cette demande de numéro..."
+          },
+          "priority": {
+            "label": "Niveau de Priorité",
+            "options": {
+              "low": "Basse",
+              "medium": "Moyenne",
+              "high": "Haute",
+              "urgent": "Urgente"
+            }
+          }
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "submit": "Soumettre la Demande",
+          "submitting": "Soumission..."
+        }
+      }
+    },
+    "messages": {
+      "error": {
+        "loadNumbers": "Échec du chargement des numéros disponibles",
+        "purchaseNumber": "Échec de l'achat du numéro",
+        "bulkPurchase": "Échec du traitement de l'achat en lot",
+        "submitBackorder": "Échec de la soumission de la demande de commande"
+      },
+      "success": {
+        "numberPurchased": "Numéro de téléphone {number} acheté avec succès !",
+        "bulkPurchaseComplete": "Achat en lot terminé avec succès !",
+        "backorderSubmitted": "Demande de commande soumise avec succès ! ID de demande : {requestId}"
+      }
+    }
+  },
+  "admin": {
+    "page": {
+      "title": "Numéros de Téléphone",
+      "description": "Gérer l'inventaire et les affectations des numéros de téléphone",
+      "breadcrumbs": {
+        "dashboard": "Tableau de Bord",
+        "admin": "Administration",
+        "phoneNumbers": "Numéros de Téléphone"
+      },
+      "loading": {
+        "title": "Chargement...",
+        "description": "Vérification des permissions"
+      },
+      "accessDenied": {
+        "title": "Accès Refusé",
+        "description": "Vous n'avez pas la permission d'accéder à cette page",
+        "message": "Vous n'avez pas la permission d'accéder à cette page."
+      }
+    },
+    "actions": {
+      "addNumber": "Ajouter un Numéro",
+      "export": "Exporter",
+      "import": "Importer",
+      "clearSelection": "Effacer la Sélection"
+    },
+    "filters": {
+      "title": "Filtres",
+      "searchPlaceholder": "Rechercher des numéros...",
+      "statuses": {
+        "all": "Tous les Statuts",
+        "available": "Disponible",
+        "assigned": "Assigné",
+        "reserved": "Réservé",
+        "suspended": "Suspendu",
+        "cancelled": "Annulé"
+      },
+      "countries": {
+        "all": "Tous les Pays"
+      },
+      "types": {
+        "all": "Tous les Types",
+        "geographic": "Géographique/Local",
+        "mobile": "Mobile",
+        "national": "National",
+        "tollfree": "Numéro Vert",
+        "shared": "Coût Partagé",
+        "npv": "NPV (Numéros Vérifiés)",
+        "premium": "Premium"
+      },
+      "users": {
+        "all": "Tous les Utilisateurs",
+        "unassigned": "Non Assigné"
+      }
+    },
+    "stats": {
+      "totalNumbers": "Total Numéros",
+      "available": "Disponibles",
+      "assigned": "Assignés",
+      "reserved": "Réservés",
+      "inactive": "Inactifs"
+    },
+    "table": {
+      "title": "Numéros de Téléphone ({count})",
+      "headers": {
+        "selectAll": "Tout sélectionner",
+        "number": "Numéro",
+        "country": "Pays",
+        "type": "Type",
+        "status": "Statut",
+        "assignedTo": "Assigné à",
+        "actions": "Actions"
+      },
+      "content": {
+        "unassigned": "Non assigné",
+        "noCompany": "Aucune entreprise",
+        "selectNumber": "Sélectionner {number}"
+      },
+      "bulkActions": {
+        "bulkAssign": "Assignation en Lot ({count})",
+        "bulkUnassign": "Désassignation en Lot ({count})",
+        "bulkDelete": "Suppression en Lot ({count})"
+      },
+      "actionButtons": {
+        "viewDetails": "Voir les Détails",
+        "edit": "Modifier",
+        "copy": "Copier",
+        "assign": "Assigner",
+        "unassign": "Désassigner",
+        "reserve": "Réserver",
+        "suspend": "Suspendre",
+        "cancel": "Annuler",
+        "unreserve": "Libérer",
+        "delete": "Supprimer",
+        "more": "Plus d'Actions"
+      }
+    },
+    "pagination": {
+      "showing": "Affichage {start} à {end} sur {total} numéros de téléphone",
+      "previous": "Précédent",
+      "next": "Suivant"
+    },
+    "modals": {
+      "create": {
+        "title": "Ajouter un Nouveau Numéro",
+        "description": "Créer un nouveau numéro de téléphone dans le système",
+        "tabs": {
+          "basic": "Informations de Base",
+          "pricing": "Tarification et Facturation",
+          "technical": "Paramètres Techniques"
+        },
+        "fields": {
+          "number": "Numéro de Téléphone",
+          "numberPlaceholder": "+1234567890",
+          "country": "Pays",
+          "countryCode": "Code Pays",
+          "numberType": "Type de Numéro",
+          "provider": "Fournisseur",
+          "currency": "Devise",
+          "backorderOnly": "Commande Uniquement",
+          "backorderDescription": "Nécessite l'approbation de l'administrateur pour l'achat",
+          "billingCycle": "Cycle de Facturation",
+          "billingDay": "Jour de Facturation du Mois",
+          "capabilities": "Capacités",
+          "connectionType": "Type de Connexion",
+          "ipAddress": "Adresse IP",
+          "port": "Port",
+          "login": "Identifiant",
+          "password": "Mot de Passe",
+          "domain": "Domaine",
+          "credentialsPort": "Port des Identifiants"
+        },
+        "billingCycles": {
+          "monthly": "Mensuel",
+          "yearly": "Annuel"
+        },
+        "connectionTypes": {
+          "sip": "SIP",
+          "iax2": "IAX2",
+          "h323": "H.323"
+        },
+        "capabilities": {
+          "voice": "Voix",
+          "sms": "SMS",
+          "mms": "MMS",
+          "fax": "Fax"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "create": "Créer le Numéro",
+          "creating": "Création..."
+        }
+      },
+      "assign": {
+        "title": "Assigner un Numéro de Téléphone",
+        "description": "Assigner {number} à un utilisateur",
+        "fields": {
+          "user": "Sélectionner l'Utilisateur",
+          "billingStartDate": "Date de Début de Facturation",
+          "notes": "Notes d'Assignation"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "assign": "Assigner le Numéro",
+          "assigning": "Assignation..."
+        }
+      },
+      "unassign": {
+        "title": "Désassigner un Numéro de Téléphone",
+        "description": "Retirer l'assignation de {number}",
+        "fields": {
+          "reason": "Raison de la Désassignation",
+          "cancelPendingBilling": "Annuler la Facturation en Attente",
+          "createRefund": "Créer un Remboursement",
+          "refundAmount": "Montant du Remboursement"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "unassign": "Désassigner le Numéro",
+          "unassigning": "Désassignation..."
+        }
+      },
+      "edit": {
+        "title": "Modifier le Numéro de Téléphone",
+        "description": "Mettre à jour les détails du numéro {number}",
+        "fields": {
+          "number": "Numéro de Téléphone",
+          "numberPlaceholder": "+1234567890",
+          "country": "Pays",
+          "countryPlaceholder": "Sélectionner un pays",
+          "numberType": "Type de Numéro",
+          "provider": "Fournisseur",
+          "providerPlaceholder": "Sélectionner un fournisseur",
+
+          "backorderOnly": "Nécessite une commande en attente (les utilisateurs doivent demander ce numéro au lieu de l'acheter directement)",
+          "backorderDescription": "Lorsque activé, les utilisateurs devront soumettre une demande de commande en attente pour approbation administrative au lieu d'acheter ce numéro directement.",
+          "billingCycle": "Cycle de Facturation",
+          "billingDay": "Jour de Facturation du Mois",
+          "capabilities": "Capacités",
+          "connectionType": "Type de Connexion",
+          "connectionTypePlaceholder": "Sélectionner un type de connexion",
+          "ipAddress": "Adresse IP",
+          "port": "Port",
+          "login": "Identifiant",
+          "password": "Mot de Passe",
+          "domain": "Domaine/IP",
+          "credentialsPort": "Port"
+        },
+        "numberTypes": {
+          "geographic": "Géographique/Local",
+          "mobile": "Mobile",
+          "national": "National",
+          "tollfree": "Numéro Vert",
+          "shared": "Coût Partagé",
+          "npv": "NPV (Numéros Vérifiés)",
+          "premium": "Premium"
+        },
+        "billingCycles": {
+          "monthly": "Mensuel",
+          "yearly": "Annuel"
+        },
+        "connectionTypes": {
+          "none": "Aucun",
+          "ip_routing": "Routage IP",
+          "credentials": "Identifiants"
+        },
+        "capabilities": {
+          "voice": "Voix",
+          "sms": "SMS",
+          "fax": "Fax",
+          "data": "Données"
+        },
+        "sections": {
+          "technical": "Paramètres de Connexion Technique"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "update": "Mettre à Jour le Numéro",
+          "updating": "Mise à Jour..."
+        }
+      },
+      "reserve": {
+        "title": "Réserver un Numéro de Téléphone",
+        "description": "Réserver {number} à des fins administratives",
+        "fields": {
+          "reason": "Raison de la Réservation",
+          "reservedUntil": "Réservé Jusqu'au",
+          "notes": "Notes"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "reserve": "Réserver le Numéro",
+          "reserving": "Réservation..."
+        }
+      },
+      "suspend": {
+        "title": "Suspendre un Numéro de Téléphone",
+        "description": "Suspendre temporairement {number}",
+        "fields": {
+          "reason": "Raison de la Suspension",
+          "suspendedUntil": "Suspendu Jusqu'au",
+          "notes": "Notes"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "suspend": "Suspendre le Numéro",
+          "suspending": "Suspension..."
+        }
+      },
+      "cancel": {
+        "title": "Annuler un Numéro de Téléphone",
+        "description": "Annuler définitivement {number}",
+        "warning": "Cette action ne peut pas être annulée. Le numéro sera marqué comme annulé et ne pourra pas être assigné aux utilisateurs.",
+        "fields": {
+          "reason": "Raison de l'Annulation",
+          "notes": "Notes"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "confirm": "Annuler le Numéro",
+          "cancelling": "Annulation..."
+        }
+      },
+      "unreserve": {
+        "title": "Libérer un Numéro de Téléphone",
+        "description": "Retirer la réservation de {number}",
+        "fields": {
+          "notes": "Notes"
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "unreserve": "Libérer le Numéro",
+          "unreserving": "Libération..."
+        }
+      },
+      "details": {
+        "title": "Détails du Numéro de Téléphone",
+        "tabs": {
+          "overview": "Aperçu",
+          "billing": "Facturation",
+          "technical": "Technique",
+          "audit": "Journal d'Audit"
+        },
+        "fields": {
+          "number": "Numéro de Téléphone",
+          "status": "Statut",
+          "country": "Pays",
+          "type": "Type",
+          "provider": "Fournisseur",
+          "assignedTo": "Assigné à",
+          "assignedDate": "Date d'Assignation",
+          "billingCycle": "Cycle de Facturation",
+          "billingDay": "Jour de Facturation",
+          "nextBillingDate": "Prochaine Date de Facturation",
+          "monthlyRate": "Tarif Mensuel",
+          "setupFee": "Frais d'Installation",
+          "currency": "Devise",
+          "capabilities": "Capacités",
+          "connectionType": "Type de Connexion",
+          "ipAddress": "Adresse IP",
+          "port": "Port",
+          "domain": "Domaine",
+          "createdAt": "Créé le",
+          "updatedAt": "Dernière Mise à Jour"
+        },
+        "buttons": {
+          "close": "Fermer"
+        }
+      },
+      "bulkAssign": {
+        "title": "Assignation en Lot de Numéros",
+        "description": "Assigner {count} numéros de téléphone à un utilisateur",
+        "buttons": {
+          "cancel": "Annuler",
+          "assign": "Assigner Tout",
+          "assigning": "Assignation..."
+        }
+      },
+      "bulkUnassign": {
+        "title": "Désassignation en Lot de Numéros",
+        "description": "Retirer les assignations de {count} numéros de téléphone",
+        "buttons": {
+          "cancel": "Annuler",
+          "unassign": "Désassigner Tout",
+          "unassigning": "Désassignation..."
+        }
+      },
+      "delete": {
+        "title": "Supprimer le Numéro de Téléphone",
+        "description": "Êtes-vous sûr de vouloir supprimer {number} ?",
+        "warning": "Cette action ne peut pas être annulée.",
+        "buttons": {
+          "cancel": "Annuler",
+          "delete": "Supprimer",
+          "deleting": "Suppression..."
+        }
+      }
+    },
+    "messages": {
+      "success": {
+        "numberCreated": "Numéro de téléphone créé avec succès !",
+        "numberAssigned": "Numéro de téléphone assigné avec succès !",
+        "numberUnassigned": "Numéro de téléphone désassigné avec succès !",
+        "numberUpdated": "Numéro de téléphone mis à jour avec succès !",
+        "numberDeleted": "Numéro de téléphone supprimé avec succès !",
+        "numberReserved": "Numéro de téléphone réservé avec succès !",
+        "numberSuspended": "Numéro de téléphone suspendu avec succès !",
+        "numberCancelled": "Numéro de téléphone annulé avec succès !",
+        "numberUnreserved": "Numéro de téléphone libéré avec succès !",
+        "bulkAssigned": "Numéros assignés avec succès !",
+        "bulkUnassigned": "Numéros désassignés avec succès !",
+        "bulkDeleted": "Numéros supprimés avec succès !",
+        "copied": "Copié dans le presse-papiers !"
+      },
+      "error": {
+        "loadNumbers": "Échec du chargement des numéros de téléphone",
+        "loadUsers": "Échec du chargement des utilisateurs",
+
+        "loadCountries": "Échec du chargement des pays",
+        "loadProviders": "Échec du chargement des fournisseurs",
+        "loadDetails": "Échec du chargement des détails du numéro",
+        "createNumber": "Échec de la création du numéro de téléphone",
+        "assignNumber": "Échec de l'assignation du numéro de téléphone",
+        "unassignNumber": "Échec de la désassignation du numéro de téléphone",
+        "updateNumber": "Échec de la mise à jour du numéro de téléphone",
+        "deleteNumber": "Échec de la suppression du numéro de téléphone",
+        "reserveNumber": "Échec de la réservation du numéro de téléphone",
+        "suspendNumber": "Échec de la suspension du numéro de téléphone",
+        "cancelNumber": "Échec de l'annulation du numéro de téléphone",
+        "unreserveNumber": "Échec de la libération du numéro de téléphone",
+        "bulkAssign": "Échec de l'assignation des numéros",
+        "bulkUnassign": "Échec de la désassignation des numéros",
+        "bulkDelete": "Échec de la suppression des numéros",
+        "copyFailed": "Échec de la copie dans le presse-papiers",
+        "analyzeReputation": "Échec de l'analyse de réputation"
+      },
+      "validation": {
+        "numberRequired": "Le numéro de téléphone est requis",
+        "countryRequired": "Le pays est requis",
+        "providerRequired": "Le fournisseur est requis",
+
+        "userRequired": "La sélection d'utilisateur est requise",
+        "reasonRequired": "La raison est requise"
+      },
+      "copy": {
+        "toClipboard": "Copier dans le presse-papiers",
+        "passwordToClipboard": "Copier le mot de passe dans le presse-papiers"
+      },
+      "loading": {
+        "details": "Chargement des détails..."
+      }
+    }
+  },
+  "reputation": {
+    "modal": {
+      "title": "Réputation du Numéro de Téléphone",
+      "scrollIndicator": "Faites défiler pour voir tous les détails de réputation",
+      "buttons": {
+        "analyze": "Réputation",
+        "checkReputation": "Vérifier la Réputation"
+      }
+    },
+    "cards": {
+      "checking": "Vérification..."
+    },
+    "tooltips": {
+      "analyze": "Cliquez pour analyser la réputation de ce numéro de téléphone"
+    },
+    "statusDescriptions": {
+      "safe": "Numéro Sûr",
+      "neutral": "Numéro Neutre",
+      "annoying": "Numéro Gênant",
+      "dangerous": "Numéro Dangereux",
+      "unknown": "Inconnu",
+      "reputationStatus": "Statut de Réputation"
+    },
+    "displayText": {
+      "safe": "Sûr ({dangerLevel}%)",
+      "neutral": "Neutre ({dangerLevel}%)",
+      "annoying": "Gênant ({dangerLevel}%)",
+      "dangerous": "Dangereux ({dangerLevel}%)",
+      "unknown": "Inconnu"
+    },
+    "stats": {
+      "comments": "Commentaires",
+      "visits": "Visites",
+      "trustScore": "Score de Confiance",
+      "lastVisit": "Dernière Visite",
+      "unknown": "Inconnu"
+    },
+    "sections": {
+      "dangerLevel": "Niveau de Danger",
+      "summary": "Résumé",
+      "categories": "Résumé des Catégories de Commentaires",
+      "comments": "Commentaires",
+      "latestComment": "Dernier Commentaire",
+      "showingComments": "Affichage de {showing} sur {total} commentaires",
+      "source": "Source",
+      "noData": "Aucune Donnée de Réputation",
+      "noDataDescription": "Aucune information de réputation n'est disponible pour ce numéro de téléphone. Cliquez ci-dessous pour vérifier avec les fournisseurs de réputation."
+    },
+    "actions": {
+      "viewSource": "Voir la Source",
+      "refresh": "Actualiser",
+      "close": "Fermer",
+      "checking": "Vérification..."
+    },
+    "sources": {
+      "pageJauneBelgium": "Page Jaune Belgique"
+    }
+  }
+} 

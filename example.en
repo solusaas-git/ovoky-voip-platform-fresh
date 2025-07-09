@@ -1,0 +1,21 @@
+# MongoDB Connection
+MONGODB_URI=mongodb://sippy:owTWo84Nf2JL5q5z@176.9.26.121:27017/sippy?directConnection=true
+
+# JWT Secret
+JWT_SECRET=lqsjdliqsufilqjlj8687687djklsj968
+
+# App URL for email links
+NEXT_PUBLIC_APP_URL=https://ovoky.io:3022
+
+# Sippy API Configuration
+# You can specify a default host for development (optional)
+NEXT_PUBLIC_SIPPY_HOST=https://sip2.ovoky.io
+
+# Add this section for push notifications
+NEXT_PUBLIC_VAPID_PUBLIC_KEY=BPpc5ppkbyT_tI7PJJDCvdmCC6YiaGz8Ih-oa48P9gkx7Vjq4fP2Yyndpr_e4xXthjIAg3TTsJOyeCZCEyAM73I
+VAPID_PRIVATE_KEY=S9AwKtx-XUWpw3nZ4LcDRgl2l9AHguak83kBYcj4AVk
+
+# Cron Job Configuration
+BALANCE_CHECK_CRON=0 */6 * * *
+# Timezone for cron jobs (optional, defaults to Europe/London)
+TZ=Europe/London

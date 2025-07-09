@@ -1,0 +1,175 @@
+{
+  "page": {
+    "title": "Gestion des Trunks",
+    "description": "Gérer les trunks SIP et leurs assignations",
+    "breadcrumbs": {
+      "dashboard": "Tableau de Bord",
+      "admin": "Admin",
+      "trunks": "Trunks"
+    }
+  },
+  "actions": {
+    "createTrunk": "Créer un Trunk",
+    "viewDetails": "Voir les détails",
+    "editTrunk": "Modifier le trunk",
+    "deleteTrunk": "Supprimer le trunk",
+    "manageAuthRules": "Gérer les règles d'authentification",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "back": "Retour",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "copy": "Copier",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe"
+  },
+  "stats": {
+    "totalTrunks": "Total des Trunks",
+    "assignedTrunks": "Trunks Assignés",
+    "unassigned": "Non Assignés",
+    "withSippyAccount": "Avec Compte Sippy"
+  },
+  "filters": {
+    "title": "Filtres",
+    "searchPlaceholder": "Rechercher des trunks..."
+  },
+  "table": {
+    "title": "Trunks",
+    "headers": {
+      "name": "Nom",
+      "username": "Nom d'utilisateur",
+      "domain": "Domaine",
+      "accountStatus": "Statut du Compte",
+      "sipRegistration": "Enregistrement SIP",
+      "assignedTo": "Assigné à",
+      "created": "Créé",
+      "actions": "Actions"
+    }
+  },
+  "details": {
+    "overview": {
+      "title": "Aperçu du Trunk",
+      "trunkName": "Nom du Trunk",
+      "created": "Créé",
+      "description": "Description"
+    },
+    "connection": {
+      "title": "Détails de Connexion",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "domain": "Domaine",
+      "ipAddresses": "Adresses IP",
+      "port": "Port",
+      "authType": "Type d'Authentification",
+      "registrationRequired": "Enregistrement Requis",
+      "primary": "Primaire",
+      "noIpAddresses": "Aucune adresse IP configurée",
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "authRules": {
+      "title": "Règles d'Authentification",
+      "noSipAccount": "Aucun Compte SIP",
+      "noSipAccountDescription": "Ce trunk n'est pas assigné à un utilisateur avec un compte SIP configuré. Les règles d'authentification seront disponibles une fois que le trunk sera correctement assigné et configuré."
+    },
+    "codecs": {
+      "title": "Configuration des Codecs"
+    },
+    "assignment": {
+      "title": "Informations d'Assignation",
+      "assignedUser": "Utilisateur Assigné",
+      "company": "Entreprise",
+      "assignedDate": "Date d'Assignation",
+      "notSpecified": "Non spécifié",
+      "notAssigned": "Ce trunk n'est assigné à aucun utilisateur"
+    },
+    "adminNotes": {
+      "title": "Notes Administrateur"
+    },
+    "sippyIntegration": {
+      "title": "Intégration Sippy",
+      "accountId": "ID Compte Sippy",
+      "trunkId": "ID Trunk Sippy"
+    }
+  },
+  "edit": {
+    "title": "Modifier le Trunk",
+    "description": "Modifier la configuration et les paramètres du trunk",
+    "form": {
+      "basicInfo": "Informations de Base",
+      "name": "Nom du Trunk",
+      "namePlaceholder": "Saisir le nom du trunk",
+      "description": "Description",
+      "descriptionPlaceholder": "Description optionnelle",
+      "connectionSettings": "Paramètres de Connexion",
+      "username": "Nom d'utilisateur",
+      "usernamePlaceholder": "Nom d'utilisateur SIP",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Mot de passe SIP",
+      "domain": "Domaine",
+      "domainPlaceholder": "Domaine SIP",
+      "port": "Port",
+      "portPlaceholder": "5060",
+      "ipAddresses": "Adresses IP",
+      "ipAddressPlaceholder": "Saisir l'adresse IP",
+      "addIpAddress": "Ajouter une Adresse IP",
+      "removeIpAddress": "Supprimer",
+      "authSettings": "Paramètres d'Authentification",
+      "authType": "Type d'Authentification",
+      "authTypePassword": "Mot de passe",
+      "authTypeIp": "Adresse IP",
+      "authTypeBoth": "Les deux",
+      "registrationRequired": "Enregistrement Requis",
+      "codecSettings": "Paramètres des Codecs",
+      "selectCodecs": "Sélectionner les codecs supportés",
+      "assignmentSettings": "Paramètres d'Assignation",
+      "assignTo": "Assigner à l'Utilisateur",
+      "selectUser": "Sélectionner un utilisateur",
+      "capacityManagement": "Gestion de la Capacité",
+      "maxSessions": "Sessions Max",
+      "maxSessionsPlaceholder": "Saisir le nombre max de sessions ou 'Illimité'",
+      "maxCps": "APS Max",
+      "maxCpsPlaceholder": "Saisir le nombre max d'appels par seconde ou 'Illimité'",
+      "adminNotes": "Notes Administrateur",
+      "notesPlaceholder": "Notes internes pour les administrateurs"
+    },
+    "validation": {
+      "nameRequired": "Le nom du trunk est requis",
+      "usernameRequired": "Le nom d'utilisateur est requis",
+      "passwordRequired": "Le mot de passe est requis",
+      "domainRequired": "Le domaine est requis",
+      "invalidPort": "Le port doit être un nombre valide",
+      "invalidIpAddress": "Format d'adresse IP invalide",
+      "codecRequired": "Au moins un codec doit être sélectionné"
+    }
+  },
+  "states": {
+    "loading": "Chargement...",
+    "loadingTrunk": "Chargement des détails du trunk",
+    "saving": "Enregistrement...",
+    "noTrunks": "Aucun trunk trouvé",
+    "unassigned": "Non assigné",
+    "showingResults": "Affichage de {start} à {end} sur {total} résultats",
+    "trunkNotFound": "Trunk non trouvé",
+    "error": "Erreur",
+    "failedToLoad": "Échec du chargement des détails du trunk"
+  },
+  "confirmations": {
+    "deleteTrunk": "Êtes-vous sûr de vouloir supprimer ce trunk ?",
+    "deleteTrunkNamed": "Êtes-vous sûr de vouloir supprimer le trunk \"{name}\" ?"
+  },
+  "errors": {
+    "fetchFailed": "Échec de la récupération des trunks",
+    "deleteFailed": "Échec de la suppression du trunk",
+    "saveFailed": "Échec de l'enregistrement du trunk",
+    "loadFailed": "Échec du chargement des détails du trunk",
+    "copyFailed": "Échec de la copie dans le presse-papiers"
+  },
+  "success": {
+    "trunkDeleted": "Trunk supprimé avec succès",
+    "trunkSaved": "Trunk enregistré avec succès",
+    "copied": "Copié dans le presse-papiers"
+  }
+} 

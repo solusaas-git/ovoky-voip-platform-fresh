@@ -1,0 +1,147 @@
+{
+  "welcome": {
+    "title": "Welcome to OVOKY",
+    "subtitle": "Let's get your VoIP account set up",
+    "description": "Complete your profile to start managing your communications effectively"
+  },
+  "steps": {
+    "personal": "Personal Information",
+    "company": "Company Details", 
+    "preferences": "Preferences",
+    "verification": "Verification",
+    "complete": "Complete"
+  },
+  "progress": {
+    "step": "Step {current} of {total}",
+    "completing": "Completing setup...",
+    "almostDone": "Almost done!"
+  },
+  "personalInfo": {
+    "title": "Tell us about yourself",
+    "subtitle": "This information helps us personalize your experience",
+    "firstNameLabel": "First Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastNameLabel": "Last Name", 
+    "lastNamePlaceholder": "Enter your last name",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "countryLabel": "Country",
+    "countryPlaceholder": "Select your country",
+    "timezoneLabel": "Timezone",
+    "timezonePlaceholder": "Select your timezone",
+    "languageLabel": "Preferred Language",
+    "languageDescription": "Choose your preferred language for the interface"
+  },
+  "companyInfo": {
+    "title": "Company Information",
+    "subtitle": "Help us understand your business needs",
+    "companyNameLabel": "Company Name",
+    "companyNamePlaceholder": "Enter your company name",
+    "industryLabel": "Industry",
+    "industryPlaceholder": "Select your industry",
+    "companySizeLabel": "Company Size",
+    "companySizePlaceholder": "Select company size",
+    "websiteLabel": "Website",
+    "websitePlaceholder": "https://yourwebsite.com",
+    "addressLabel": "Business Address",
+    "addressPlaceholder": "Enter your business address",
+    "vatNumberLabel": "VAT Number",
+    "vatNumberPlaceholder": "Enter VAT number (if applicable)",
+    "businessTypeLabel": "Business Type",
+    "businessTypeOptions": {
+      "individual": "Individual/Freelancer",
+      "startup": "Startup",
+      "smallBusiness": "Small Business", 
+      "enterprise": "Enterprise",
+      "nonprofit": "Non-profit",
+      "government": "Government"
+    },
+    "companySizeOptions": {
+      "1-10": "1-10 employees",
+      "11-50": "11-50 employees",
+      "51-200": "51-200 employees",
+      "201-1000": "201-1000 employees",
+      "1000+": "1000+ employees"
+    }
+  },
+  "preferences": {
+    "title": "Set your preferences",
+    "subtitle": "Customize your experience",
+    "notificationsTitle": "Notifications",
+    "notificationsDescription": "Choose how you want to be notified",
+    "emailNotifications": "Email notifications",
+    "emailNotificationsDescription": "Receive updates via email",
+    "pushNotifications": "Push notifications", 
+    "pushNotificationsDescription": "Receive instant browser notifications",
+    "smsNotifications": "SMS notifications",
+    "smsNotificationsDescription": "Receive alerts via SMS",
+    "communicationTitle": "Communication Preferences",
+    "lowBalanceAlerts": "Low balance alerts",
+    "lowBalanceAlertsDescription": "Get notified when your account balance is low",
+    "systemUpdates": "System updates",
+    "systemUpdatesDescription": "Receive notifications about system maintenance and updates",
+    "marketingEmails": "Marketing emails",
+    "marketingEmailsDescription": "Receive product updates and promotional content",
+    "weeklyReports": "Weekly reports",
+    "weeklyReportsDescription": "Receive weekly usage and billing reports"
+  },
+  "verification": {
+    "title": "Verify your information",
+    "subtitle": "Review and confirm your details",
+    "personalSection": "Personal Information",
+    "companySection": "Company Information", 
+    "preferencesSection": "Notification Preferences",
+    "editButton": "Edit",
+    "confirmTitle": "Confirm your setup",
+    "confirmDescription": "By completing setup, you agree to our Terms of Service and Privacy Policy",
+    "termsLink": "Terms of Service",
+    "privacyLink": "Privacy Policy",
+    "dataProcessing": "We will process your data according to our privacy policy"
+  },
+  "completion": {
+    "title": "Welcome aboard!",
+    "subtitle": "Your account is now set up and ready to use",
+    "description": "You can now start managing your VoIP communications",
+    "nextSteps": "Next Steps:",
+    "step1": "Add credit to your account",
+    "step2": "Purchase phone numbers",
+    "step3": "Configure your first trunk",
+    "step4": "Start making calls",
+    "dashboardButton": "Go to Dashboard",
+    "skipSetup": "I'll do this later"
+  },
+  "actions": {
+    "next": "Next",
+    "previous": "Previous", 
+    "skip": "Skip",
+    "complete": "Complete Setup",
+    "save": "Save",
+    "cancel": "Cancel",
+    "goToDashboard": "Go to Dashboard",
+    "editStep": "Edit this step",
+    "continueSetup": "Continue Setup"
+  },
+  "validation": {
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "phoneRequired": "Phone number is required",
+    "phoneInvalid": "Please enter a valid phone number",
+    "countryRequired": "Country is required",
+    "companyNameRequired": "Company name is required",
+    "industryRequired": "Industry selection is required",
+    "businessTypeRequired": "Business type is required",
+    "agreementRequired": "You must agree to the terms to continue"
+  },
+  "errors": {
+    "saveError": "Failed to save information. Please try again.",
+    "loadError": "Failed to load setup data. Please refresh the page.",
+    "validationError": "Please check your information and try again",
+    "networkError": "Network error. Please check your connection."
+  },
+  "tooltips": {
+    "phoneNumber": "We'll use this for account security and important notifications",
+    "timezone": "This helps us schedule notifications and reports at appropriate times",
+    "vatNumber": "Required for EU businesses for tax compliance",
+    "website": "Optional - helps us understand your business better"
+  }
+} 

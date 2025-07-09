@@ -1,0 +1,92 @@
+{
+  "page": {
+    "title": "Mon Compte",
+    "description": "Consultez et gérez les détails de votre compte et vos informations de profil"
+  },
+  "profile": {
+    "title": "Détails du Profil",
+    "refresh": "Actualiser"
+  },
+  "tabs": {
+    "account": "Compte",
+    "company": "Entreprise",
+    "contact": "Contact",
+    "services": "Services",
+    "security": "Sécurité"
+  },
+  "account": {
+    "title": "Informations du Compte",
+    "description": "Vos détails de compte de base et paramètres",
+    "fullName": "Nom Complet",
+    "emailAddress": "Adresse E-mail",
+    "role": "Rôle",
+    "accountId": "ID du Compte",
+    "verified": "Vérifié",
+    "notVerified": "Non Vérifié"
+  },
+  "company": {
+    "title": "Informations de l'Entreprise",
+    "description": "Détails commerciaux de votre intégration",
+    "companyName": "Nom de l'Entreprise",
+    "businessPhone": "Téléphone Professionnel",
+    "businessAddress": "Adresse Professionnelle",
+    "expectedTrafficVolume": "Volume de Trafic Attendu",
+    "additionalNotes": "Notes Supplémentaires",
+    "noCompanyInfo": "Aucune Information d'Entreprise",
+    "noCompanyInfoDescription": "Complétez votre intégration pour ajouter les détails de l'entreprise",
+    "completeOnboarding": "Compléter l'Intégration",
+    "per": "par"
+  },
+  "contact": {
+    "title": "Préférences de Contact",
+    "description": "Comment vous préférez être contacté",
+    "noContactPreferences": "Aucune Préférence de Contact",
+    "noContactPreferencesDescription": "Aucune méthode de contact n'a été configurée",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "whatsapp": "WhatsApp",
+    "other": "Autre"
+  },
+  "services": {
+    "title": "Services d'Intérêt",
+    "description": "Services qui vous intéressent ou que vous utilisez actuellement",
+    "noServicesSelected": "Aucun Service Sélectionné",
+    "noServicesSelectedDescription": "Aucun service n'a été sélectionné lors de l'intégration",
+    "countries": "Pays",
+    "serviceNames": {
+      "outbound_calls": "Appels Sortants",
+      "inbound_calls": "Appels Entrants",
+      "did_numbers": "Numéros DID",
+      "sms": "Services SMS",
+      "emailing": "Services E-mail",
+      "whatsapp_business": "WhatsApp Business",
+      "other": "Autres Services"
+    }
+  },
+  "security": {
+    "title": "Paramètres de Sécurité",
+    "description": "Changez votre mot de passe et gérez les paramètres de sécurité",
+    "changePassword": "Changer le Mot de Passe",
+    "passwordRequirements": "Mettez à jour votre mot de passe pour sécuriser votre compte. Votre nouveau mot de passe doit contenir au moins 8 caractères et inclure des majuscules, minuscules et des chiffres.",
+    "currentPassword": "Mot de Passe Actuel",
+    "currentPasswordPlaceholder": "Saisissez votre mot de passe actuel",
+    "newPassword": "Nouveau Mot de Passe",
+    "newPasswordPlaceholder": "Saisissez votre nouveau mot de passe",
+    "confirmPassword": "Confirmer le Nouveau Mot de Passe",
+    "confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+    "updatePassword": "Mettre à Jour le Mot de Passe",
+    "updating": "Mise à jour...",
+    "validation": {
+      "allFieldsRequired": "Tous les champs de mot de passe sont requis",
+      "passwordsDoNotMatch": "Les nouveaux mots de passe ne correspondent pas",
+      "passwordTooShort": "Le nouveau mot de passe doit contenir au moins 8 caractères",
+      "passwordComplexity": "Le nouveau mot de passe doit contenir des majuscules, minuscules et des chiffres"
+    },
+    "success": "Mot de passe changé avec succès",
+    "error": "Échec du changement de mot de passe"
+  },
+  "roles": {
+    "admin": "Administrateur",
+    "client": "Client"
+  }
+} 

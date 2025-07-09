@@ -1,0 +1,3140 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { 
+  Calendar, 
+  CheckCircle, 
+  ChevronLeft,
+  ChevronRight,
+  DollarSign, 
+  Download,
+  Eye,
+  Hash, 
+  Info, 
+  Loader2,
+  Receipt, 
+  RefreshCw,
+  Search,
+  X,
+  XCircle, 
+  CreditCard, 
+  FileText, 
+  TrendingUp, 
+  TrendingDown, 
+  Copy,
+  Filter,
+  Plus,
+  Minus,
+  User
+} from 'lucide-react';
+import { useAuth } from '@/lib/AuthContext';
+import { useBranding } from '@/hooks/useBranding';
+import { toast } from 'sonner';
+import { format } from 'date-fns';
+import { BalanceTopup } from './BalanceTopup';
+
+interface Payment {
+  payment_time: string;
+  amount: number;
+  currency: string;
+  i_payment: number;
+  tx_id: string;
+  tx_error: string;
+  tx_result: number; // 1 = successful, 2 = failed
+  i_account: number;
+  i_customer: number;
+  by_credit_debit_card: boolean;
+  by_voucher: boolean;
+  notes: string;
+  // Optional MongoDB data for admin view
+  _mongoData?: Record<string, unknown>;
+  _source?: string;
+  _sippyData?: Payment;
+  // Failed payment specific fields
+  _isFailedPayment?: boolean;
+  _failureReason?: string;
+  _paymentReference?: string;
+}
+
+interface PaymentsData {
+  result: string;
+  payments: Payment[];
+  count: number;
+  requestDuration?: number;
+}
+
+interface PaymentsStats {
+  totalPayments: number;
+  totalCredits: number;
+  totalDebits: number;
+  successfulPayments: number;
+  failedPayments: number;
+  currency: string;
+}
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  sippyAccountId?: number;
+  isEmailVerified: boolean;
+}
+
+interface AccountPaymentsProps {
+  accountId?: number;
+}
+
+export function AccountPayments({ accountId }: AccountPaymentsProps) {
+  const { user, isLoading: authLoading } = useAuth();
+  const { colors } = useBranding();
+  const [paymentsData, setPaymentsData] = useState<PaymentsData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [recordsPerPage, setRecordsPerPage] = useState(50);
+  
+  // Filter state
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState(() => {
+    // Default to current month's date range using GMT timezone
+    const now = new Date();
+    const currentYear = now.getUTCFullYear();
+    const currentMonth = now.getUTCMonth(); // 0-based (0 = January, 11 = December)
+    
+    // First day of current month in GMT
+    const firstDayOfMonth = new Date(Date.UTC(currentYear, currentMonth, 1));
+    const startDate = firstDayOfMonth.toISOString().split('T')[0]; // YYYY-MM-DD format
+    
+    // Last day of current month in GMT
+    const lastDayOfMonth = new Date(Date.UTC(currentYear, currentMonth + 1, 0)); // Day 0 of next month = last day of current month
+    const endDate = lastDayOfMonth.toISOString().split('T')[0]; // YYYY-MM-DD format
+    
+    console.log('Initial filters set to current month (GMT):', {
+      startDate,
+      endDate,
+      timezone: 'GMT'
+    });
+    
+    return {
+      type: 'all' as 'credit' | 'debit' | 'all',
+      startDate,
+      endDate,
+      userId: 'all', // Add user filter
+    };
+  });
+
+  // Balance management state
+  const [showBalanceDialog, setShowBalanceDialog] = useState(false);
+  const [balanceOperation, setBalanceOperation] = useState({
+    operation: 'credit' as 'credit' | 'debit' | 'add_funds',
+    amount: '',
+    currency: 'EUR',
+    notes: '',
+    selectedUserId: '',
+    selectedUserAccountId: null as number | null
+  });
+  const [isBalanceLoading, setIsBalanceLoading] = useState(false);
+  
+  // User management state for balance operations
+  const [users, setUsers] = useState<User[]>([]);
+  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+  const [userSearchTerm, setUserSearchTerm] = useState('');
+
+  // Payment details dialog state
+  const [showPaymentDetails, setShowPaymentDetails] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
+  const [enhancedPaymentData, setEnhancedPaymentData] = useState<any>(null);
+
+  // Use provided accountId or user's account ID
+  const targetAccountId = accountId || user?.sippyAccountId;
+
+  // Parse Sippy date format to JavaScript Date
+  const parseSippyDate = (sippyDate: string): Date => {
+    // Format: '09:57:29.000 GMT Wed Nov 18 2009'
+    try {
+      if (!sippyDate || typeof sippyDate !== 'string') {
+        return new Date();
+      }
+
+      // Remove the milliseconds and GMT parts to make it parseable
+      // Convert "09:57:29.000 GMT Wed Nov 18 2009" to "Wed Nov 18 2009 09:57:29 GMT"
+      const parts = sippyDate.trim().split(' ');
+      if (parts.length >= 6) {
+        const time = parts[0]; // "09:57:29.000"
+        const timeWithoutMs = time.split('.')[0]; // "09:57:29"
+        const dayName = parts[2]; // "Wed"
+        const month = parts[3]; // "Nov"
+        const day = parts[4]; // "18"
+        const year = parts[5]; // "2009"
+        
+        // Reconstruct in a format JavaScript can parse
+        const dateString = `${dayName} ${month} ${day} ${year} ${timeWithoutMs} GMT`;
+        const parsedDate = new Date(dateString);
+        
+        if (!isNaN(parsedDate.getTime())) {
+          return parsedDate;
+        }
+      }
+      
+      // Fallback: try parsing as-is
+      const fallbackDate = new Date(sippyDate);
+      if (!isNaN(fallbackDate.getTime())) {
+        return fallbackDate;
+      }
+      
+      // If all else fails, return current date
+      console.warn('Failed to parse Sippy date:', sippyDate);
+      return new Date();
+    } catch (error) {
+      console.warn('Error parsing Sippy date:', sippyDate, error);
+      return new Date();
+    }
+  };
+
+  // Calculate payments statistics
+  const calculateStats = (payments: Payment[]): PaymentsStats => {
+    // Handle undefined or null payments array
+    if (!payments || !Array.isArray(payments)) {
+      return {
+        totalPayments: 0,
+        totalCredits: 0,
+        totalDebits: 0,
+        successfulPayments: 0,
+        failedPayments: 0,
+        currency: 'EUR'
+      };
+    }
+
+    const stats: PaymentsStats = {
+      totalPayments: payments.length,
+      totalCredits: 0,
+      totalDebits: 0,
+      successfulPayments: 0,
+      failedPayments: 0,
+      currency: payments[0]?.currency || 'EUR'
+    };
+
+    payments.forEach(payment => {
+      if (payment.tx_result === 1) {
+        stats.successfulPayments++;
+        if (payment.amount > 0) {
+          stats.totalCredits += payment.amount;
+        } else {
+          stats.totalDebits += Math.abs(payment.amount);
+        }
+      } else {
+        stats.failedPayments++;
+      }
+    });
+
+    return stats;
+  };
+
+  const stats = paymentsData?.payments ? calculateStats(paymentsData.payments) : {
+    totalPayments: 0,
+    totalCredits: 0,
+    totalDebits: 0,
+    successfulPayments: 0,
+    failedPayments: 0,
+    currency: 'EUR'
+  };
+
+  // Cache for user information to avoid multiple API calls
+  const userInfoCache = new Map<string, { userName: string; userEmail: string } | null>();
+
+  // Helper function to get user information by email
+  const getUserInfoByEmail = async (email: string): Promise<{ userName: string; userEmail: string } | null> => {
+    // Check cache first
+    if (userInfoCache.has(email)) {
+      return userInfoCache.get(email) || null;
+    }
+    
+    try {
+      const response = await fetch(`/api/users?search=${encodeURIComponent(email)}&limit=1`, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        const user = data.users?.find((u: any) => u.email === email);
+        if (user) {
+          const userInfo = {
+            userName: user.name || 'Unknown User',
+            userEmail: user.email
+          };
+          userInfoCache.set(email, userInfo);
+          return userInfo;
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to fetch user info for email:', email, error);
+    }
+    
+    // Cache null result to avoid repeated failed lookups
+    userInfoCache.set(email, null);
+    return null;
+  };
+
+  const fetchPayments = async (page: number = currentPage, customRecordsPerPage?: number) => {
+    // Don't fetch if auth is still loading
+    if (authLoading) {
+      return;
+    }
+    
+    // For admin users without specific accountId, fetch all payments from Sippy
+    const isAdminViewingAll = user?.role === 'admin' && !accountId;
+    
+    if (!isAdminViewingAll && !targetAccountId) {
+      setError('No Sippy account ID available');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const limit = customRecordsPerPage || recordsPerPage;
+      const offset = (page - 1) * limit;
+
+      if (isAdminViewingAll) {
+        // Admin viewing all payments - fetch from all Sippy accounts
+        console.log('Fetching admin payments (Sippy primary) with params:', { limit, offset, page, customRecordsPerPage, recordsPerPage });
+        
+        const sippyQueryParams = new URLSearchParams({
+          limit: limit.toString(),
+          offset: offset.toString(),
+          ...(filters.type && filters.type !== 'all' && { 
+            type: filters.type === 'credit' ? 'credit' : 'debit'
+          }),
+          ...(filters.startDate && { start_date: filters.startDate }),
+          ...(filters.endDate && { end_date: filters.endDate }),
+          ...(filters.userId && filters.userId !== 'all' && { user_id: filters.userId }),
+        });
+
+        const sippyResponse = await fetch(`/api/sippy/payments/all?${sippyQueryParams}`, {
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!sippyResponse.ok) {
+          const errorData = await sippyResponse.json().catch(() => ({ error: 'Unknown error' }));
+          throw new Error(errorData.error || `HTTP ${sippyResponse.status}: Failed to fetch payments`);
+        }
+
+        const sippyData = await sippyResponse.json();
+        const sippyPayments = sippyData.payments || [];
+        
+        console.log('Sippy payments fetched:', sippyPayments.length);
+
+        // Now enhance Sippy payments with MongoDB data where available
+        let enhancedPayments = sippyPayments;
+        
+        if (sippyPayments.length > 0) {
+          try {
+            // Fetch MongoDB payments to enhance the Sippy data
+            const mongoQueryParams = new URLSearchParams({
+              limit: '500', // Fetch more MongoDB records to find matches
+              offset: '0',
+              include_raw: 'false',
+              ...(filters.startDate && { start_date: filters.startDate }),
+              ...(filters.endDate && { end_date: filters.endDate }),
+            });
+
+            const mongoResponse = await fetch(`/api/payments/history?${mongoQueryParams}`, {
+              headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (mongoResponse.ok) {
+              const mongoData = await mongoResponse.json();
+              const mongoPayments = mongoData.payments || [];
+              
+              console.log('MongoDB payments for enhancement:', mongoPayments.length);
+              
+              // Create a map of MongoDB payments for quick lookup
+              const mongoMap = new Map();
+              const failedMongoPayments: any[] = [];
+              
+              mongoPayments.forEach((mp: any) => {
+                // Separate failed payments that are not in Sippy
+                if (mp.status === 'failed' && !mp.sippyPaymentId) {
+                  failedMongoPayments.push(mp);
+                } else {
+                  // For successful payments, create lookup maps
+                  // Map by payment intent ID
+                  if (mp.paymentIntentId) {
+                    mongoMap.set(`tx_${mp.paymentIntentId}`, mp);
+                  }
+                  // Map by Sippy payment ID if available
+                  if (mp.sippyPaymentId) {
+                    mongoMap.set(`payment_${mp.sippyPaymentId}`, mp);
+                  }
+                  // Map by account ID and amount for fuzzy matching
+                  if (mp.sippyAccountId && mp.topupAmount) {
+                    const key = `account_${mp.sippyAccountId}_${mp.topupAmount}_${mp.currency}`;
+                    mongoMap.set(key, mp);
+                  }
+                }
+              });
+
+              // Enhance Sippy payments with MongoDB data where available
+              enhancedPayments = sippyPayments.map((payment: any) => {
+                // Try different matching strategies
+                let mongoData = null;
+                
+                // 1. Match by transaction ID
+                if (payment.tx_id) {
+                  mongoData = mongoMap.get(`tx_${payment.tx_id}`);
+                }
+                
+                // 2. Match by payment ID
+                if (!mongoData && payment.i_payment) {
+                  mongoData = mongoMap.get(`payment_${payment.i_payment}`);
+                }
+                
+                // 3. Match by account ID and amount
+                if (!mongoData && payment._userInfo?.sippyAccountId && payment.amount) {
+                  const key = `account_${payment._userInfo.sippyAccountId}_${Math.abs(payment.amount)}_${payment.currency}`;
+                  mongoData = mongoMap.get(key);
+                }
+                
+                if (mongoData) {
+                  return {
+                    ...payment,
+                    _mongoData: mongoData,
+                    _source: 'enhanced'
+                  };
+                }
+                
+                return {
+                  ...payment,
+                  _source: 'sippy_only'
+                };
+              });
+              
+              // Convert failed MongoDB payments to Sippy payment format for admin view
+              const failedPaymentsForAdmin = await Promise.all(failedMongoPayments.map(async (fp: any) => {
+                // Try to get actual user info by email
+                const userInfo = await getUserInfoByEmail(fp.userEmail);
+                
+                return {
+                  payment_time: fp.paymentCompletedAt || fp.paymentInitiatedAt,
+                  amount: fp.topupAmount || 0,
+                  currency: fp.currency || 'EUR',
+                  i_payment: 0, // No Sippy payment ID for failed payments
+                  tx_id: fp.paymentIntentId || fp.paymentReference || '',
+                  tx_error: fp.failureMessage || 'Payment failed',
+                  tx_result: 2, // Failed
+                  i_account: fp.sippyAccountId || 0,
+                  i_customer: fp.sippyCustomerId || 0,
+                  by_credit_debit_card: true,
+                  by_voucher: false,
+                  notes: `Failed payment: ${fp.failureMessage || 'Unknown error'}`,
+                  _mongoData: fp,
+                  _source: 'failed_only',
+                  _userInfo: {
+                    userName: userInfo?.userName || fp.userEmail?.split('@')[0] || 'Unknown',
+                    userEmail: fp.userEmail || 'Unknown',
+                    sippyAccountId: fp.sippyAccountId
+                  },
+                  _isFailedPayment: true,
+                  _failureReason: fp.failureMessage,
+                  _paymentReference: fp.paymentReference
+                };
+              }));
+              
+              // Add failed payments to enhanced payments
+              enhancedPayments = [...enhancedPayments, ...failedPaymentsForAdmin];
+              
+              console.log('Enhanced payments:', {
+                total: enhancedPayments.length,
+                enhanced: enhancedPayments.filter(p => p._source === 'enhanced').length,
+                sippyOnly: enhancedPayments.filter(p => p._source === 'sippy_only').length,
+                failed: failedPaymentsForAdmin.length
+              });
+            }
+          } catch (error) {
+            console.warn('Failed to enhance Sippy payments with MongoDB data:', error);
+          }
+        }
+
+        // Convert to expected format with user information
+        const convertedPayments = enhancedPayments.map((sippyPayment: any) => ({
+          payment_time: sippyPayment.payment_time,
+          amount: sippyPayment.amount,
+          currency: sippyPayment.currency,
+          i_payment: sippyPayment.i_payment,
+          tx_id: sippyPayment.tx_id,
+          tx_error: sippyPayment.tx_error || '',
+          tx_result: sippyPayment.tx_result,
+          i_account: sippyPayment.i_account,
+          i_customer: sippyPayment.i_customer || 0,
+          by_credit_debit_card: sippyPayment.by_credit_debit_card || false,
+          by_voucher: sippyPayment.by_voucher || false,
+          notes: sippyPayment.notes || '',
+          _mongoData: sippyPayment._mongoData ? {
+            ...sippyPayment._mongoData,
+            userName: sippyPayment._userInfo?.userName,
+            userEmail: sippyPayment._userInfo?.userEmail
+          } : {
+            userName: sippyPayment._userInfo?.userName,
+            userEmail: sippyPayment._userInfo?.userEmail
+          },
+          _source: sippyPayment._source || 'sippy_primary',
+          _isFailedPayment: sippyPayment._isFailedPayment,
+          _failureReason: sippyPayment._failureReason,
+          _paymentReference: sippyPayment._paymentReference
+        }));
+        
+        // Sort by payment time (most recent first)
+        convertedPayments.sort((a, b) => {
+          // Handle different date formats for robust sorting
+          const getTimestamp = (payment: any): number => {
+            try {
+              // For failed payments from MongoDB, use ISO date format
+              if (payment._isFailedPayment && payment._mongoData) {
+                const mongoDate = payment._mongoData.paymentCompletedAt || payment._mongoData.paymentInitiatedAt || payment._mongoData.createdAt;
+                if (mongoDate) {
+                  return new Date(mongoDate).getTime();
+                }
+              }
+              
+              // For Sippy payments, use the parseSippyDate function
+              if (payment.payment_time) {
+                // Check if it's already in ISO format (from MongoDB)
+                if (payment.payment_time.includes('T') || payment.payment_time.includes('Z')) {
+                  return new Date(payment.payment_time).getTime();
+                }
+                // Otherwise, parse as Sippy format
+                return parseSippyDate(payment.payment_time).getTime();
+              }
+              
+              // Fallback to current time if no valid date
+              return new Date().getTime();
+            } catch (error) {
+              console.warn('Error parsing payment date for sorting:', payment.payment_time, error);
+              return new Date().getTime();
+            }
+          };
+          
+          const timestampA = getTimestamp(a);
+          const timestampB = getTimestamp(b);
+          
+          // Sort descending (most recent first)
+          return timestampB - timestampA;
+        });
+
+        console.log('Admin payments result:', { 
+          total: convertedPayments.length,
+          sippyPayments: sippyPayments.length,
+          failedPayments: convertedPayments.filter(p => p._isFailedPayment).length,
+          totalRecords: sippyData.pagination?.total,
+          currency: convertedPayments[0]?.currency 
+        });
+        
+        setPaymentsData({
+          result: 'success',
+          payments: convertedPayments,
+          count: convertedPayments.length,
+          requestDuration: 0
+        });
+        
+        setTotalRecords(sippyData.pagination?.total || 0);
+        
+      } else {
+        // Regular user or admin viewing specific account - fetch Sippy payments and enhance with MongoDB data
+        const queryParams = new URLSearchParams({
+          offset: offset.toString(),
+          limit: limit.toString(),
+          ...(filters.type && filters.type !== 'all' && { type: filters.type }),
+          ...(filters.startDate && { start_date: filters.startDate }),
+          ...(filters.endDate && { end_date: filters.endDate }),
+        });
+
+        console.log('Fetching account payments with params:', { limit, offset, page, customRecordsPerPage, recordsPerPage });
+        
+        const response = await fetch(`/api/sippy/account/${targetAccountId}/payments?${queryParams}`, {
+          headers: { 'Content-Type': 'application/json' },
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+          throw new Error(errorData.error || `HTTP ${response.status}: Failed to fetch payments`);
+        }
+
+        const data = await response.json();
+        
+        // Ensure payments is always an array
+        if (!data.payments || !Array.isArray(data.payments)) {
+          data.payments = [];
+        }
+        
+        // For single account view, try to enhance Sippy payments with MongoDB data
+        // But do this more efficiently by fetching MongoDB data for this specific account
+        let enhancedPayments = data.payments.map((payment: Payment) => ({
+          ...payment,
+          _source: 'sippy_only'
+        }));
+
+        // Try to fetch MongoDB payments for this specific account to enhance the data
+        // and also fetch failed payments that are not in Sippy
+        let failedPayments: Payment[] = [];
+        
+        if (targetAccountId) {
+          try {
+            const mongoEnhanceParams = new URLSearchParams({
+              limit: '500', // Fetch more to find matches and failed payments
+              offset: '0',
+              include_raw: 'false',
+              account_id: targetAccountId.toString(),
+              ...(filters.startDate && { start_date: filters.startDate }),
+              ...(filters.endDate && { end_date: filters.endDate }),
+            });
+
+            const mongoResponse = await fetch(`/api/payments/history?${mongoEnhanceParams}`, {
+              headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (mongoResponse.ok) {
+              const mongoData = await mongoResponse.json();
+              const mongoPayments = mongoData.payments || [];
+              
+              // Create a map of MongoDB payments for quick lookup
+              const mongoMap = new Map();
+              const failedMongoPayments: any[] = [];
+              
+              mongoPayments.forEach((mp: any) => {
+                // Separate failed payments that are not in Sippy
+                if (mp.status === 'failed' && !mp.sippyPaymentId) {
+                  failedMongoPayments.push(mp);
+                } else {
+                  // For successful payments, create lookup maps
+                  if (mp.sippyPaymentId) {
+                    mongoMap.set(`payment_${mp.sippyPaymentId}`, mp);
+                  }
+                  if (mp.paymentIntentId) {
+                    mongoMap.set(`tx_${mp.paymentIntentId}`, mp);
+                  }
+                }
+              });
+
+              // Enhance Sippy payments with MongoDB data where available
+              enhancedPayments = data.payments.map((payment: Payment) => {
+                const mongoData = mongoMap.get(`payment_${payment.i_payment}`) || 
+                                mongoMap.get(`tx_${payment.tx_id}`);
+                
+                if (mongoData) {
+                  return {
+                    ...payment,
+                    _mongoData: mongoData,
+                    _source: 'enhanced'
+                  };
+                }
+                
+                return {
+                  ...payment,
+                  _source: 'sippy_only'
+                };
+              });
+              
+              // Convert failed MongoDB payments to Payment format
+              failedPayments = failedMongoPayments.map((fp: any) => ({
+                payment_time: fp.paymentCompletedAt || fp.paymentInitiatedAt,
+                amount: fp.topupAmount || 0,
+                currency: fp.currency || 'EUR',
+                i_payment: 0, // No Sippy payment ID for failed payments
+                tx_id: fp.paymentIntentId || fp.paymentReference || '',
+                tx_error: fp.failureMessage || 'Payment failed',
+                tx_result: 2, // Failed
+                i_account: fp.sippyAccountId || targetAccountId,
+                i_customer: fp.sippyCustomerId || 0,
+                by_credit_debit_card: true, // Failed payments are typically card payments
+                by_voucher: false,
+                notes: `Failed payment: ${fp.failureMessage || 'Unknown error'}`,
+                _mongoData: fp,
+                _source: 'failed_only',
+                _isFailedPayment: true,
+                _failureReason: fp.failureMessage,
+                _paymentReference: fp.paymentReference
+              }));
+              
+              console.log('Enhanced payments:', {
+                sippy: enhancedPayments.length,
+                enhanced: enhancedPayments.filter(p => p._source === 'enhanced').length,
+                sippyOnly: enhancedPayments.filter(p => p._source === 'sippy_only').length,
+                failed: failedPayments.length
+              });
+            }
+          } catch (error) {
+            console.warn('Failed to enhance payments with MongoDB data:', error);
+          }
+        }
+        
+        // Combine Sippy payments with failed payments
+        const allPayments = [...enhancedPayments, ...failedPayments];
+        
+        // Sort by payment time (most recent first)
+        allPayments.sort((a, b) => {
+          // Handle different date formats for robust sorting
+          const getTimestamp = (payment: Payment): number => {
+            try {
+              // For failed payments from MongoDB, use ISO date format
+              if (payment._isFailedPayment && payment._mongoData) {
+                const mongoDate = payment._mongoData.paymentCompletedAt || payment._mongoData.paymentInitiatedAt || payment._mongoData.createdAt;
+                if (mongoDate) {
+                  return new Date(mongoDate).getTime();
+                }
+              }
+              
+              // For Sippy payments, use the parseSippyDate function
+              if (payment.payment_time) {
+                // Check if it's already in ISO format (from MongoDB)
+                if (payment.payment_time.includes('T') || payment.payment_time.includes('Z')) {
+                  return new Date(payment.payment_time).getTime();
+                }
+                // Otherwise, parse as Sippy format
+                return parseSippyDate(payment.payment_time).getTime();
+              }
+              
+              // Fallback to current time if no valid date
+              return new Date().getTime();
+            } catch (error) {
+              console.warn('Error parsing payment date for sorting:', payment.payment_time, error);
+              return new Date().getTime();
+            }
+          };
+          
+          const timestampA = getTimestamp(a);
+          const timestampB = getTimestamp(b);
+          
+          // Sort descending (most recent first)
+          return timestampB - timestampA;
+        });
+        
+        console.log('Combined payments API response:', { 
+          totalPayments: allPayments.length,
+          sippyPayments: enhancedPayments.length,
+          failedPayments: failedPayments.length,
+          enhanced: allPayments.filter(p => p._source === 'enhanced').length,
+          currency: allPayments[0]?.currency 
+        });
+        
+        setPaymentsData({
+          result: 'success',
+          payments: allPayments,
+          count: allPayments.length,
+          requestDuration: data.requestDuration || 0
+        });
+        
+        // Update total records for pagination
+        const currentRecords = allPayments.length;
+        const effectiveLimit = customRecordsPerPage || recordsPerPage;
+        
+        if (currentRecords === effectiveLimit) {
+          setTotalRecords((page + 10) * effectiveLimit);
+        } else {
+          setTotalRecords(offset + currentRecords);
+        }
+      }
+      
+      setLastRefresh(new Date());
+      
+    } catch (err) {
+      console.error('Error fetching payments:', err);
+      
+      let errorMessage = 'Failed to fetch payments';
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleFilterChange = (key: string, value: string) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  const clearFilters = () => {
+    // Reset to current month's date range using GMT timezone
+    const now = new Date();
+    const currentYear = now.getUTCFullYear();
+    const currentMonth = now.getUTCMonth(); // 0-based (0 = January, 11 = December)
+    
+    // First day of current month in GMT
+    const firstDayOfMonth = new Date(Date.UTC(currentYear, currentMonth, 1));
+    const startDate = firstDayOfMonth.toISOString().split('T')[0]; // YYYY-MM-DD format
+    
+    // Last day of current month in GMT
+    const lastDayOfMonth = new Date(Date.UTC(currentYear, currentMonth + 1, 0)); // Day 0 of next month = last day of current month
+    const endDate = lastDayOfMonth.toISOString().split('T')[0]; // YYYY-MM-DD format
+    
+    console.log('Clearing filters, resetting to current month (GMT):', {
+      startDate,
+      endDate,
+      timezone: 'GMT'
+    });
+    
+    setFilters({
+      type: 'all',
+      startDate,
+      endDate,
+      userId: 'all',
+    });
+    setCurrentPage(1);
+  };
+
+  // Quick filter functions for common date ranges
+  const setQuickFilter = (range: 'today' | 'this_month' | 'last_month' | 'this_year') => {
+    // Use GMT timezone for all date calculations to match Sippy's requirements
+    const now = new Date();
+    const currentYear = now.getUTCFullYear();
+    const currentMonth = now.getUTCMonth(); // 0-based (0 = January, 11 = December)
+    
+    let startDate: string;
+    let endDate: string;
+    
+    switch (range) {
+      case 'today':
+        // Today in GMT
+        const todayGMT = new Date(Date.UTC(currentYear, currentMonth, now.getUTCDate()));
+        startDate = todayGMT.toISOString().split('T')[0];
+        endDate = todayGMT.toISOString().split('T')[0];
+        break;
+        
+      case 'this_month':
+        // First day of current month in GMT
+        const firstDayOfMonth = new Date(Date.UTC(currentYear, currentMonth, 1));
+        startDate = firstDayOfMonth.toISOString().split('T')[0];
+        
+        // Last day of current month in GMT
+        const lastDayOfMonth = new Date(Date.UTC(currentYear, currentMonth + 1, 0));
+        endDate = lastDayOfMonth.toISOString().split('T')[0];
+        break;
+        
+      case 'last_month':
+        // First day of last month in GMT
+        const firstDayOfLastMonth = new Date(Date.UTC(currentYear, currentMonth - 1, 1));
+        startDate = firstDayOfLastMonth.toISOString().split('T')[0];
+        
+        // Last day of last month in GMT
+        const lastDayOfLastMonth = new Date(Date.UTC(currentYear, currentMonth, 0));
+        endDate = lastDayOfLastMonth.toISOString().split('T')[0];
+        break;
+        
+      case 'this_year':
+        // First day of current year in GMT
+        const firstDayOfYear = new Date(Date.UTC(currentYear, 0, 1));
+        startDate = firstDayOfYear.toISOString().split('T')[0];
+        
+        // Last day of current year in GMT
+        const lastDayOfYear = new Date(Date.UTC(currentYear, 11, 31));
+        endDate = lastDayOfYear.toISOString().split('T')[0];
+        break;
+        
+      default:
+        return;
+    }
+    
+    console.log(`Quick filter ${range} applied:`, {
+      startDate,
+      endDate,
+      timezone: 'GMT',
+      currentUTCDate: now.toISOString()
+    });
+    
+    // Update filters state
+    const newFilters = {
+      ...filters,
+      startDate,
+      endDate
+    };
+    
+    setFilters(newFilters);
+    setCurrentPage(1);
+    
+    // Immediately fetch payments with the new dates - don't wait for state update
+    fetchPaymentsWithFilters(newFilters, 1);
+  };
+
+  // Helper function to fetch payments with specific filters
+  const fetchPaymentsWithFilters = async (filterOverrides: any, page: number = 1) => {
+    // Don't fetch if auth is still loading
+    if (authLoading) {
+      return;
+    }
+    
+    // For admin users without specific accountId, fetch all payments from Sippy
+    const isAdminViewingAll = user?.role === 'admin' && !accountId;
+    
+    if (!isAdminViewingAll && !targetAccountId) {
+      setError('No Sippy account ID available');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const limit = recordsPerPage;
+      const offset = (page - 1) * limit;
+
+      if (isAdminViewingAll) {
+        // Admin viewing all payments - fetch from all Sippy accounts
+        console.log('Fetching admin payments (Sippy primary) with filters:', filterOverrides);
+        
+        const sippyQueryParams = new URLSearchParams({
+          limit: limit.toString(),
+          offset: offset.toString(),
+          ...(filterOverrides.type && filterOverrides.type !== 'all' && { 
+            type: filterOverrides.type === 'credit' ? 'credit' : 'debit'
+          }),
+          ...(filterOverrides.startDate && { start_date: filterOverrides.startDate }),
+          ...(filterOverrides.endDate && { end_date: filterOverrides.endDate }),
+          ...(filterOverrides.userId && filterOverrides.userId !== 'all' && { user_id: filterOverrides.userId }),
+        });
+
+        const sippyResponse = await fetch(`/api/sippy/payments/all?${sippyQueryParams}`, {
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!sippyResponse.ok) {
+          const errorData = await sippyResponse.json().catch(() => ({ error: 'Unknown error' }));
+          throw new Error(errorData.error || `HTTP ${sippyResponse.status}: Failed to fetch payments`);
+        }
+
+        const sippyData = await sippyResponse.json();
+        const sippyPayments = sippyData.payments || [];
+        
+        console.log('Sippy payments fetched:', sippyPayments.length);
+
+        // Process and enhance payments (same logic as before)
+        let enhancedPayments = sippyPayments;
+        
+        // Convert to expected format with user information
+        const convertedPayments = enhancedPayments.map((sippyPayment: any) => ({
+          payment_time: sippyPayment.payment_time,
+          amount: sippyPayment.amount,
+          currency: sippyPayment.currency,
+          i_payment: sippyPayment.i_payment,
+          tx_id: sippyPayment.tx_id,
+          tx_error: sippyPayment.tx_error || '',
+          tx_result: sippyPayment.tx_result,
+          i_account: sippyPayment.i_account,
+          i_customer: sippyPayment.i_customer || 0,
+          by_credit_debit_card: sippyPayment.by_credit_debit_card || false,
+          by_voucher: sippyPayment.by_voucher || false,
+          notes: sippyPayment.notes || '',
+          _mongoData: sippyPayment._mongoData ? {
+            ...sippyPayment._mongoData,
+            userName: sippyPayment._userInfo?.userName,
+            userEmail: sippyPayment._userInfo?.userEmail
+          } : {
+            userName: sippyPayment._userInfo?.userName,
+            userEmail: sippyPayment._userInfo?.userEmail
+          },
+          _source: sippyPayment._source || 'sippy_primary'
+        }));
+
+        console.log('Admin payments result:', { 
+          total: convertedPayments.length,
+          totalRecords: sippyData.pagination?.total,
+          currency: convertedPayments[0]?.currency 
+        });
+        
+        setPaymentsData({
+          result: 'success',
+          payments: convertedPayments,
+          count: convertedPayments.length,
+          requestDuration: 0
+        });
+        
+        setTotalRecords(sippyData.pagination?.total || 0);
+        
+      } else {
+        // Regular user or admin viewing specific account
+        const queryParams = new URLSearchParams({
+          offset: offset.toString(),
+          limit: limit.toString(),
+          ...(filterOverrides.type && filterOverrides.type !== 'all' && { type: filterOverrides.type }),
+          ...(filterOverrides.startDate && { start_date: filterOverrides.startDate }),
+          ...(filterOverrides.endDate && { end_date: filterOverrides.endDate }),
+        });
+
+        console.log('Fetching account payments with filters:', filterOverrides);
+        
+        const response = await fetch(`/api/sippy/account/${targetAccountId}/payments?${queryParams}`, {
+          headers: { 'Content-Type': 'application/json' },
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+          throw new Error(errorData.error || `HTTP ${response.status}: Failed to fetch payments`);
+        }
+
+        const data = await response.json();
+        
+        // Ensure payments is always an array
+        if (!data.payments || !Array.isArray(data.payments)) {
+          data.payments = [];
+        }
+        
+        // Enhance payments with MongoDB data (same logic as before)
+        let enhancedPayments = data.payments.map((payment: any) => ({
+          ...payment,
+          _source: 'sippy_only'
+        }));
+        
+        console.log('Sippy payments API response:', { 
+          paymentCount: enhancedPayments.length, 
+          enhanced: enhancedPayments.filter(p => p._source === 'enhanced').length,
+          currency: enhancedPayments[0]?.currency 
+        });
+        
+        setPaymentsData({
+          result: 'success',
+          payments: enhancedPayments,
+          count: enhancedPayments.length,
+          requestDuration: data.requestDuration || 0
+        });
+        
+        // Update total records for pagination
+        const currentRecords = enhancedPayments.length;
+        
+        if (currentRecords === limit) {
+          setTotalRecords((page + 10) * limit);
+        } else {
+          setTotalRecords(offset + currentRecords);
+        }
+      }
+      
+      setLastRefresh(new Date());
+      
+    } catch (err) {
+      console.error('Error fetching payments:', err);
+      
+      let errorMessage = 'Failed to fetch payments';
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Helper function to check if a quick filter is currently active
+  const isQuickFilterActive = (range: 'today' | 'this_month' | 'last_month' | 'this_year'): boolean => {
+    // Use GMT timezone for consistency with Sippy API
+    const now = new Date();
+    const currentYear = now.getUTCFullYear();
+    const currentMonth = now.getUTCMonth();
+    
+    let expectedStartDate: string;
+    let expectedEndDate: string;
+    
+    switch (range) {
+      case 'today':
+        const todayGMT = new Date(Date.UTC(currentYear, currentMonth, now.getUTCDate()));
+        expectedStartDate = todayGMT.toISOString().split('T')[0];
+        expectedEndDate = todayGMT.toISOString().split('T')[0];
+        break;
+        
+      case 'this_month':
+        const firstDayOfMonth = new Date(Date.UTC(currentYear, currentMonth, 1));
+        const lastDayOfMonth = new Date(Date.UTC(currentYear, currentMonth + 1, 0));
+        expectedStartDate = firstDayOfMonth.toISOString().split('T')[0];
+        expectedEndDate = lastDayOfMonth.toISOString().split('T')[0];
+        break;
+        
+      case 'last_month':
+        const firstDayOfLastMonth = new Date(Date.UTC(currentYear, currentMonth - 1, 1));
+        const lastDayOfLastMonth = new Date(Date.UTC(currentYear, currentMonth, 0));
+        expectedStartDate = firstDayOfLastMonth.toISOString().split('T')[0];
+        expectedEndDate = lastDayOfLastMonth.toISOString().split('T')[0];
+        break;
+        
+      case 'this_year':
+        const firstDayOfYear = new Date(Date.UTC(currentYear, 0, 1));
+        const lastDayOfYear = new Date(Date.UTC(currentYear, 11, 31));
+        expectedStartDate = firstDayOfYear.toISOString().split('T')[0];
+        expectedEndDate = lastDayOfYear.toISOString().split('T')[0];
+        break;
+        
+      default:
+        return false;
+    }
+    
+    return filters.startDate === expectedStartDate && filters.endDate === expectedEndDate;
+  };
+
+  const applyFilters = () => {
+    setCurrentPage(1);
+    fetchPayments(1);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    fetchPayments(newPage);
+  };
+
+  const handleLimitChange = (value: string) => {
+    const newLimit = parseInt(value);
+    setRecordsPerPage(newLimit);
+    setCurrentPage(1);
+    fetchPayments(1, newLimit);
+  };
+
+  const formatCurrency = (amount: number, currency: string = 'EUR') => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount);
+  };
+
+  // Intelligent payment method detection
+  const getPaymentMethod = (payment: Payment, enhancedData?: any) => {
+    // First priority: Use embedded MongoDB data from admin view
+    if (payment._mongoData) {
+      const mongoData = payment._mongoData;
+      if (mongoData.cardBrand && mongoData.cardLast4) {
+        return `${mongoData.cardBrand.charAt(0).toUpperCase() + mongoData.cardBrand.slice(1)} •••• ${mongoData.cardLast4}`;
+      }
+      if (mongoData.paymentMethodType) {
+        return mongoData.paymentMethodType === 'card' ? 'Credit/Debit Card' : mongoData.paymentMethodType;
+      }
+    }
+
+    // Second priority: Use MongoDB enhanced data if available
+    if (enhancedData?.type === 'mongodb' && enhancedData?.data) {
+      const mongoData = enhancedData.data;
+      if (mongoData.paymentMethodType) {
+        // Return the actual payment method from MongoDB
+        if (mongoData.cardBrand && mongoData.cardLast4) {
+          return `${mongoData.cardBrand.charAt(0).toUpperCase() + mongoData.cardBrand.slice(1)} •••• ${mongoData.cardLast4}`;
+        }
+        return mongoData.paymentMethodType;
+      }
+    }
+
+    // Third priority: Check transaction ID patterns for payment gateway detection
+    if (payment.tx_id) {
+      // Stripe payment intent pattern
+      if (payment.tx_id.startsWith('pi_') || payment.tx_id.includes('pi_')) {
+        return 'Credit/Debit Card (Stripe)';
+      }
+      // PayPal pattern
+      if (payment.tx_id.includes('paypal') || payment.tx_id.toUpperCase().includes('PP')) {
+        return 'PayPal';
+      }
+      // Other payment gateway patterns can be added here
+    }
+
+    // Fourth priority: Check payment notes for gateway information
+    if (payment.notes) {
+      const notes = payment.notes.toLowerCase();
+      if (notes.includes('stripe') || notes.includes('pi_')) {
+        return 'Credit/Debit Card (Stripe)';
+      }
+      if (notes.includes('paypal')) {
+        return 'PayPal';
+      }
+      if (notes.includes('manual') || notes.includes('admin')) {
+        return 'Manual Topup';
+      }
+    }
+
+    // Fifth priority: Use Sippy flags
+    if (payment.by_credit_debit_card) {
+      return 'Credit/Debit Card';
+    }
+    if (payment.by_voucher) {
+      return 'Voucher';
+    }
+
+    // Default: Assume manual topup for payments without clear gateway indicators
+    return 'Manual Topup';
+  };
+
+  const exportToCsv = () => {
+    if (!paymentsData?.payments || !Array.isArray(paymentsData.payments) || paymentsData.payments.length === 0) {
+      toast.error('No payment data available to export');
+      return;
+    }
+
+    const isAdminViewingAll = user?.role === 'admin' && !accountId;
+
+    const headers = [
+      'Payment Time',
+      ...(isAdminViewingAll ? ['User Name', 'Account ID'] : []),
+      'Amount',
+      'Currency',
+      'Payment ID',
+      'Transaction ID',
+      'Status',
+      'Method',
+      'Notes'
+    ];
+
+    const csvContent = [
+      headers.join(','),
+      ...paymentsData.payments.map(payment => [
+        payment.payment_time || '',
+        ...(isAdminViewingAll ? [
+          payment._mongoData?.userName || payment._mongoData?.userEmail || 'Unknown User',
+          payment.i_account || ''
+        ] : []),
+        payment.amount || '',
+        payment.currency || '',
+        payment.i_payment || '',
+        payment.tx_id || '',
+        payment.tx_result === 1 ? 'Success' : 'Failed',
+        getPaymentMethod(payment),
+        payment.notes || ''
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    const filename = isAdminViewingAll 
+      ? `all_payments_${format(new Date(), 'yyyy-MM-dd')}.csv`
+      : `account_payments_${targetAccountId}_${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Fetch users for balance operations
+  const fetchUsers = async () => {
+    try {
+      setIsLoadingUsers(true);
+      
+      const response = await fetch('/api/users', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch users');
+      }
+
+      const data = await response.json();
+      const usersWithSippyAccounts = data.users?.filter((user: User) => 
+        user.isEmailVerified && user.sippyAccountId
+      ) || [];
+      
+      setUsers(usersWithSippyAccounts);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      toast.error('Failed to fetch users');
+    } finally {
+      setIsLoadingUsers(false);
+    }
+  };
+
+  // Handle user selection for balance operations
+  const handleUserSelection = (userId: string) => {
+    const selectedUser = users.find(user => user.id === userId);
+    if (selectedUser) {
+      setBalanceOperation(prev => ({
+        ...prev,
+        selectedUserId: userId,
+        selectedUserAccountId: selectedUser.sippyAccountId || null
+      }));
+    }
+  };
+
+  // Filter users based on search term
+  const filteredUsers = users.filter(user => 
+    user.email.toLowerCase().includes(userSearchTerm.toLowerCase()) ||
+    `${user.name} ${user.email}`.toLowerCase().includes(userSearchTerm.toLowerCase()) ||
+    (user.sippyAccountId && user.sippyAccountId.toString().includes(userSearchTerm))
+  );
+
+  // Open balance dialog and fetch users
+  const openBalanceDialog = () => {
+    setShowBalanceDialog(true);
+    fetchUsers();
+  };
+
+  const handleBalanceOperation = async () => {
+    // For balance operations, use selectedUserAccountId if available, otherwise fall back to targetAccountId
+    const operationAccountId = balanceOperation.selectedUserAccountId || targetAccountId;
+    
+    if (!operationAccountId || !balanceOperation.amount) {
+      toast.error('Please select a user and fill in all required fields');
+      return;
+    }
+
+    try {
+      setIsBalanceLoading(true);
+
+      const response = await fetch(`/api/sippy/account/${operationAccountId}/balance`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          operation: balanceOperation.operation,
+          amount: parseFloat(balanceOperation.amount),
+          currency: balanceOperation.currency,
+          payment_notes: balanceOperation.notes || undefined,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to perform balance operation');
+      }
+
+      const selectedUser = users.find(user => user.id === balanceOperation.selectedUserId);
+      const userInfo = selectedUser ? `${selectedUser.name} (${selectedUser.email})` : `Account ${operationAccountId}`;
+      
+      toast.success(`Balance operation completed successfully for ${userInfo}`);
+      setShowBalanceDialog(false);
+      setBalanceOperation({
+        operation: 'credit',
+        amount: '',
+        currency: 'EUR',
+        notes: '',
+        selectedUserId: '',
+        selectedUserAccountId: null
+      });
+      
+      // Refresh payments to show the new transaction (if viewing the same account)
+      if (operationAccountId === targetAccountId) {
+        fetchPayments();
+      }
+    } catch (err) {
+      console.error('Error performing balance operation:', err);
+      toast.error(err instanceof Error ? err.message : 'Failed to perform balance operation');
+    } finally {
+      setIsBalanceLoading(false);
+    }
+  };
+
+  // Extract payment intent ID from Sippy payment notes/description
+  const extractPaymentIntentId = (payment: Payment): string | null => {
+    // Check tx_id first
+    if (payment.tx_id) {
+      // If tx_id looks like a payment intent ID, use it
+      if (payment.tx_id.startsWith('pi_')) {
+        return payment.tx_id;
+      }
+    }
+    
+    // Check notes field for Stripe payment intent pattern
+    if (payment.notes) {
+      const piMatch = payment.notes.match(/pi_[a-zA-Z0-9]+/);
+      if (piMatch) {
+        return piMatch[0];
+      }
+    }
+    
+    // Check if tx_id contains the payment intent pattern
+    if (payment.tx_id) {
+      const piMatch = payment.tx_id.match(/pi_[a-zA-Z0-9]+/);
+      if (piMatch) {
+        return piMatch[0];
+      }
+    }
+    
+    return null;
+  };
+
+  // Fetch enhanced payment data from MongoDB
+  const fetchEnhancedPaymentData = async (payment: Payment) => {
+    try {
+      console.log('=== FETCHING ENHANCED PAYMENT DATA ===');
+      console.log('Payment object:', payment);
+      
+      // Extract payment intent ID from Sippy data
+      const extractedPaymentIntentId = extractPaymentIntentId(payment);
+      console.log('Extracted payment intent ID:', extractedPaymentIntentId);
+      console.log('Original TX ID:', payment.tx_id);
+      console.log('Payment notes:', payment.notes);
+      console.log('Payment ID:', payment.i_payment);
+      console.log('Account ID:', payment.i_account);
+      console.log('Amount:', payment.amount);
+      console.log('Currency:', payment.currency);
+      
+      // First, try to find MongoDB payment record directly by payment intent ID
+      if (extractedPaymentIntentId) {
+        console.log(`Trying direct receipt lookup for extracted payment intent ID: ${extractedPaymentIntentId}`);
+        const directResponse = await fetch(`/api/payments/${extractedPaymentIntentId}/receipt`);
+        
+        if (directResponse.ok) {
+          const receiptData = await directResponse.json();
+          console.log('Direct receipt response:', receiptData);
+          
+          // If this receipt has comprehensive data, convert it to MongoDB format
+          if (receiptData.success && receiptData.receipt) {
+            console.log('Enhanced receipt data found:', receiptData.receipt);
+            
+            // Convert receipt format to MongoDB format for consistency
+            const convertedData = {
+              paymentReference: receiptData.receipt.receiptNumber,
+              paymentIntentId: receiptData.receipt.payment?.id,
+              status: receiptData.receipt.payment?.status,
+              userEmail: receiptData.receipt.customer?.email,
+              sippyAccountId: receiptData.receipt.customer?.accountId,
+              sippyCustomerId: receiptData.receipt.customer?.customerId,
+              topupAmount: receiptData.receipt.amounts?.topupAmount,
+              processingFee: receiptData.receipt.amounts?.processingFee,
+              fixedFee: receiptData.receipt.amounts?.fixedFee,
+              totalChargedAmount: receiptData.receipt.amounts?.totalCharged,
+              currency: receiptData.receipt.amounts?.currency,
+              paymentMethodType: receiptData.receipt.payment?.method,
+              gatewayName: receiptData.receipt.payment?.gateway,
+              provider: receiptData.receipt.payment?.provider,
+              cardBrand: receiptData.receipt.card?.brand,
+              cardLast4: receiptData.receipt.card?.last4,
+              cardCountry: receiptData.receipt.card?.country,
+              description: receiptData.receipt.description,
+              notes: receiptData.receipt.notes,
+              receiptUrl: receiptData.receipt.receiptUrl,
+              createdAt: receiptData.receipt.createdAt,
+              updatedAt: receiptData.receipt.updatedAt,
+              paymentCompletedAt: receiptData.receipt.paymentDate,
+              taxAmount: receiptData.receipt.tax?.amount,
+              taxRate: receiptData.receipt.tax?.rate
+            };
+            
+            setEnhancedPaymentData({
+              type: 'mongodb',
+              data: convertedData,
+              sippyData: payment
+            });
+            return;
+          }
+        } else {
+          console.log('Direct receipt lookup failed:', directResponse.status);
+        }
+      } else {
+        console.log('⚠️ No payment intent ID extracted from Sippy data');
+      }
+      
+      // Search MongoDB payment history for matching payment
+      let searchOffset = 0;
+      const searchLimit = 100;
+      let found = false;
+      
+      console.log('Starting MongoDB payment history search...');
+      console.log('Search criteria:', {
+        extractedPaymentIntentId,
+        sippyPaymentId: payment.i_payment,
+        sippyAccountId: payment.i_account,
+        originalTxId: payment.tx_id,
+        amount: payment.amount,
+        currency: payment.currency
+      });
+      
+      // Search through multiple pages if needed (up to 500 payments)
+      while (!found && searchOffset < 500) {
+        console.log(`Searching payments with offset ${searchOffset}, limit ${searchLimit}`);
+        const mongoResponse = await fetch(`/api/payments/history?limit=${searchLimit}&offset=${searchOffset}&include_raw=false`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        if (mongoResponse.ok) {
+          const mongoData = await mongoResponse.json();
+          console.log(`Found ${mongoData.payments?.length || 0} MongoDB payments`);
+          
+          if (mongoData.payments && mongoData.payments.length > 0) {
+            console.log('First few MongoDB payments sample:', mongoData.payments.slice(0, 3));
+            
+            // Look for matching payment with prioritized criteria
+            const matchingPayment = mongoData.payments?.find((p: any) => {
+              // Primary matching criteria: payment intent ID (highest priority)
+              const matchesExtractedPaymentIntent = extractedPaymentIntentId && p.paymentIntentId === extractedPaymentIntentId;
+              
+              // Secondary matching criteria
+              const matchesOriginalTxId = payment.tx_id && p.paymentIntentId === payment.tx_id;
+              const matchesPaymentId = p.sippyPaymentId === payment.i_payment;
+              const matchesAccountId = p.sippyAccountId === payment.i_account;
+              
+              // Tertiary matching criteria (for payments without perfect ID matches)
+              const amountMatches = Math.abs(p.topupAmount - Math.abs(payment.amount)) < 0.01; // Allow for small rounding differences
+              const currencyMatches = p.currency === payment.currency;
+              const accountAmountMatch = matchesAccountId && amountMatches && currencyMatches;
+              
+              // Prioritize payment intent ID match first
+              const isMatch = matchesExtractedPaymentIntent || matchesOriginalTxId || matchesPaymentId || accountAmountMatch;
+              
+              if (isMatch) {
+                console.log('Potential match found:', {
+                  mongoPayment: p,
+                  matchCriteria: {
+                    matchesExtractedPaymentIntent,
+                    matchesOriginalTxId,
+                    matchesPaymentId,
+                    matchesAccountId,
+                    amountMatches,
+                    currencyMatches,
+                    accountAmountMatch,
+                    priority: matchesExtractedPaymentIntent ? 'HIGH (Payment Intent)' : 
+                             matchesOriginalTxId ? 'HIGH (TX ID)' :
+                             matchesPaymentId ? 'MEDIUM (Payment ID)' : 'LOW (Amount/Account)'
+                  },
+                  comparison: {
+                    mongoPaymentIntentId: p.paymentIntentId,
+                    extractedPaymentIntentId,
+                    originalSippyTxId: payment.tx_id,
+                    mongoPaymentId: p.sippyPaymentId,
+                    sippyPaymentId: payment.i_payment,
+                    mongoAccountId: p.sippyAccountId,
+                    sippyAccountId: payment.i_account,
+                    mongoAmount: p.topupAmount,
+                    sippyAmount: payment.amount,
+                    mongoCurrency: p.currency,
+                    sippyCurrency: payment.currency
+                  }
+                });
+              }
+              
+              return isMatch;
+            });
+            
+            if (matchingPayment) {
+              console.log('✅ MongoDB payment data found:', matchingPayment);
+              setEnhancedPaymentData({
+                type: 'mongodb',
+                data: matchingPayment,
+                sippyData: payment
+              });
+              found = true;
+              return;
+            }
+          }
+          
+          // If we got fewer results than the limit, we've reached the end
+          if (mongoData.payments.length < searchLimit) {
+            console.log('Reached end of MongoDB payments');
+            break;
+          }
+        } else {
+          console.log('MongoDB history request failed:', mongoResponse.status);
+          break;
+        }
+        
+        searchOffset += searchLimit;
+      }
+      
+      // No enhanced data found
+      console.log('❌ No enhanced payment data found for payment:', {
+        paymentId: payment.i_payment,
+        extractedPaymentIntentId,
+        originalTxId: payment.tx_id,
+        accountId: payment.i_account,
+        amount: payment.amount,
+        currency: payment.currency
+      });
+      setEnhancedPaymentData({
+        type: 'sippy_only',
+        data: null,
+        sippyData: payment
+      });
+      
+    } catch (error) {
+      console.error('Error fetching enhanced payment data:', error);
+      setEnhancedPaymentData({
+        type: 'sippy_only',
+        data: null,
+        sippyData: payment
+      });
+    }
+  };
+
+  const handlePaymentDetailsClick = async (payment: Payment) => {
+    console.log('🎯 Payment clicked! Opening details dialog for payment:', payment.i_payment, payment.tx_id);
+    console.log('📊 Full payment object:', payment);
+    setSelectedPayment(payment);
+    setShowPaymentDetails(true);
+    
+    // Always try to fetch enhanced payment data, even without tx_id
+    console.log('📞 Attempting to fetch enhanced data for payment...');
+    await fetchEnhancedPaymentData(payment);
+  };
+
+  useEffect(() => {
+    // Only fetch payments when auth is loaded and we have a target account ID
+    if (!authLoading && targetAccountId) {
+      fetchPayments(1);
+    }
+  }, [authLoading, targetAccountId]);
+
+  const totalPages = Math.ceil(totalRecords / recordsPerPage);
+  const startRecord = (currentPage - 1) * recordsPerPage + 1;
+  const endRecord = Math.min(currentPage * recordsPerPage, totalRecords);
+
+  // Show loading state while auth is loading or while fetching payments
+  if (authLoading || (isLoading && !paymentsData)) {
+    return (
+      <div className="min-h-[400px] flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div 
+            className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg"
+            style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
+          >
+            <Loader2 className="h-8 w-8 animate-spin text-white" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold" style={{ color: colors.primary }}>
+              {authLoading ? 'Loading Authentication' : 'Loading Payments'}
+            </h3>
+            <p className="text-muted-foreground">
+              {authLoading ? 'Authenticating user...' : 'Fetching payment history from Sippy...'}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card className="border-destructive">
+        <CardHeader>
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center">
+              <CreditCard className="h-5 w-5 text-red-600" />
+            </div>
+            <div>
+              <CardTitle className="text-destructive">Error Loading Payments</CardTitle>
+              <CardDescription>There was an error loading your payment history</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-destructive mb-4">{error}</p>
+          <Button 
+            variant="outline" 
+            onClick={() => fetchPayments()}
+            className="gap-2"
+          >
+            <RefreshCw className="h-4 w-4" />
+            Try Again
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Actions */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <div 
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium"
+            style={{ backgroundColor: `${colors.primary}20`, color: colors.primary }}
+          >
+            <CreditCard className="h-4 w-4" />
+            {stats.totalPayments} payment{stats.totalPayments !== 1 ? 's' : ''} • {stats.successfulPayments} successful
+          </div>
+          {lastRefresh && (
+            <span className="text-sm text-muted-foreground">
+              • Last updated {format(lastRefresh, 'HH:mm:ss')}
+            </span>
+          )}
+        </div>
+        
+        <div className="flex items-center gap-2">
+          <BalanceTopup onPaymentSuccess={() => fetchPayments()} />
+          
+          {user?.role === 'admin' && (
+            <Button 
+              onClick={openBalanceDialog}
+              variant="outline"
+              className="gap-2"
+            >
+              <DollarSign className="h-4 w-4" />
+              Manage Balance
+            </Button>
+          )}
+          
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => {
+              setShowFilters(!showFilters);
+              // Load users when opening filters for admin
+              if (!showFilters && user?.role === 'admin' && !accountId && users.length === 0) {
+                fetchUsers();
+              }
+            }}
+            className="gap-2"
+          >
+            <Filter className="h-4 w-4" />
+            Filters
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => fetchPayments()}
+            disabled={isLoading}
+            className="gap-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+            Refresh
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={exportToCsv}
+            disabled={!paymentsData?.payments || !Array.isArray(paymentsData.payments) || paymentsData.payments.length === 0}
+            className="gap-2"
+          >
+            <Download className="h-4 w-4" />
+            Export CSV
+          </Button>
+        </div>
+      </div>
+
+      {/* Statistics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Total Payments */}
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Total Payments</p>
+                <p className="text-2xl font-bold" style={{ color: colors.primary }}>
+                  {stats.totalPayments}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {stats.successfulPayments} successful
+                </p>
+              </div>
+              <div 
+                className="w-12 h-12 rounded-xl flex items-center justify-center"
+                style={{ backgroundColor: `${colors.primary}20` }}
+              >
+                <Receipt className="h-6 w-6" style={{ color: colors.primary }} />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Total Credits */}
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Total Credits</p>
+                <p className="text-2xl font-bold text-green-600">
+                  {formatCurrency(stats.totalCredits, stats.currency)}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Money added
+                </p>
+              </div>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-green-100">
+                <TrendingUp className="h-6 w-6 text-green-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Total Debits */}
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Total Debits</p>
+                <p className="text-2xl font-bold text-red-600">
+                  {formatCurrency(stats.totalDebits, stats.currency)}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Money deducted
+                </p>
+              </div>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-red-100">
+                <TrendingDown className="h-6 w-6 text-red-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Failed Payments */}
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Failed Payments</p>
+                <p className="text-2xl font-bold text-red-600">
+                  {stats.failedPayments}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {stats.totalPayments > 0 ? Math.round((stats.failedPayments / stats.totalPayments) * 100) : 0}% failure rate
+                </p>
+              </div>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-red-100">
+                <XCircle className="h-6 w-6 text-red-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Filters Panel */}
+      {showFilters && (
+        <Card>
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Filter className="h-5 w-5" style={{ color: colors.primary }} />
+                Filters
+              </CardTitle>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowFilters(false)}
+                className="h-8 w-8 p-0"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className={`grid gap-4 ${
+              user?.role === 'admin' && !accountId 
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' 
+                : 'grid-cols-1 md:grid-cols-3'
+            }`}>
+              <div className="space-y-2">
+                <Label>Payment Type</Label>
+                <Select
+                  value={filters.type}
+                  onValueChange={(value) => handleFilterChange('type', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="All types" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All types</SelectItem>
+                    <SelectItem value="credit">Credits only</SelectItem>
+                    <SelectItem value="debit">Debits only</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              {user?.role === 'admin' && !accountId && (
+                <div className="space-y-2">
+                  <Label>User</Label>
+                  <Select
+                    value={filters.userId}
+                    onValueChange={(value) => handleFilterChange('userId', value)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="All users" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60">
+                      <SelectItem value="all">All users</SelectItem>
+                      {users.map((user) => (
+                        <SelectItem key={user.id} value={user.id}>
+                          <div className="flex flex-col">
+                            <span className="font-medium">
+                              {user.name}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {user.email}
+                            </span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+              <div className="space-y-2">
+                <Label>Start Date</Label>
+                <Input
+                  type="date"
+                  value={filters.startDate}
+                  onChange={(e) => handleFilterChange('startDate', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>End Date</Label>
+                <Input
+                  type="date"
+                  value={filters.endDate}
+                  onChange={(e) => handleFilterChange('endDate', e.target.value)}
+                />
+              </div>
+            </div>
+            
+            <div className="flex gap-2 mt-4">
+              <Button 
+                onClick={applyFilters}
+                disabled={isLoading}
+                className="gap-2"
+                style={{ backgroundColor: colors.primary }}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Searching...
+                  </>
+                ) : (
+                  <>
+                    <Search className="h-4 w-4" />
+                    Apply Filters
+                  </>
+                )}
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={clearFilters}
+                disabled={isLoading}
+                className="gap-2"
+              >
+                <X className="h-4 w-4" />
+                Clear Filters
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Quick Filter Buttons - Above Table */}
+      <Card className="border-0 shadow-sm">
+        <CardContent className="p-4">
+          <div className="flex justify-center">
+            <div className="flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setQuickFilter('today')}
+                disabled={isLoading}
+                className="gap-2 hover:bg-blue-50 hover:border-blue-300"
+                style={{ 
+                  backgroundColor: isQuickFilterActive('today') ? `${colors.primary}20` : undefined,
+                  borderColor: isQuickFilterActive('today') ? colors.primary : undefined,
+                  color: isQuickFilterActive('today') ? colors.primary : undefined
+                }}
+              >
+                <Calendar className="h-3 w-3" />
+                Today
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setQuickFilter('this_month')}
+                disabled={isLoading}
+                className="gap-2 hover:bg-green-50 hover:border-green-300"
+                style={{ 
+                  backgroundColor: isQuickFilterActive('this_month') ? `${colors.primary}20` : undefined,
+                  borderColor: isQuickFilterActive('this_month') ? colors.primary : undefined,
+                  color: isQuickFilterActive('this_month') ? colors.primary : undefined
+                }}
+              >
+                <Calendar className="h-3 w-3" />
+                This Month
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setQuickFilter('last_month')}
+                disabled={isLoading}
+                className="gap-2 hover:bg-orange-50 hover:border-orange-300"
+                style={{ 
+                  backgroundColor: isQuickFilterActive('last_month') ? `${colors.primary}20` : undefined,
+                  borderColor: isQuickFilterActive('last_month') ? colors.primary : undefined,
+                  color: isQuickFilterActive('last_month') ? colors.primary : undefined
+                }}
+              >
+                <Calendar className="h-3 w-3" />
+                Last Month
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setQuickFilter('this_year')}
+                disabled={isLoading}
+                className="gap-2 hover:bg-purple-50 hover:border-purple-300"
+                style={{ 
+                  backgroundColor: isQuickFilterActive('this_year') ? `${colors.primary}20` : undefined,
+                  borderColor: isQuickFilterActive('this_year') ? colors.primary : undefined,
+                  color: isQuickFilterActive('this_year') ? colors.primary : undefined
+                }}
+              >
+                <Calendar className="h-3 w-3" />
+                This Year
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Main Content */}
+      {!paymentsData?.payments || !Array.isArray(paymentsData.payments) || paymentsData.payments.length === 0 ? (
+        <Card>
+          <CardContent className="text-center py-12">
+            <div className="space-y-4">
+              <div 
+                className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg"
+                style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
+              >
+                <CreditCard className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold" style={{ color: colors.primary }}>
+                  No Payments Found
+                </h3>
+                <p className="text-muted-foreground">
+                  {user?.role === 'admin' && !accountId 
+                    ? 'No payment history found across all accounts. Try adjusting your filters.'
+                    : `No payment history found for account ${targetAccountId}. Try adjusting your filters.`
+                  }
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ) : (
+        /* Payments Table */
+        <Card className="border-0 shadow-xl rounded-xl overflow-hidden">
+          <div 
+            className="h-2 rounded-t-xl"
+            style={{ background: `linear-gradient(90deg, ${colors.primary}, ${colors.secondary}, ${colors.accent})` }}
+          />
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <Table className="rounded-b-xl overflow-hidden m-0">
+                <TableHeader className="m-0">
+                  <TableRow className="border-b-0 m-0">
+                    <TableHead 
+                      className="bg-muted/40 font-bold text-foreground border-r border-muted/50 pt-2 pb-4 px-6"
+                      style={{ color: colors.primary }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4" />
+                        Date & Time
+                      </div>
+                    </TableHead>
+                    {user?.role === 'admin' && !accountId && (
+                      <TableHead 
+                        className="bg-muted/40 font-bold text-foreground border-r border-muted/50 pt-2 pb-4 px-6"
+                        style={{ color: colors.primary }}
+                      >
+                        <div className="flex items-center gap-2">
+                          <User className="h-4 w-4" />
+                          User
+                        </div>
+                      </TableHead>
+                    )}
+                    <TableHead 
+                      className="bg-muted/40 font-bold text-foreground border-r border-muted/50 pt-2 pb-4 px-6"
+                      style={{ color: colors.primary }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <DollarSign className="h-4 w-4" />
+                        Amount
+                      </div>
+                    </TableHead>
+                    <TableHead 
+                      className="bg-muted/40 font-bold text-foreground border-r border-muted/50 pt-2 pb-4 px-6"
+                      style={{ color: colors.primary }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Info className="h-4 w-4" />
+                        Status
+                      </div>
+                    </TableHead>
+                    <TableHead 
+                      className="bg-muted/40 font-bold text-foreground border-r border-muted/50 pt-2 pb-4 px-6"
+                      style={{ color: colors.primary }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <CreditCard className="h-4 w-4" />
+                        Method
+                      </div>
+                    </TableHead>
+                    <TableHead 
+                      className="bg-muted/40 font-bold text-foreground pt-2 pb-4 px-6"
+                      style={{ color: colors.primary }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Receipt className="h-4 w-4" />
+                        Details
+                      </div>
+                    </TableHead>
+                    <TableHead 
+                      className="bg-muted/40 font-bold text-foreground pt-2 pb-4 px-6"
+                      style={{ color: colors.primary }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Eye className="h-4 w-4" />
+                        Actions
+                      </div>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {paymentsData?.payments && Array.isArray(paymentsData.payments) && 
+                    // Final sort to ensure proper date ordering (most recent first)
+                    [...paymentsData.payments].sort((a, b) => {
+                      const getTimestamp = (payment: Payment): number => {
+                        try {
+                          // For failed payments from MongoDB, use ISO date format
+                          if (payment._isFailedPayment && payment._mongoData) {
+                            const mongoDate = payment._mongoData.paymentCompletedAt || payment._mongoData.paymentInitiatedAt || payment._mongoData.createdAt;
+                            if (mongoDate) {
+                              return new Date(mongoDate).getTime();
+                            }
+                          }
+                          
+                          // For Sippy payments, use the parseSippyDate function
+                          if (payment.payment_time) {
+                            // Check if it's already in ISO format (from MongoDB)
+                            if (payment.payment_time.includes('T') || payment.payment_time.includes('Z')) {
+                              return new Date(payment.payment_time).getTime();
+                            }
+                            // Otherwise, parse as Sippy format
+                            return parseSippyDate(payment.payment_time).getTime();
+                          }
+                          
+                          // Fallback to current time if no valid date
+                          return new Date().getTime();
+                        } catch (error) {
+                          console.warn('Error parsing payment date for table sorting:', payment.payment_time, error);
+                          return new Date().getTime();
+                        }
+                      };
+                      
+                      const timestampA = getTimestamp(a);
+                      const timestampB = getTimestamp(b);
+                      
+                      // Sort descending (most recent first)
+                      return timestampB - timestampA;
+                    }).map((payment, index) => (
+                    <TableRow 
+                      key={`${payment.i_payment}-${index}`} 
+                      className="hover:bg-muted/30 transition-all duration-200 border-b border-muted/30 group"
+                    >
+                      <TableCell className="border-r border-muted/30 pt-4 pb-4 px-6">
+                        <div>
+                          <div className="font-semibold text-sm">
+                            {(() => {
+                              try {
+                                const date = parseSippyDate(payment.payment_time);
+                                return format(date, 'MMM dd, yyyy');
+                              } catch (error) {
+                                console.warn('Error formatting payment date:', payment.payment_time, error);
+                                return payment.payment_time || 'Invalid Date';
+                              }
+                            })()}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            {(() => {
+                              try {
+                                const date = parseSippyDate(payment.payment_time);
+                                return format(date, 'HH:mm:ss');
+                              } catch (error) {
+                                return '--:--:--';
+                              }
+                            })()}
+                          </div>
+                        </div>
+                      </TableCell>
+                      {user?.role === 'admin' && !accountId && (
+                        <TableCell className="border-r border-muted/30 pt-4 pb-4 px-6">
+                          <div>
+                            <div className="font-medium text-sm">
+                              {payment._mongoData?.userName || payment._mongoData?.userEmail || 'Unknown User'}
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              {payment._mongoData?.userEmail && payment._mongoData?.userName ? payment._mongoData.userEmail : `Account: ${payment.i_account}`}
+                            </div>
+                          </div>
+                        </TableCell>
+                      )}
+                      <TableCell className="border-r border-muted/30 pt-4 pb-4 px-6">
+                        <div className="text-right">
+                          <div 
+                            className={`font-bold text-lg ${payment.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}
+                          >
+                            {payment.amount >= 0 ? '+' : ''}{formatCurrency(payment.amount, payment.currency)}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            {payment.currency}
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="border-r border-muted/30 pt-4 pb-4 px-6">
+                        <div className="flex items-center gap-2">
+                          {payment.tx_result === 1 ? (
+                            <>
+                              <CheckCircle className="h-4 w-4 text-green-600" />
+                              <Badge variant="secondary" className="bg-green-100 text-green-800">
+                                Success
+                              </Badge>
+                            </>
+                          ) : (
+                            <>
+                              <XCircle className="h-4 w-4 text-red-600" />
+                              <Badge variant="destructive">
+                                Failed
+                              </Badge>
+                            </>
+                          )}
+                        </div>
+                        {payment.tx_error && (
+                          <div className="text-xs text-red-600 mt-1">
+                            {payment.tx_error}
+                          </div>
+                        )}
+                      </TableCell>
+                      <TableCell className="border-r border-muted/30 pt-4 pb-4 px-6">
+                        <div>
+                          <div className="font-medium text-sm">
+                            {getPaymentMethod(payment)}
+                          </div>
+                          {payment.tx_id && (
+                            <div className="text-xs text-muted-foreground font-mono">
+                              TX: {payment.tx_id}
+                            </div>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell className="pt-4 pb-4 px-6">
+                        <div>
+                          <div className="text-xs text-muted-foreground">
+                            Payment ID: {payment.i_payment}
+                          </div>
+                          {payment.notes && (
+                            <div className="text-sm mt-1 max-w-xs truncate">
+                              {payment.notes}
+                            </div>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell className="pt-4 pb-4 px-6">
+                        <div>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handlePaymentDetailsClick(payment)}
+                            className="gap-2 hover:bg-blue-50 hover:border-blue-300"
+                            style={{ 
+                              borderColor: `${colors.primary}40`,
+                              color: colors.primary
+                            }}
+                          >
+                            <Receipt className="h-3 w-3" />
+                            View Details
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+          
+          {/* Pagination */}
+          <div 
+            className="border-t bg-muted/20 px-6 py-4"
+            style={{ borderColor: `${colors.primary}20` }}
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <div 
+                    className="w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: `${colors.primary}20` }}
+                  >
+                    <Info className="h-4 w-4" style={{ color: colors.primary }} />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">
+                      {startRecord}-{endRecord} of {totalRecords}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      Payments displayed
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-medium text-muted-foreground">Rows:</span>
+                  <Select
+                    value={recordsPerPage.toString()}
+                    onValueChange={handleLimitChange}
+                  >
+                    <SelectTrigger 
+                      className="w-[80px] h-9 border-0 shadow-md"
+                      style={{ backgroundColor: `${colors.primary}10` }}
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="25">25</SelectItem>
+                      <SelectItem value="50">50</SelectItem>
+                      <SelectItem value="100">100</SelectItem>
+                      <SelectItem value="200">200</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="text-sm font-medium" style={{ color: colors.secondary }}>
+                  Page {currentPage} of {totalPages}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1 || isLoading}
+                    className="h-9 w-9 p-0 shadow-md hover:shadow-lg transition-all"
+                    style={{ 
+                      borderColor: colors.primary,
+                      color: colors.primary
+                    }}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages || isLoading}
+                    className="h-9 w-9 p-0 shadow-md hover:shadow-lg transition-all"
+                    style={{ 
+                      borderColor: colors.primary,
+                      color: colors.primary
+                    }}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
+
+      {/* Balance Management Dialog */}
+      <Dialog open={showBalanceDialog} onOpenChange={setShowBalanceDialog}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <DollarSign className="h-5 w-5" style={{ color: colors.primary }} />
+              Manage Account Balance
+            </DialogTitle>
+            <DialogDescription>
+              Select a user and manage their account balance
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            {/* User Selection */}
+            <div className="space-y-2">
+              <Label>Select User</Label>
+              {isLoadingUsers ? (
+                <div className="flex items-center justify-center p-4 border rounded-lg">
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  <span className="text-sm text-muted-foreground">Loading users...</span>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {/* Search Input */}
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      placeholder="Search by email, name, or account ID..."
+                      value={userSearchTerm}
+                      onChange={(e) => setUserSearchTerm(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
+                  
+                  {/* User Selection */}
+                  <Select
+                    value={balanceOperation.selectedUserId}
+                    onValueChange={handleUserSelection}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a user to manage balance for" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60">
+                      {filteredUsers.length === 0 ? (
+                        <div className="p-4 text-center text-sm text-muted-foreground">
+                          {userSearchTerm ? 'No users found matching search criteria' : 'No users with Sippy accounts found'}
+                        </div>
+                      ) : (
+                        filteredUsers.map((user) => (
+                          <SelectItem key={user.id} value={user.id}>
+                            <div className="flex flex-col">
+                              <span className="font-medium">
+                                {user.name}
+                              </span>
+                              <span className="text-xs text-muted-foreground">
+                                {user.email} • Account: {user.sippyAccountId}
+                              </span>
+                            </div>
+                          </SelectItem>
+                        ))
+                      )}
+                    </SelectContent>
+                  </Select>
+                  
+                  {/* Selected User Info */}
+                  {balanceOperation.selectedUserAccountId && (
+                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <div className="text-sm">
+                        <span className="font-medium text-blue-900">Selected Account:</span>
+                        <span className="ml-2 font-mono text-blue-700">
+                          {balanceOperation.selectedUserAccountId}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Operation Type */}
+            <div className="space-y-2">
+              <Label>Operation</Label>
+              <Select
+                value={balanceOperation.operation}
+                onValueChange={(value) => setBalanceOperation(prev => ({ ...prev, operation: value as any }))}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="credit">Credit (Add funds)</SelectItem>
+                  <SelectItem value="debit">Debit (Deduct funds)</SelectItem>
+                  <SelectItem value="add_funds">Add Funds</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            {/* Amount and Currency */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Amount</Label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={balanceOperation.amount}
+                  onChange={(e) => setBalanceOperation(prev => ({ ...prev, amount: e.target.value }))}
+                  placeholder="0.00"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Currency</Label>
+                <Select
+                  value={balanceOperation.currency}
+                  onValueChange={(value) => setBalanceOperation(prev => ({ ...prev, currency: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="EUR">EUR</SelectItem>
+                    <SelectItem value="USD">USD</SelectItem>
+                    <SelectItem value="GBP">GBP</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            
+            {/* Notes */}
+            <div className="space-y-2">
+              <Label>Notes (Optional)</Label>
+              <Textarea
+                value={balanceOperation.notes}
+                onChange={(e) => setBalanceOperation(prev => ({ ...prev, notes: e.target.value }))}
+                placeholder="Add a note for this transaction..."
+                rows={3}
+              />
+            </div>
+            
+            {/* Action Buttons */}
+            <div className="flex gap-2 pt-4">
+              <Button
+                onClick={handleBalanceOperation}
+                disabled={isBalanceLoading || !balanceOperation.amount || !balanceOperation.selectedUserAccountId}
+                className="flex-1 gap-2"
+                style={{ backgroundColor: colors.primary }}
+              >
+                {isBalanceLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    {balanceOperation.operation === 'credit' || balanceOperation.operation === 'add_funds' ? (
+                      <Plus className="h-4 w-4" />
+                    ) : (
+                      <Minus className="h-4 w-4" />
+                    )}
+                    {balanceOperation.operation === 'credit' ? 'Credit Account' : 
+                     balanceOperation.operation === 'debit' ? 'Debit Account' : 'Add Funds'}
+                  </>
+                )}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowBalanceDialog(false);
+                  setUserSearchTerm('');
+                  setBalanceOperation({
+                    operation: 'credit',
+                    amount: '',
+                    currency: 'EUR',
+                    notes: '',
+                    selectedUserId: '',
+                    selectedUserAccountId: null
+                  });
+                }}
+                disabled={isBalanceLoading}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Payment Details Dialog */}
+      <PaymentDetailsDialog
+        payment={selectedPayment}
+        enhancedPaymentData={enhancedPaymentData}
+        isOpen={showPaymentDetails}
+        onClose={() => {
+          setShowPaymentDetails(false);
+          setSelectedPayment(null);
+          setEnhancedPaymentData(null);
+        }}
+        getPaymentMethod={getPaymentMethod}
+      />
+    </div>
+  );
+}
+
+// Payment Details Dialog Component
+function PaymentDetailsDialog({ 
+  payment, 
+  enhancedPaymentData, 
+  isOpen, 
+  onClose, 
+  getPaymentMethod 
+}: { 
+  payment: Payment | null;
+  enhancedPaymentData: any;
+  isOpen: boolean;
+  onClose: () => void;
+  getPaymentMethod: (payment: Payment, enhancedData?: any) => string;
+}) {
+  const { colors } = useBranding();
+  
+  if (!payment) return null;
+
+  // Determine primary data source
+  const hasMongoDB = enhancedPaymentData?.type === 'mongodb' && enhancedPaymentData?.data;
+  const hasReceipt = enhancedPaymentData?.type === 'receipt' && enhancedPaymentData?.data;
+  const mongoData = hasMongoDB ? enhancedPaymentData.data : null;
+  const receiptData = hasReceipt ? enhancedPaymentData.data : null;
+
+  const formatCurrency = (amount: number, currency: string = 'EUR') => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount);
+  };
+
+  const formatDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return {
+        date: format(date, 'EEEE, MMMM dd, yyyy'),
+        time: format(date, 'HH:mm:ss'),
+        timestamp: date.toISOString()
+      };
+    } catch (error) {
+      return {
+        date: dateString || 'Invalid Date',
+        time: '--:--:--',
+        timestamp: new Date().toISOString()
+      };
+    }
+  };
+
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text);
+    toast.success(`${label} copied to clipboard`);
+  };
+
+  // Use MongoDB data as primary source if available
+  const primaryStatus = mongoData ? mongoData.status : (payment.tx_result === 1 ? 'succeeded' : 'failed');
+  const primaryDate = mongoData ? mongoData.createdAt : payment.payment_time;
+  const isSuccess = primaryStatus === 'succeeded';
+
+  const dateInfo = formatDate(primaryDate);
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'succeeded':
+        return <Badge className="bg-green-100 text-green-800">Succeeded</Badge>;
+      case 'failed':
+        return <Badge variant="destructive">Failed</Badge>;
+      case 'pending':
+        return <Badge variant="secondary">Pending</Badge>;
+      case 'processing':
+        return <Badge className="bg-blue-100 text-blue-800">Processing</Badge>;
+      default:
+        return <Badge variant="outline">{status}</Badge>;
+    }
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className={`${
+        mongoData ? 'max-w-6xl w-[95vw]' : 'max-w-4xl'
+      } max-h-[90vh] overflow-y-auto overflow-x-hidden`}>
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-3 pr-8">
+            <div 
+              className="p-2 rounded-lg flex-shrink-0"
+              style={{ backgroundColor: `${colors.primary}20` }}
+            >
+              <Receipt className="h-5 w-5" style={{ color: colors.primary }} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-semibold">Payment Details</span>
+                {getStatusBadge(primaryStatus)}
+              </div>
+              <div className="text-sm text-muted-foreground font-normal break-words">
+                {mongoData ? (
+                  <>Payment Reference: {mongoData.paymentReference || mongoData.paymentIntentId}</>
+                ) : (
+                  <>Payment ID: {payment.i_payment}</>
+                )}
+              </div>
+            </div>
+          </DialogTitle>
+          <DialogDescription className="break-words">
+            {mongoData ? (
+              `Comprehensive payment details with amount breakdown, card information, and processing status.`
+            ) : (
+              `Basic payment information from payment processing system.`
+            )}
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="space-y-6 overflow-x-hidden">
+          {/* Primary Payment Information */}
+          {mongoData ? (
+            <>
+              {/* MongoDB Payment Details */}
+              <div className={`p-4 rounded-lg border ${
+                isSuccess 
+                  ? 'bg-green-50 border-green-200' 
+                  : 'bg-red-50 border-red-200'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <div className={`p-2 rounded-full ${
+                    isSuccess ? 'bg-green-100' : 'bg-red-100'
+                  }`}>
+                    {isSuccess ? (
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-600" />
+                    )}
+                  </div>
+                  <div>
+                    <h4 className={`font-medium ${
+                      isSuccess ? 'text-green-900' : 'text-red-900'
+                    }`}>
+                      Payment {isSuccess ? 'Successful' : 'Failed'}
+                    </h4>
+                    <p className={`text-sm ${
+                      isSuccess ? 'text-green-700' : 'text-red-700'
+                    }`}>
+                      Total charged: {formatCurrency(mongoData.totalChargedAmount, mongoData.currency)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Payment Reference & IDs */}
+              <div>
+                <h4 className="font-semibold flex items-center gap-2 mb-3">
+                  <Hash className="h-4 w-4" style={{ color: colors.primary }} />
+                  Payment References
+                </h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                  <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg min-w-0">
+                    <span className="text-sm text-muted-foreground flex-shrink-0">Payment Reference</span>
+                    <div className="flex items-center gap-2 min-w-0 ml-2">
+                      <span className="font-mono text-sm truncate">{mongoData.paymentReference || 'N/A'}</span>
+                      {mongoData.paymentReference && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => copyToClipboard(mongoData.paymentReference, 'Payment Reference')}
+                          className="h-6 w-6 p-0 flex-shrink-0"
+                        >
+                          <Copy className="h-3 w-3" />
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg min-w-0">
+                    <span className="text-sm text-muted-foreground flex-shrink-0">Payment Intent ID</span>
+                    <div className="flex items-center gap-2 min-w-0 ml-2">
+                      <span className="font-mono text-sm truncate">{mongoData.paymentIntentId}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => copyToClipboard(mongoData.paymentIntentId, 'Payment Intent ID')}
+                        className="h-6 w-6 p-0 flex-shrink-0"
+                      >
+                        <Copy className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg min-w-0">
+                    <span className="text-sm text-muted-foreground flex-shrink-0">User Email</span>
+                    <span className="text-sm truncate ml-2">{mongoData.userEmail}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg min-w-0">
+                    <span className="text-sm text-muted-foreground flex-shrink-0">Account ID</span>
+                    <span className="font-mono text-sm truncate ml-2">{mongoData.sippyAccountId}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Amount Breakdown */}
+              <div>
+                <h4 className="font-semibold flex items-center gap-2 mb-3">
+                  <DollarSign className="h-4 w-4" style={{ color: colors.primary }} />
+                  Amount Breakdown
+                </h4>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Top-up Amount</span>
+                      <span className="font-bold text-green-600">
+                        {formatCurrency(mongoData.topupAmount, mongoData.currency)}
+                      </span>
+                    </div>
+                    {mongoData.processingFee > 0 && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">Processing Fee</span>
+                        <span className="font-medium text-yellow-600">
+                          {formatCurrency(mongoData.processingFee, mongoData.currency)}
+                        </span>
+                      </div>
+                    )}
+                    {mongoData.fixedFee > 0 && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">Fixed Fee</span>
+                        <span className="font-medium text-yellow-600">
+                          {formatCurrency(mongoData.fixedFee, mongoData.currency)}
+                        </span>
+                      </div>
+                    )}
+                    <div className="border-t pt-3 flex justify-between items-center">
+                      <span className="font-medium">Total Charged</span>
+                      <span className="font-bold text-lg" style={{ color: colors.primary }}>
+                        {formatCurrency(mongoData.totalChargedAmount, mongoData.currency)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Information */}
+              {mongoData.cardBrand && mongoData.cardLast4 && (
+                <div>
+                  <h4 className="font-semibold flex items-center gap-2 mb-3">
+                    <CreditCard className="h-4 w-4" style={{ color: colors.primary }} />
+                    Payment Method
+                  </h4>
+                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <CreditCard className="h-8 w-8 text-green-600" />
+                      <div>
+                        <div className="font-medium capitalize text-green-900">
+                          {mongoData.cardBrand} •••• {mongoData.cardLast4}
+                        </div>
+                        {mongoData.cardCountry && (
+                          <div className="text-sm text-green-700">
+                            Issued in {mongoData.cardCountry}
+                          </div>
+                        )}
+                        <div className="text-sm text-green-700">
+                          {mongoData.paymentMethodType} payment
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Gateway Information */}
+              <div>
+                <h4 className="font-semibold flex items-center gap-2 mb-3">
+                  <Info className="h-4 w-4" style={{ color: colors.primary }} />
+                  Gateway & Timing
+                </h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                  <div className="p-3 bg-muted/30 rounded-lg min-w-0">
+                    <div className="text-sm text-muted-foreground mb-1">Gateway</div>
+                    <div className="font-medium truncate">{mongoData.gatewayName}</div>
+                    <div className="text-xs text-muted-foreground capitalize truncate">{mongoData.provider}</div>
+                  </div>
+
+                  <div className="p-3 bg-muted/30 rounded-lg min-w-0">
+                    <div className="text-sm text-muted-foreground mb-1">Status</div>
+                    <div>{getStatusBadge(mongoData.status)}</div>
+                  </div>
+
+                  <div className="p-3 bg-muted/30 rounded-lg min-w-0">
+                    <div className="text-sm text-muted-foreground mb-1">Created</div>
+                    <div className="font-medium truncate">{dateInfo.date}</div>
+                    <div className="text-xs text-muted-foreground font-mono">{dateInfo.time}</div>
+                  </div>
+
+                  {mongoData.paymentCompletedAt && (
+                    <div className="p-3 bg-muted/30 rounded-lg min-w-0">
+                      <div className="text-sm text-muted-foreground mb-1">Completed</div>
+                      <div className="font-medium truncate">{format(new Date(mongoData.paymentCompletedAt), 'MMM dd, yyyy')}</div>
+                      <div className="text-xs text-muted-foreground font-mono">{format(new Date(mongoData.paymentCompletedAt), 'HH:mm:ss')}</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Description & Notes */}
+              {(mongoData.description || mongoData.notes) && (
+                <div>
+                  <h4 className="font-semibold flex items-center gap-2 mb-3">
+                    <FileText className="h-4 w-4" style={{ color: colors.primary }} />
+                    Notes & Description
+                  </h4>
+                  <div className="space-y-3">
+                    {mongoData.description && (
+                      <div className="p-3 bg-muted/30 rounded-lg">
+                        <div className="text-sm text-muted-foreground mb-1">Description</div>
+                        <div className="text-sm">{mongoData.description}</div>
+                      </div>
+                    )}
+                    {mongoData.notes && (
+                      <div className="p-3 bg-muted/30 rounded-lg">
+                        <div className="text-sm text-muted-foreground mb-1">Notes</div>
+                        <div className="text-sm whitespace-pre-wrap">{mongoData.notes}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Failure Information */}
+              {mongoData.status === 'failed' && (mongoData.failureCode || mongoData.failureMessage) && (
+                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <XCircle className="h-4 w-4 text-red-600" />
+                    <span className="font-medium text-red-900">Failure Details</span>
+                  </div>
+                  {mongoData.failureCode && (
+                    <div className="text-sm text-red-700 mb-1">
+                      <strong>Code:</strong> {mongoData.failureCode}
+                    </div>
+                  )}
+                  {mongoData.failureMessage && (
+                    <div className="text-sm text-red-700">
+                      <strong>Message:</strong> {mongoData.failureMessage}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Receipt URL */}
+              {mongoData.receiptUrl && (
+                <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileText className="h-4 w-4 text-gray-600" />
+                    <span className="font-medium text-gray-900">Receipt</span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => window.open(mongoData.receiptUrl, '_blank')}
+                    className="gap-2"
+                  >
+                    <FileText className="h-3 w-3" />
+                    View Stripe Receipt
+                  </Button>
+                </div>
+              )}
+
+              {/* Sippy Data Comparison */}
+              <div className="border-t pt-6">
+                <h4 className="font-semibold flex items-center gap-2 mb-3">
+                  <Info className="h-4 w-4 text-muted-foreground" />
+                  Basic Payment Information
+                </h4>
+                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-sm">
+                    <div className="min-w-0">
+                      <span className="text-blue-700 font-medium">Payment ID:</span>
+                      <div className="font-mono truncate">{payment.i_payment}</div>
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-blue-700 font-medium">Amount:</span>
+                      <div className={`truncate ${payment.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        {payment.amount >= 0 ? '+' : ''}{formatCurrency(payment.amount, payment.currency)}
+                      </div>
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-blue-700 font-medium">Result:</span>
+                      <div className="truncate">{payment.tx_result === 1 ? 'Success (1)' : `Failed (${payment.tx_result})`}</div>
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-blue-700 font-medium">Payment Method:</span>
+                      <div className="truncate">
+                        {getPaymentMethod(payment, enhancedPaymentData)}
+                      </div>
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-blue-700 font-medium">Transaction ID:</span>
+                      <div className="font-mono truncate">{payment.tx_id || 'N/A'}</div>
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-blue-700 font-medium">Account ID:</span>
+                      <div className="font-mono truncate">{payment.i_account}</div>
+                    </div>
+                  </div>
+                  
+                  {payment.tx_error && (
+                    <div className="mt-3 pt-3 border-t border-blue-300">
+                      <span className="text-blue-700 font-medium">Error:</span>
+                      <div className="text-red-600 text-sm break-words">{payment.tx_error}</div>
+                    </div>
+                  )}
+                  
+                  <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded">
+                    <div className="text-xs text-yellow-800">
+                      ⚠️ Limited data available. Enhanced payment details with fees, card info, and receipts are only available for payments processed through MongoDB integration.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : receiptData ? (
+            <>
+              {/* Receipt Data Display */}
+              <div className={`p-4 rounded-lg border ${
+                isSuccess 
+                  ? 'bg-green-50 border-green-200' 
+                  : 'bg-red-50 border-red-200'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <div className={`p-2 rounded-full ${
+                    isSuccess ? 'bg-green-100' : 'bg-red-100'
+                  }`}>
+                    {isSuccess ? (
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-600" />
+                    )}
+                  </div>
+                  <div>
+                    <h4 className={`font-medium ${
+                      isSuccess ? 'text-green-900' : 'text-red-900'
+                    }`}>
+                      Payment {isSuccess ? 'Successful' : 'Failed'}
+                    </h4>
+                    <p className={`text-sm ${
+                      isSuccess ? 'text-green-700' : 'text-red-700'
+                    }`}>
+                      Receipt available from enhanced data
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Show receipt data with fallback to Sippy data */}
+              {/* Add receipt data display logic here - similar to the old enhanced data section */}
+              <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div className="text-sm text-yellow-800">
+                  Receipt data available but limited. Consider upgrading to MongoDB payment records for full details.
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Sippy Data Only */}
+              <div className={`p-4 rounded-lg border ${
+                isSuccess 
+                  ? 'bg-green-50 border-green-200' 
+                  : 'bg-red-50 border-red-200'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <div className={`p-2 rounded-full ${
+                    isSuccess ? 'bg-green-100' : 'bg-red-100'
+                  }`}>
+                    {isSuccess ? (
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-600" />
+                    )}
+                  </div>
+                  <div>
+                    <h4 className={`font-medium ${
+                      isSuccess ? 'text-green-900' : 'text-red-900'
+                    }`}>
+                      Payment {isSuccess ? 'Successful' : 'Failed'}
+                    </h4>
+                    <p className={`text-sm ${
+                      isSuccess ? 'text-green-700' : 'text-red-700'
+                    }`}>
+                      {payment.amount >= 0 ? 'Credit' : 'Debit'} of {formatCurrency(Math.abs(payment.amount), payment.currency)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Basic Sippy Data */}
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="flex items-center gap-2 mb-3">
+                  <Info className="h-4 w-4 text-blue-600" />
+                  <span className="font-medium text-blue-900">Basic Payment Information</span>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-sm">
+                  <div className="min-w-0">
+                    <span className="text-blue-700 font-medium">Payment ID:</span>
+                    <div className="font-mono truncate">{payment.i_payment}</div>
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-blue-700 font-medium">Amount:</span>
+                    <div className={`truncate ${payment.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {payment.amount >= 0 ? '+' : ''}{formatCurrency(payment.amount, payment.currency)}
+                    </div>
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-blue-700 font-medium">Transaction ID:</span>
+                    <div className="font-mono truncate">{payment.tx_id || 'N/A'}</div>
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-blue-700 font-medium">Account ID:</span>
+                    <div className="font-mono truncate">{payment.i_account}</div>
+                  </div>
+                </div>
+                
+                {payment.tx_error && (
+                  <div className="mt-3 pt-3 border-t border-blue-300">
+                    <span className="text-blue-700 font-medium">Error:</span>
+                    <div className="text-red-600 text-sm break-words">{payment.tx_error}</div>
+                  </div>
+                )}
+                
+                <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded">
+                  <div className="text-xs text-yellow-800">
+                    ⚠️ Limited data available. Enhanced payment details with fees, card info, and receipts are only available for payments processed through MongoDB integration.
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Actions */}
+          <div className="flex gap-2 pt-4">
+            <Button
+              onClick={() => {
+                const dataToExport = mongoData || receiptData || payment;
+                copyToClipboard(JSON.stringify(dataToExport, null, 2), 'Payment data');
+              }}
+              variant="outline"
+              className="flex-1 gap-2"
+            >
+              <Copy className="h-4 w-4" />
+              Copy Data
+            </Button>
+            {mongoData?.receiptUrl && (
+              <Button
+                onClick={() => window.open(mongoData.receiptUrl, '_blank')}
+                variant="outline"
+                className="flex-1 gap-2"
+              >
+                <Receipt className="h-4 w-4" />
+                View Receipt
+              </Button>
+            )}
+            <Button
+              onClick={onClose}
+              className="flex-1"
+              style={{ backgroundColor: colors.primary }}
+            >
+              Close
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog> 
+  );
+} 

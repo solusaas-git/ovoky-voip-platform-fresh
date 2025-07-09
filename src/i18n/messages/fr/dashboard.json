@@ -1,0 +1,589 @@
+{
+  "page": {
+    "title": "Tableau de bord",
+    "description": "Aperçu de l'activité de votre compte, des statistiques d'appels et de l'état du système"
+  },
+  "welcome": "Bienvenue {name} !",
+  "account": "compte",
+  "settings": {
+    "title": "Paramètres du tableau de bord",
+    "editMode": {
+      "label": "Mode édition",
+      "helpText": "Glissez les widgets pour les réorganiser • Cliquez sur les icônes d'œil pour afficher/masquer • Utilisez les boutons de redimensionnement • Verrouillez/déverrouillez les widgets"
+    },
+    "status": {
+      "editMode": "Mode édition",
+      "unsaved": "Non sauvegardé",
+      "lastUpdated": "Dernière mise à jour : {time}"
+    },
+    "widgetStatus": {
+      "title": "État des widgets",
+      "enabled": "Activés :",
+      "collapsed": "Réduits :",
+      "locked": "Verrouillés :",
+      "critical": "Critiques :",
+      "autoRefresh": "Auto-actualisation :"
+    },
+    "widgetVisibility": {
+      "title": "Visibilité des widgets",
+      "helpText": "Activez/désactivez les widgets. Les widgets verrouillés et critiques ne peuvent pas être masqués."
+    },
+    "missingWidgets": {
+      "title": "Widgets manquants",
+      "addButton": "Ajouter les widgets manquants",
+      "helpText": "Ajoute automatiquement tous les nouveaux widgets qui ont été ajoutés au système"
+    },
+    "layout": {
+      "title": "Disposition",
+      "grid": "Disposition en grille",
+      "list": "Disposition en liste",
+      "masonry": "Disposition en maçonnerie",
+      "custom": "Disposition personnalisée"
+    },
+    "gridColumns": {
+      "title": "Colonnes de grille",
+      "min": "6 col.",
+      "max": "24 col."
+    },
+    "categories": {
+      "title": "Catégories",
+      "available": "Catégories disponibles :"
+    },
+    "theme": {
+      "title": "Thème"
+    },
+    "advanced": {
+      "title": "Options avancées",
+      "compactMode": "Mode compact",
+      "autoSave": "Sauvegarde automatique"
+    },
+    "backupRestore": {
+      "title": "Sauvegarde et restauration",
+      "export": "Exporter",
+      "import": "Importer",
+      "importDialog": {
+        "title": "Importer les préférences du tableau de bord",
+        "description": "Collez vos données JSON de préférences exportées ci-dessous.",
+        "placeholder": "Collez les données JSON ici...",
+        "cancel": "Annuler",
+        "import": "Importer"
+      }
+    },
+    "actions": {
+      "saving": "Enregistrement...",
+      "saveChanges": "Enregistrer les modifications",
+      "autoSaved": "Sauvegardé automatiquement",
+      "saved": "Enregistré",
+      "resetToDefaults": "Réinitialiser aux valeurs par défaut"
+    }
+  },
+  "widgets": {
+    "welcome": {
+      "title": "Bienvenue"
+    },
+    "balance": {
+      "title": "Solde du compte",
+      "status": {
+        "critical": "Critique",
+        "warning": "Faible",
+        "low": "Sous le seuil",
+        "good": "Sain",
+        "loading": "Chargement"
+      },
+      "alerts": {
+        "critical": "Critique : Le solde du compte est nul ou négatif",
+        "warning": "Attention : Le solde est inférieur à 5,00 €",
+        "low": "Avis : Le solde est inférieur à votre seuil de {threshold} €",
+        "threshold": "Seuil",
+        "account": "Compte :",
+        "updating": "Mise à jour...",
+        "live": "En direct",
+        "topupMessage": "Pensez à recharger votre compte pour éviter toute interruption de service.",
+        "statusLabel": "État :",
+        "lastUpdated": "Dernière mise à jour : {time}"
+      }
+    },
+    "costOfDay": {
+      "title": "Coût du Jour",
+      "states": {
+        "noDataLoaded": {
+          "title": "Aucune donnée chargée",
+          "subtitle": "Utilisez le sélecteur de date pour charger les métriques"
+        },
+        "loading": {
+          "title": "Chargement des métriques...",
+          "subtitle": "Veuillez patienter pendant que nous récupérons vos données"
+        },
+        "error": {
+          "title": "Erreur",
+          "subtitle": "Échec du chargement des données de coût"
+        },
+        "noActivity": {
+          "subtitle": "Aucun appel effectué {date}",
+          "badge": "Aucune Activité",
+          "waiting": "En attente d'activité d'appel..."
+        }
+      },
+      "status": {
+        "badges": {
+          "lowCost": "Coût Faible",
+          "moderate": "Modéré",
+          "highCost": "Coût Élevé", 
+          "noData": "Aucune Donnée"
+        },
+        "usage": {
+          "efficient": "Efficace",
+          "moderate": "Modéré",
+          "highUsage": "Usage Élevé"
+        }
+      },
+      "labels": {
+        "totalChargedToday": "Total facturé aujourd'hui",
+        "totalCalls": "Total d'Appels",
+        "avgPerCall": "Moy par Appel",
+        "dailyUsage": "Usage Quotidien",
+        "liveData": "Données en Direct"
+      },
+      "dateFormats": {
+        "today": "aujourd'hui",
+        "yesterday": "hier",
+        "onDate": "le {date}"
+      }
+    },
+    "asr": {
+      "title": "ASR (Taux de Réussite)",
+      "states": {
+        "noDataLoaded": {
+          "title": "Aucune donnée chargée",
+          "subtitle": "Utilisez le sélecteur de date pour charger les métriques"
+        },
+        "loading": {
+          "title": "Chargement des métriques...",
+          "subtitle": "Veuillez patienter pendant que nous récupérons vos données"
+        },
+        "error": {
+          "title": "Erreur",
+          "subtitle": "Échec du chargement des données ASR"
+        },
+        "noActivity": {
+          "subtitle": "Aucun appel à analyser {date}",
+          "badge": "Aucune Activité",
+          "waiting": "En attente d'activité d'appel..."
+        }
+      },
+      "status": {
+        "badges": {
+          "excellent": "Excellent",
+          "good": "Bon",
+          "fair": "Correct",
+          "poor": "Faible",
+          "critical": "Critique"
+        }
+      },
+      "labels": {
+        "successRate": "Taux de Réussite",
+        "totalCalls": "Total d'Appels",
+        "successfulCalls": "Appels Réussis",
+        "failedCalls": "Appels Échoués",
+        "connectionQuality": "Qualité de Connexion",
+        "liveData": "Données en Direct"
+      },
+      "dateFormats": {
+        "today": "aujourd'hui",
+        "yesterday": "hier",
+        "onDate": "le {date}"
+      }
+    },
+    "acd": {
+      "title": "ACD (Durée Moy d'Appel)",
+      "states": {
+        "noDataLoaded": {
+          "title": "Aucune donnée chargée",
+          "subtitle": "Utilisez le sélecteur de date pour charger les métriques"
+        },
+        "loading": {
+          "title": "Chargement des métriques...",
+          "subtitle": "Veuillez patienter pendant que nous récupérons vos données"
+        },
+        "error": {
+          "title": "Erreur",
+          "subtitle": "Échec du chargement des données ACD"
+        },
+        "noActivity": {
+          "subtitle": "Aucun appel réussi {date}",
+          "badge": "Aucune Activité",
+          "waiting": "En attente d'activité d'appel..."
+        }
+      },
+      "status": {
+        "badges": {
+          "quickCalls": "Appels Rapides",
+          "optimal": "Optimal",
+          "longCalls": "Appels Longs",
+          "veryLong": "Très Long",
+          "noData": "Aucune Donnée"
+        },
+        "indicators": {
+          "quick": "⚡ Rapide",
+          "optimal": "✅ Optimal", 
+          "extended": "📞 Prolongé",
+          "veryLong": "⏳ Très Long"
+        }
+      },
+      "labels": {
+        "avgDuration": "Durée Moyenne",
+        "totalCalls": "Total d'Appels",
+        "totalDuration": "Durée Totale",
+        "shortestCall": "Appel le Plus Court",
+        "longestCall": "Appel le Plus Long",
+        "durationTrend": "Tendance de Durée",
+        "liveData": "Données en Direct",
+        "basedOn": "Basé sur",
+        "successfulCalls": "appels réussis",
+        "detailed": "Détaillé",
+        "durationRange": "Plage de Durée"
+      },
+      "dateFormats": {
+        "today": "aujourd'hui",
+        "yesterday": "hier",
+        "onDate": "le {date}"
+      }
+    },
+    "totalMinutes": {
+      "title": "Total Minutes du Jour",
+      "states": {
+        "loading": {
+          "subtitle": "Chargement des données de minutes..."
+        },
+        "error": {
+          "title": "Erreur",
+          "subtitle": "Échec du chargement des données",
+          "badge": "Erreur",
+          "retry": "Veuillez essayer d'actualiser le widget"
+        },
+        "noActivity": {
+          "subtitle": "Aucune utilisation {date}",
+          "badge": "Aucune Activité",
+          "waiting": "En attente d'activité d'appel..."
+        },
+        "noData": {
+          "subtitle": "Aucune donnée disponible",
+          "badge": "Aucune Donnée"
+        }
+      },
+      "status": {
+        "badges": {
+          "lightUsage": "Usage Léger",
+          "moderate": "Modéré",
+          "heavy": "Usage Intensif",
+          "veryHeavy": "Très Intensif"
+        }
+      },
+      "labels": {
+        "totalUsage": "Usage Total",
+        "avgPerCall": "Moy par Appel",
+        "peakUsage": "Usage de Pointe",
+        "efficiency": "Efficacité",
+        "usageTrend": "Tendance d'Usage",
+        "liveData": "Données en Direct"
+      },
+      "dateFormats": {
+        "today": "aujourd'hui",
+        "yesterday": "hier",
+        "onDate": "le {date}"
+      }
+    },
+    "userAttention": {
+      "title": "Utilisateurs nécessitant attention",
+      "description": "Utilisateurs sans ID de compte Sippy ou en attente de vérification d'email",
+      "buttons": {
+        "refresh": "Actualiser",
+        "manageAllUsers": "Gérer tous les utilisateurs",
+        "viewAllUsers": "Voir tous les utilisateurs"
+      },
+      "filters": {
+        "show": "Afficher :",
+        "all": "Tous en attente ({count})",
+        "missingSippy": "ID Sippy manquant ({count})",
+        "pendingVerification": "Vérification en attente ({count})"
+      },
+      "limits": {
+        "5": "5 utilisateurs",
+        "10": "10 utilisateurs", 
+        "20": "20 utilisateurs",
+        "50": "50 utilisateurs"
+      },
+      "stats": {
+        "missingSippyId": "ID Sippy manquant",
+        "pendingVerification": "Vérification en attente",
+        "totalPending": "Total en attente"
+      },
+      "badges": {
+        "noSippyId": "Pas d'ID Sippy",
+        "unverified": "Non vérifié",
+        "recent": "Récent",
+        "admin": "Admin",
+        "client": "Client",
+        "adminCreated": "Créé par admin",
+        "selfSignup": "Auto-inscription"
+      },
+      "userInfo": {
+        "created": "Créé :",
+        "sippyId": "ID Sippy :"
+      },
+      "emptyState": {
+        "title": "Aucun utilisateur nécessite d'attention",
+        "allClear": "Tous les utilisateurs ont des ID Sippy et des emails vérifiés",
+        "noMatches": "Aucun utilisateur ne correspond au filtre actuel : {filter}"
+      },
+      "footer": {
+        "showing": "Affichage de {current} sur {total} utilisateurs nécessitant attention",
+        "viewAll": "Voir tous les utilisateurs →"
+      },
+      "loading": "Chargement..."
+    },
+    "lowBalanceUsers": {
+      "title": "Utilisateurs avec Solde Faible",
+      "threshold": {
+        "label": "Seuil de Solde Faible",
+        "description": "Les utilisateurs avec un solde inférieur à ce montant seront affichés comme ayant un solde faible.",
+        "placeholder": "5.00",
+        "currency": "EUR",
+        "below": "Inférieur à {amount} €"
+      },
+      "loading": "Chargement des utilisateurs...",
+      "error": {
+        "title": "Erreur de Chargement des Utilisateurs",
+        "tryAgain": "Réessayer"
+      },
+      "emptyState": {
+        "title": "Tout va bien !",
+        "description": "Aucun utilisateur n'a un solde faible (inférieur à {threshold} €)",
+        "refresh": "Actualiser"
+      },
+      "header": {
+        "userCount": "{count} utilisateur avec un solde faible",
+        "userCountPlural": "{count} utilisateurs avec un solde faible"
+      },
+      "userInfo": {
+        "lastActive": "Dernière activité :",
+        "sippyId": "ID :",
+        "view": "Voir"
+      },
+      "footer": {
+        "totalAffected": "Total affecté :",
+        "user": "utilisateur",
+        "users": "utilisateurs",
+        "threshold": "Seuil :"
+      }
+    },
+    "dateSelector": {
+      "title": "Sélecteur de date",
+      "buttons": {
+        "today": "Aujourd'hui",
+        "yesterday": "Hier",
+        "pickDate": "Choisir une date",
+        "load": "Charger",
+        "refresh": "Actualiser",
+        "loading": "Chargement..."
+      },
+      "status": {
+        "calls": "{count} appels"
+      }
+    },
+    "unsolvedTickets": {
+      "title": "Tickets Non Résolus",
+      "loading": "Chargement des tickets...",
+      "error": {
+        "title": "Erreur de Chargement des Tickets",
+        "tryAgain": "Réessayer"
+      },
+      "emptyState": {
+        "title": "Tout est à jour !",
+        "description": "Aucun ticket non résolu pour le moment. Excellent travail !",
+        "refresh": "Actualiser"
+      },
+      "header": {
+        "ticketCount": "{count} ticket non résolu",
+        "ticketCountPlural": "{count} tickets non résolus",
+        "averageDays": "Moy {days} jour ouvert",
+        "averageDaysPlural": "Moy {days} jours ouverts"
+      },
+      "stats": {
+        "highPriority": "Haute Priorité",
+        "oldest": "Plus Ancien (jours)"
+      },
+      "status": {
+        "open": "Ouvert",
+        "inProgress": "En Cours",
+        "waitingUser": "Attente Utilisateur",
+        "waitingAdmin": "Attente Admin"
+      },
+      "priority": {
+        "urgent": "URGENT",
+        "high": "ÉLEVÉ",
+        "medium": "MOYEN",
+        "low": "FAIBLE"
+      },
+      "services": {
+        "outboundCalls": "Appels Sortants",
+        "inboundCalls": "Appels Entrants",
+        "didNumbers": "Numéros DID",
+        "sms": "SMS",
+        "emailing": "Email",
+        "whatsappBusiness": "WhatsApp Business",
+        "billing": "Facturation",
+        "technical": "Technique",
+        "other": "Autre"
+      },
+      "timeAgo": {
+        "today": "Aujourd'hui",
+        "dayAgo": "Il y a 1 jour",
+        "daysAgo": "Il y a {days} jours"
+      },
+      "ticketInfo": {
+        "unassigned": "Non Assigné",
+        "view": "Voir",
+        "replies": "réponses"
+      },
+      "footer": {
+        "showing": "Affichage de {current} sur {total} ticket non résolu",
+        "showingPlural": "Affichage de {current} sur {total} tickets non résolus",
+        "urgentHigh": "{urgent} urgent, {high} haute priorité"
+      }
+    },
+    "phoneNumberRequests": {
+      "title": "Demandes de numéros de téléphone"
+    },
+    "placeholder": {
+      "content": "Contenu du widget pour {widgetId}"
+    },
+    "editMode": {
+      "buttons": {
+        "settings": "Paramètres",
+        "visible": "Visible",
+        "hidden": "Masqué",
+        "dragTooltip": "Glisser pour réorganiser",
+        "refreshTooltip": "Actualiser les données du widget",
+        "autoRefreshTooltip": "Auto-actualisation dans {time}",
+        "hideTooltip": "Masquer le widget",
+        "showTooltip": "Afficher le widget"
+      }
+    },
+    "settings": {
+      "title": "Paramètres du widget",
+      "currentStatus": {
+        "title": "État actuel",
+        "visibility": "Visibilité :",
+        "visible": "Visible",
+        "hidden": "Masqué",
+        "size": "Taille :",
+        "category": "Catégorie :",
+        "priority": "Priorité :",
+        "badges": {
+          "criticalWidget": "Widget critique",
+          "locked": "Verrouillé",
+          "noCollapse": "Non réductible",
+          "autoRefresh": "Auto-actualisation"
+        }
+      },
+      "visibilityBehavior": {
+        "title": "Visibilité et comportement",
+        "widgetEnabled": {
+          "label": "Widget activé",
+          "description": "Afficher ou masquer ce widget sur le tableau de bord"
+        },
+        "showTitle": {
+          "label": "Afficher le titre",
+          "description": "Afficher l'en-tête de titre du widget"
+        },
+        "allowCollapsing": {
+          "label": "Autoriser la réduction",
+          "description": "Les utilisateurs peuvent réduire ce widget"
+        },
+        "lockWidget": {
+          "label": "Verrouiller le widget",
+          "description": "Empêcher le déplacement ou le redimensionnement"
+        },
+        "criticalNote": "Il s'agit d'un widget critique qui ne peut pas être masqué."
+      },
+      "layoutSizing": {
+        "title": "Disposition et dimensionnement",
+        "width": {
+          "label": "Largeur (Colonnes)",
+          "badge": "{cols} sur {total}",
+          "min": "1 col.",
+          "max": "{total} col."
+        },
+        "height": {
+          "label": "Hauteur (Lignes)",
+          "badge": "{rows} ligne",
+          "badgePlural": "{rows} lignes",
+          "min": "1 ligne",
+          "max": "6 lignes"
+        },
+        "aspectRatio": {
+          "label": "Ratio d'aspect",
+          "auto": "Auto (Basé sur le contenu)",
+          "square": "Carré (1:1)",
+          "wide": "Large (2:1)",
+          "tall": "Haut (1:2)"
+        }
+      },
+      "categoryPriority": {
+        "title": "Catégorie et priorité",
+        "category": {
+          "label": "Catégorie",
+          "general": "Général",
+          "overview": "Aperçu",
+          "admin": "Administration",
+          "metrics": "Métriques",
+          "analytics": "Analytiques",
+          "reports": "Rapports",
+          "settings": "Paramètres"
+        },
+        "priority": {
+          "label": "Priorité",
+          "min": "Faible (0)",
+          "max": "Élevée (10)",
+          "levels": {
+            "critical": "Critique",
+            "high": "Élevée",
+            "medium": "Moyenne",
+            "low": "Faible",
+            "minimal": "Minimale"
+          }
+        }
+      },
+      "autoRefresh": {
+        "title": "Paramètres d'auto-actualisation",
+        "interval": {
+          "label": "Intervalle d'actualisation",
+          "disabled": "Désactivé",
+          "min": "Désactivé",
+          "max": "1 heure"
+        },
+        "note": "Le widget s'actualisera automatiquement toutes les {time}",
+        "timeFormats": {
+          "seconds": "{count}s",
+          "minutes": "{count}m",
+          "hours": "{count}h"
+        }
+      },
+      "preview": {
+        "title": "Aperçu en direct",
+        "widget": "Widget : {title}",
+        "details": "Taille : {cols}×{rows} • Catégorie : {category} • Priorité : {priority}",
+        "badges": {
+          "visible": "Visible",
+          "hidden": "Masqué",
+          "titleShown": "Titre affiché",
+          "titleHidden": "Titre masqué",
+          "collapsible": "Réductible",
+          "locked": "Verrouillé",
+          "autoRefresh": "Auto-actualisation"
+        }
+      }
+    }
+  }
+} 

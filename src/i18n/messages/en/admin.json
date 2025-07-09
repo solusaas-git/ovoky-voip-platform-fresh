@@ -1,0 +1,267 @@
+{
+  "breadcrumbs": {
+    "admin": "Admin"
+  },
+  "sms": {
+    "title": "SMS Management",
+    "description": "Manage SMS providers, blacklist, statistics, and system settings",
+    "tabs": {
+      "providers": "Providers",
+      "senderIds": "Sender IDs",
+      "blacklist": "Blacklist",
+      "stats": "Statistics",
+      "history": "Sending History",
+      "users": "Users",
+      "settings": "Settings",
+      "queue": "Queue Monitor",
+      "simulation": "Simulation"
+    },
+    "providers": {
+      "title": "SMS Providers",
+      "description": "Manage SMS gateway providers and their configurations",
+      "addProvider": "Add Provider",
+      "loading": "Loading SMS providers...",
+      "empty": "No SMS providers configured",
+      "emptyDescription": "Add your first SMS provider to get started",
+      "form": {
+        "addTitle": "Add SMS Provider",
+        "editTitle": "Edit SMS Provider",
+        "addDescription": "Configure a new SMS gateway provider",
+        "editDescription": "Update SMS gateway provider configuration",
+        "internalName": "Internal Name",
+        "displayName": "Display Name",
+        "providerType": "Provider Type",
+        "gatewayType": "Gateway Type",
+        "oneWay": "One-way (Send Only)",
+        "twoWay": "Two-way (Send & Receive)",
+        "apiEndpoint": "API Endpoint (optional)",
+        "apiKey": "API Key",
+        "apiSecret": "API Secret (optional)",
+        "rateLimits": "Rate Limits",
+        "perSecond": "Per Second",
+        "perMinute": "Per Minute",
+        "perHour": "Per Hour",
+        "additionalSettings": "Additional Settings (JSON)",
+        "active": "Active",
+        "cancel": "Cancel",
+        "create": "Create Provider",
+        "update": "Update Provider",
+        "creating": "Creating...",
+        "updating": "Updating..."
+      },
+      "table": {
+        "name": "Name",
+        "provider": "Provider",
+        "type": "Type",
+        "status": "Status",
+        "rateLimits": "Rate Limits",
+        "countries": "Countries",
+        "actions": "Actions"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "messages": {
+        "providerCreated": "Provider created successfully",
+        "providerUpdated": "Provider updated successfully",
+        "providerDeleted": "Provider deleted successfully",
+        "providerEnabled": "Provider enabled successfully",
+        "providerDisabled": "Provider disabled successfully",
+        "failedToLoad": "Failed to load SMS providers",
+        "failedToSave": "Failed to save provider",
+        "failedToDelete": "Failed to delete provider",
+        "failedToUpdateStatus": "Failed to update provider status",
+        "confirmDelete": "Are you sure you want to delete \"{name}\"? This action cannot be undone."
+      }
+    },
+    "blacklist": {
+      "title": "Global SMS Blacklist",
+      "description": "Manage globally blacklisted phone numbers across all users",
+      "addToBlacklist": "Add to Blacklist",
+      "loading": "Loading blacklisted numbers...",
+      "empty": "No blacklisted numbers",
+      "emptyDescription": "Add phone numbers to prevent SMS delivery globally",
+      "table": {
+        "phoneNumber": "Phone Number",
+        "reason": "Reason",
+        "type": "Type",
+        "addedBy": "Added By",
+        "added": "Added",
+        "actions": "Actions"
+      },
+      "type": {
+        "global": "Global",
+        "user": "User"
+      },
+      "noReason": "No reason provided",
+      "system": "System",
+      "remove": "Remove"
+    },
+    "stats": {
+      "title": "SMS Statistics",
+      "totalMessages": "Total Messages",
+      "activeUsers": "Active Users",
+      "successRate": "Success Rate",
+      "blacklisted": "Blacklisted",
+      "monthlyComparison": "Monthly Comparison",
+      "systemHealth": "System Health",
+      "allTimeMessages": "All time SMS messages sent",
+      "usersWithAccess": "Users with SMS access",
+      "deliveredSuccessfully": "Messages delivered successfully",
+      "numbersInBlacklist": "Numbers in blacklist",
+      "messageVolume": "Message volume comparison",
+      "performanceMetrics": "SMS system performance metrics",
+      "thisMonth": "This Month",
+      "lastMonth": "Last Month",
+      "change": "Change",
+      "activeProviders": "Active Providers",
+      "failureRate": "Failure Rate"
+    },
+    "senderIds": {
+      "title": "Sender ID Requests",
+      "description": "Manage all sender ID requests across the system",
+      "loading": "Loading sender IDs...",
+      "empty": "No sender ID requests",
+      "emptyDescription": "Sender ID requests will appear here for approval",
+      "table": {
+        "senderId": "Sender ID",
+        "user": "User",
+        "status": "Status",
+        "type": "Type",
+        "usage": "Usage",
+        "requested": "Requested",
+        "actions": "Actions"
+      },
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "suspended": "Suspended"
+      },
+      "actions": {
+        "approve": "Approve sender ID",
+        "reject": "Reject sender ID",
+        "suspend": "Suspend sender ID"
+      },
+      "prompts": {
+        "rejectionReason": "Rejection reason (optional):",
+        "suspensionReason": "Suspension reason:"
+      },
+      "messages": {
+        "approved": "Sender ID approved successfully",
+        "rejected": "Sender ID rejected successfully",
+        "failedToLoad": "Failed to load sender IDs",
+        "failedToUpdate": "Failed to {action} sender ID"
+      }
+    },
+    "userAssignments": {
+      "title": "User Provider Assignments",
+      "description": "Assign SMS providers to users and manage their access and limits",
+      "assignProvider": "Assign Provider",
+      "loading": "Loading assignments...",
+      "empty": "No assignments found",
+      "emptyDescription": "No provider assignments have been created yet.",
+      "noAssignments": "No assignments match your current filters.",
+      "create": {
+        "title": "Assign SMS Provider to User",
+        "description": "Create a new assignment between a user and SMS provider",
+        "user": "User",
+        "userPlaceholder": "Select user",
+        "provider": "SMS Provider",
+        "providerPlaceholder": "Select provider",
+        "priority": "Priority",
+        "priorityDescription": "Lower number = higher priority",
+        "dailyLimit": "Daily Limit",
+        "monthlyLimit": "Monthly Limit",
+        "notes": "Notes",
+        "notesPlaceholder": "Optional notes about this assignment",
+        "noLimit": "No limit",
+        "createAssignment": "Create Assignment"
+      },
+      "edit": {
+        "title": "Edit Assignment",
+        "description": "Update the assignment settings for {user} → {provider}",
+        "updateAssignment": "Update Assignment",
+        "currentUsage": "Current Usage",
+        "dailyUsage": "Daily Usage",
+        "monthlyUsage": "Monthly Usage",
+        "messages": "messages"
+      },
+      "table": {
+        "user": "User",
+        "provider": "Provider",
+        "status": "Status",
+        "priority": "Priority",
+        "dailyUsage": "Daily Usage",
+        "monthlyUsage": "Monthly Usage",
+        "assigned": "Assigned",
+        "actions": "Actions"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "filters": {
+        "search": "Search users, emails, or providers...",
+        "allStatus": "All Status",
+        "allUsers": "All Users",
+        "allProviders": "All Providers"
+      },
+      "messages": {
+        "created": "Assignment created successfully",
+        "updated": "Assignment updated successfully",
+        "deleted": "Assignment deactivated successfully",
+        "activated": "Assignment activated",
+        "deactivated": "Assignment deactivated",
+        "failedToLoad": "Failed to fetch assignments",
+        "failedToCreate": "Failed to create assignment",
+        "failedToUpdate": "Failed to update assignment",
+        "failedToDelete": "Failed to deactivate assignment",
+        "confirmDelete": "Are you sure you want to deactivate this assignment?",
+        "userExists": "User is already assigned to this provider"
+      }
+    },
+    "settings": {
+      "title": "SMS System Settings",
+      "description": "Configure global SMS system settings and behavior",
+      "loading": "Loading SMS settings...",
+      "reset": "Reset",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "general": {
+        "title": "General Settings",
+        "enableSystem": "Enable SMS System",
+        "enableSystemDescription": "Master switch for the entire SMS system",
+        "maxMessageLength": "Max Message Length",
+        "defaultRetryAttempts": "Default Retry Attempts"
+      },
+      "rateLimits": {
+        "title": "Global Rate Limits",
+        "perSecond": "Messages Per Second",
+        "perMinute": "Messages Per Minute",
+        "perHour": "Messages Per Hour"
+      },
+      "senderIdSettings": {
+        "title": "Sender ID Settings",
+        "requireApproval": "Require Sender ID Approval",
+        "requireApprovalDescription": "All sender ID requests must be approved by an admin"
+      },
+      "logging": {
+        "title": "Logging & Monitoring",
+        "enableLogging": "Enable SMS Logging",
+        "enableLoggingDescription": "Log all SMS messages for audit and debugging",
+        "enableDeliveryReports": "Enable Delivery Reports",
+        "enableDeliveryReportsDescription": "Track delivery status of SMS messages",
+        "logRetention": "Log Retention (Days)",
+        "deliveryWebhook": "Delivery Report Webhook"
+      },
+      "messages": {
+        "updated": "SMS settings updated successfully",
+        "failed": "Failed to update SMS settings",
+        "failedToLoad": "Failed to load SMS settings",
+        "confirmReset": "Are you sure you want to reset all settings to defaults?"
+      }
+    }
+  }
+} 

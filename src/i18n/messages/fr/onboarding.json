@@ -1,0 +1,147 @@
+{
+  "welcome": {
+    "title": "Bienvenue sur OVOKY",
+    "subtitle": "Configurons votre compte VoIP",
+    "description": "Complétez votre profil pour commencer à gérer efficacement vos communications"
+  },
+  "steps": {
+    "personal": "Informations personnelles",
+    "company": "Détails de l'entreprise", 
+    "preferences": "Préférences",
+    "verification": "Vérification",
+    "complete": "Terminé"
+  },
+  "progress": {
+    "step": "Étape {current} sur {total}",
+    "completing": "Finalisation de la configuration...",
+    "almostDone": "Presque terminé !"
+  },
+  "personalInfo": {
+    "title": "Parlez-nous de vous",
+    "subtitle": "Ces informations nous aident à personnaliser votre expérience",
+    "firstNameLabel": "Prénom",
+    "firstNamePlaceholder": "Saisissez votre prénom",
+    "lastNameLabel": "Nom de famille", 
+    "lastNamePlaceholder": "Saisissez votre nom de famille",
+    "phoneLabel": "Numéro de téléphone",
+    "phonePlaceholder": "Saisissez votre numéro de téléphone",
+    "countryLabel": "Pays",
+    "countryPlaceholder": "Sélectionnez votre pays",
+    "timezoneLabel": "Fuseau horaire",
+    "timezonePlaceholder": "Sélectionnez votre fuseau horaire",
+    "languageLabel": "Langue préférée",
+    "languageDescription": "Choisissez votre langue préférée pour l'interface"
+  },
+  "companyInfo": {
+    "title": "Informations sur l'entreprise",
+    "subtitle": "Aidez-nous à comprendre les besoins de votre entreprise",
+    "companyNameLabel": "Nom de l'entreprise",
+    "companyNamePlaceholder": "Saisissez le nom de votre entreprise",
+    "industryLabel": "Secteur d'activité",
+    "industryPlaceholder": "Sélectionnez votre secteur",
+    "companySizeLabel": "Taille de l'entreprise",
+    "companySizePlaceholder": "Sélectionnez la taille de l'entreprise",
+    "websiteLabel": "Site web",
+    "websitePlaceholder": "https://votresite.com",
+    "addressLabel": "Adresse commerciale",
+    "addressPlaceholder": "Saisissez votre adresse commerciale",
+    "vatNumberLabel": "Numéro de TVA",
+    "vatNumberPlaceholder": "Saisissez le numéro de TVA (si applicable)",
+    "businessTypeLabel": "Type d'entreprise",
+    "businessTypeOptions": {
+      "individual": "Particulier/Freelance",
+      "startup": "Start-up",
+      "smallBusiness": "Petite entreprise", 
+      "enterprise": "Grande entreprise",
+      "nonprofit": "Organisation à but non lucratif",
+      "government": "Gouvernement"
+    },
+    "companySizeOptions": {
+      "1-10": "1-10 employés",
+      "11-50": "11-50 employés",
+      "51-200": "51-200 employés",
+      "201-1000": "201-1000 employés",
+      "1000+": "1000+ employés"
+    }
+  },
+  "preferences": {
+    "title": "Définissez vos préférences",
+    "subtitle": "Personnalisez votre expérience",
+    "notificationsTitle": "Notifications",
+    "notificationsDescription": "Choisissez comment vous souhaitez être notifié",
+    "emailNotifications": "Notifications par e-mail",
+    "emailNotificationsDescription": "Recevoir les mises à jour par e-mail",
+    "pushNotifications": "Notifications push", 
+    "pushNotificationsDescription": "Recevoir des notifications instantanées dans le navigateur",
+    "smsNotifications": "Notifications SMS",
+    "smsNotificationsDescription": "Recevoir des alertes par SMS",
+    "communicationTitle": "Préférences de communication",
+    "lowBalanceAlerts": "Alertes de solde faible",
+    "lowBalanceAlertsDescription": "Être notifié lorsque le solde de votre compte est faible",
+    "systemUpdates": "Mises à jour système",
+    "systemUpdatesDescription": "Recevoir des notifications sur la maintenance et les mises à jour du système",
+    "marketingEmails": "E-mails marketing",
+    "marketingEmailsDescription": "Recevoir les mises à jour de produits et le contenu promotionnel",
+    "weeklyReports": "Rapports hebdomadaires",
+    "weeklyReportsDescription": "Recevoir des rapports hebdomadaires d'utilisation et de facturation"
+  },
+  "verification": {
+    "title": "Vérifiez vos informations",
+    "subtitle": "Révisez et confirmez vos détails",
+    "personalSection": "Informations personnelles",
+    "companySection": "Informations sur l'entreprise", 
+    "preferencesSection": "Préférences de notification",
+    "editButton": "Modifier",
+    "confirmTitle": "Confirmez votre configuration",
+    "confirmDescription": "En terminant la configuration, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité",
+    "termsLink": "Conditions d'utilisation",
+    "privacyLink": "Politique de confidentialité",
+    "dataProcessing": "Nous traiterons vos données conformément à notre politique de confidentialité"
+  },
+  "completion": {
+    "title": "Bienvenue à bord !",
+    "subtitle": "Votre compte est maintenant configuré et prêt à être utilisé",
+    "description": "Vous pouvez maintenant commencer à gérer vos communications VoIP",
+    "nextSteps": "Prochaines étapes :",
+    "step1": "Ajouter du crédit à votre compte",
+    "step2": "Acheter des numéros de téléphone",
+    "step3": "Configurer votre premier trunk",
+    "step4": "Commencer à passer des appels",
+    "dashboardButton": "Aller au tableau de bord",
+    "skipSetup": "Je ferai cela plus tard"
+  },
+  "actions": {
+    "next": "Suivant",
+    "previous": "Précédent", 
+    "skip": "Ignorer",
+    "complete": "Terminer la configuration",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "goToDashboard": "Aller au tableau de bord",
+    "editStep": "Modifier cette étape",
+    "continueSetup": "Continuer la configuration"
+  },
+  "validation": {
+    "firstNameRequired": "Le prénom est requis",
+    "lastNameRequired": "Le nom de famille est requis",
+    "phoneRequired": "Le numéro de téléphone est requis",
+    "phoneInvalid": "Veuillez saisir un numéro de téléphone valide",
+    "countryRequired": "Le pays est requis",
+    "companyNameRequired": "Le nom de l'entreprise est requis",
+    "industryRequired": "La sélection du secteur est requise",
+    "businessTypeRequired": "Le type d'entreprise est requis",
+    "agreementRequired": "Vous devez accepter les conditions pour continuer"
+  },
+  "errors": {
+    "saveError": "Échec de l'enregistrement des informations. Veuillez réessayer.",
+    "loadError": "Échec du chargement des données de configuration. Veuillez actualiser la page.",
+    "validationError": "Veuillez vérifier vos informations et réessayer",
+    "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
+  },
+  "tooltips": {
+    "phoneNumber": "Nous l'utiliserons pour la sécurité du compte et les notifications importantes",
+    "timezone": "Cela nous aide à programmer les notifications et rapports aux moments appropriés",
+    "vatNumber": "Requis pour les entreprises de l'UE pour la conformité fiscale",
+    "website": "Optionnel - nous aide à mieux comprendre votre entreprise"
+  }
+} 

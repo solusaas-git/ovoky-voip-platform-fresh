@@ -1,0 +1,101 @@
+phoneNumber,firstName,lastName,address,city,zipCode,dateOfBirth,company,department,notes
++33123456789,Test,Succès,123 Rue du Succès,Paris,75001,1990-01-01,Société Test,Test,Réussit toujours en simulation
++33987654321,Test,Échec,456 Avenue de l'Échec,Paris,75002,1990-01-02,Société Test,Test,Échoue toujours en simulation
++33555666777,Test,Blacklist,789 Route Blacklist,Paris,75003,1990-01-03,Société Test,Test,Blacklisté en simulation
++33444555666,Test,Limite,321 Allée Limite,Paris,75004,1990-01-04,Société Test,Test,Déclenche la limite de taux en simulation
++33178115975,Polycarpe,Trinh,413 Boulevard de la Mer,Besançon,25000,2002-01-12,Groupe Moderne,Recherche,Support technique requis
++33141144501,Denise,Jimenez,486 Avenue des Champs,Tours,37000,1961-11-29,Entreprises Smart,Comptabilité,Contact décisionnaire
++33180819160,Euphrasie,Ly,680 Rue Montparnasse,Amiens,80000,1957-11-19,Excellence Corp,Management,Support requis
++33111811147,Xavière,Leroy,968 Rue Lafayette,Boulogne-Billancourt,92100,1996-04-08,Groupe Innovation,Opérations,Ancien client
++33129703928,Quentin,Cao,69 Rue de la Paix,Rennes,35000,1954-02-04,Industries Prime,Finance,Support technique requis
++33186339543,Maurice,Gomez,636 Rue de la Liberté,Grenoble,38000,1979-06-01,Technologies Smart,Qualité,Intéressé par les services premium
++33118942984,Jeanne,Barker,880 Avenue des Champs,Courbevoie,92400,1984-06-02,Solutions Avancées,Opérations,Communication par email préférée
++33130546494,Valérie,Espinosa,417 Rue de Rivoli,Tours,37000,1978-10-14,Services Excellence,Qualité,Décisionnaire
++33187404329,Siméon,Martin,484 Avenue Foch,Toulon,83000,1993-11-30,Systèmes Efficaces,Marketing,Préfère la communication par email
++33166571664,Germaine,Pena,515 Rue de Bretagne,Dijon,21000,1957-08-29,Technologies Future,Ingénierie,Support technique requis
++33113261862,Alphonse,Gutierrez,476 Boulevard Saint-Germain,Angers,49000,1956-03-17,Groupe Innovation,Commercial,Commande en volume potentielle
++33158479681,Hippolyte,Torres,138 Rue de Bretagne,Saint-Maur-des-Fossés,94100,1999-03-17,Technologie Avancée,Production,Sensible au budget
++33125009189,Alphonse,Lawson,802 Rue de la Paix,Metz,57000,1998-07-19,Technologies Modernes,Développement,Intéressé par les services premium
++33136633545,Évariste,Lopez,312 Boulevard Saint-Germain,Clermont-Ferrand,63000,1953-09-21,Corporation Future,Support,Contact décisionnaire
++33126856462,François,Ayala,80 Rue de la Liberté,Poitiers,86000,1966-02-27,Technologies Modernes,Recherche,Client VIP
++33160780487,Patrick,Gomez,105 Avenue Jean Jaurès,Lille,59000,1960-11-07,Tech France,Communication,Support technique requis
++33189172002,Augustine,Gonzalez,442 Avenue des Champs,Le Mans,72000,1953-11-09,Technologies Modernes,Support,Client premium
++33112332632,Roger,Nguyen,915 Rue Lafayette,Bordeaux,33000,1956-03-01,Solutions Efficaces,Juridique,Volume potentiel
++33124438766,Alphonse,Cao,943 Rue de Rivoli,Rueil-Malmaison,92500,1986-09-04,Services Excellence,Administration,Sensible au budget
++33124970613,Olivier,Cao,418 Boulevard Saint-Michel,Créteil,94000,2004-04-29,Corporation Future,RH,Communication email
++33115895618,Patrick,Huynh,990 Rue du Commerce,Brest,29200,1993-03-30,Technologies Modernes,Management,Sensible au budget
++33123131153,Ignace,Mendez,437 Boulevard de la Mer,Caen,14000,1967-11-16,Entreprises Smart,Service Client,Ancien client
++33123720649,Anne,Zuniga,910 Place de la République,Colombes,92700,1996-02-05,Solutions Efficaces,Service Client,Sensible budget
++33140999106,Joséphine,Dubois,206 Rue Lafayette,Levallois-Perret,92300,1955-06-15,Solutions Stratégiques,Marketing,Email préféré
++33189322972,Yvette,Martinez,99 Rue de Bretagne,Le Mans,72000,1986-08-16,Groupe Professionnel,IT,Client VIP
++33136352087,Lucien,Gomez,232 Rue du Commerce,Villeurbanne,69100,1988-11-30,Solutions Qualité,Opérations,Communication par email préférée
++33146091508,Marcel,Vo,568 Avenue Foch,Strasbourg,67000,1965-06-29,Technologies Pro,Production,Email préféré
++33141971335,Pulchérie,Gutierrez,966 Avenue des Champs,Rouen,76000,1972-10-16,Partenaires Stratégiques,Support,Sensible budget
++33185349663,Léon,Cruz,81 Boulevard de la Mer,Lyon,69001,1955-03-04,Systèmes Efficaces,Marketing,Sensible budget
++33131422775,Faustine,Rodriguez,667 Avenue Foch,Marseille,13001,1975-07-06,Entreprise Moderne,Commercial,Nécessite un suivi
++33166670740,Pélagie,Cao,968 Boulevard de la Paix,Paris,75001,1998-03-22,Entreprise Moderne,Logistique,Nécessite un suivi
++33185986817,Gérard,Nunez,189 Rue de la Gare,Roubaix,59100,1954-09-13,Industries Prime,Support,Nécessite un suivi
++33181970743,Théodore,Herrera,731 Avenue Jean Jaurès,Clermont-Ferrand,63000,1954-04-16,Technologie Avancée,Comptabilité,Décisionnaire
++33164319006,Pélagie,Vo,857 Rue de la Paix,Nantes,44000,1951-08-25,Groupe Professionnel,Finance,Décisionnaire
++33115184399,Frédéric,Fernandez,623 Avenue Jean Jaurès,Boulogne-Billancourt,92100,1978-08-12,Technologie Avancée,Recherche,Décisionnaire
++33130802207,Daniel,Bui,449 Place de la République,Reims,51100,1961-01-18,Systèmes Dynamiques,IT,Communication par email préférée
++33197727913,Xavière,Bui,866 Rue de la Paix,Le Havre,76600,1962-02-19,Services Premier,IT,Client premium
++33131797500,Monique,Aguilar,50 Avenue Jean Jaurès,Courbevoie,92400,1980-01-09,Systèmes Supérieurs,Développement,Préfère la communication par email
++33127892924,Germaine,Roux,365 Boulevard Voltaire,Dijon,21000,1960-02-23,Systèmes Efficaces,Ventes,Client VIP
++33150416513,Séverin,Swanson,245 Rue Lafayette,Limoges,87000,1986-09-01,Technologies Pro,Production,Communication par email préférée
++33151645293,Stéphane,Estrada,376 Rue de la Liberté,Grenoble,38000,1989-11-23,Services Premier,Finance,Client VIP
++33146617499,Zéphirin,Diaz,646 Boulevard Saint-Michel,Tourcoing,59200,1951-01-20,Services Premier,Production,Contact décisionnaire
++33177872518,Dorothée,Blanc,862 Rue de la Paix,Saint-Étienne,42000,1983-05-01,Entreprises Smart,Management,Préfère la communication par email
++33123959142,Chantal,Marsh,455 Avenue de la République,Orléans,45000,1965-10-03,Solutions Fiables,Logistique,Support technique requis
++33117807431,Germaine,Mccarthy,813 Rue Victor Hugo,Le Havre,76600,2005-06-27,Partenaires Stratégiques,Communication,Client premium
++33142108907,Casimir,Huynh,796 Boulevard de la Paix,Levallois-Perret,92300,1953-04-16,Technologies Smart,Management,Support technique requis
++33131211394,Armand,Tran,137 Avenue de la République,Poitiers,86000,1974-07-26,Groupe Professionnel,Communication,Volume potentiel
++33170711405,Firmin,Rios,656 Boulevard Saint-Germain,Le Mans,72000,1973-03-16,Services Digitaux,RH,Communication email
++33117786546,Raoul,Perez,616 Avenue de la République,Lille,59000,1980-11-26,Corporation Elite,Ingénierie,Décisionnaire
++33176997598,Siméon,Jimenez,710 Avenue des Champs,Angers,49000,1989-06-29,Services Fiables,Communication,Communication par email préférée
++33134693485,Faustine,Reyes,69 Boulevard de la Mer,Rouen,76000,1993-01-24,Innovation SARL,Juridique,Commande en volume potentielle
++33130631651,Jeannette,Rivera,121 Rue du Commerce,Le Havre,76600,1964-03-14,Technologies Smart,Recherche,Référence d'un client existant
++33185983728,Raoul,Martin,677 Boulevard Haussmann,Drancy,93700,1973-08-03,Solutions Avancées,Ingénierie,Support technique requis
++33194895227,Gontran,Cabrera,890 Boulevard Voltaire,Mulhouse,68100,1992-05-31,Technologies Modernes,Communication,Référence client
++33171827945,Édouard,Valdez,852 Rue du Commerce,Bordeaux,33000,1956-01-31,Services Globaux,Juridique,Sensible budget
++33117959866,Octave,Mendoza,700 Boulevard Haussmann,Brest,29200,1988-07-04,Services Fiables,Service Client,Sensible budget
++33168973699,Luc,Calderon,111 Rue de la Gare,Besançon,25000,1965-11-04,Corporation Future,Ingénierie,Communication par email préférée
++33162502305,Thomas,Fernandez,918 Rue Lafayette,Toulouse,31000,1965-12-04,Solutions Efficaces,Comptabilité,Contact décisionnaire
++33146897766,Simone,Lam,707 Boulevard de la Mer,Nantes,44000,1966-10-19,Entreprise Moderne,Ventes,Email préféré
++33111863151,Célestine,Roux,892 Rue Lafayette,Argenteuil,95100,1988-09-28,Entreprises Smart,Juridique,Commande en volume potentielle
++33147612213,Pierre,Castillo,484 Boulevard Voltaire,Versailles,78000,1967-06-06,Groupe Innovation,Management,Email préféré
++33194365719,Germaine,Martinez,697 Avenue de la République,Poitiers,86000,1989-09-28,Groupe Innovation,Opérations,Support technique requis
++33180598565,Daniel,Castillo,28 Boulevard Voltaire,Argenteuil,95100,2005-06-29,Innovation SARL,Comptabilité,Commande en volume potentielle
++33186379711,Honorine,Bach,113 Boulevard Saint-Germain,Nîmes,30000,1968-03-13,Tech France,Développement,Volume potentiel
++33174252883,Perpétue,Cruz,217 Rue Montparnasse,Dijon,21000,1980-07-05,Technologies Modernes,IT,Support technique requis
++33111529519,Édouard,Silva,277 Boulevard Saint-Michel,Lille,59000,1991-01-09,Services Premier,Marketing,Ancien client
++33149085487,Kléber,Cadwell,411 Rue de Bretagne,Limoges,87000,1994-12-08,Technologies Smart,Support,Nécessite support technique
++33165495218,Casimir,Aguilar,667 Avenue des Champs,Créteil,94000,1986-06-01,Corporation Future,Recherche,Email préféré
++33172544508,André,Martinez,982 Boulevard Saint-Germain,Caen,14000,1950-07-06,Systèmes Dynamiques,Administration,Nécessite suivi
++33152544716,Octave,Nguyen,742 Rue de Bretagne,Paris,75001,2004-12-04,Solutions Optimales,Production,Référence client
++33173964525,Bernard,Gomez,305 Avenue des Champs,Strasbourg,67000,1977-08-24,Entreprise Moderne,Développement,Référence client
++33143208105,Célestine,Mendoza,133 Avenue Jean Jaurès,Le Havre,76600,2004-05-08,Groupe Professionnel,Juridique,Préfère la communication par email
++33115733449,Marie,Ramirez,834 Boulevard Voltaire,Amiens,80000,1956-11-20,Technologies Modernes,Finance,Sensible au budget
++33165512270,Gilbert,Ngo,751 Rue de Bretagne,Paris,75001,1981-01-23,Services Fiables,Développement,Nécessite suivi
++33194519140,Gaston,Ramirez,571 Rue Montmartre,Tourcoing,59200,1989-06-26,Industries Prime,RH,Nécessite suivi
++33129630945,Catherine,Marsh,643 Rue Victor Hugo,Caen,14000,1977-12-21,Solutions Efficaces,IT,Support technique requis
++33156746145,Polycarpe,Leon,71 Rue de Rivoli,Bordeaux,33000,1985-06-24,Corporation Future,Qualité,Communication email
++33160651435,Valentin,Roux,135 Avenue Jean Jaurès,Poitiers,86000,1992-05-19,Entreprises Smart,Comptabilité,Intéressé par les services premium
++33146985083,Luc,Pacheco,273 Avenue des Champs,Amiens,80000,1954-09-22,Solutions Efficaces,Comptabilité,Commande en volume potentielle
++33195943104,Euphrasie,Mendez,954 Rue de Rivoli,Marseille,13001,1992-02-21,Corporation Elite,Opérations,Ancien client
++33137785740,Véronique,Leon,208 Rue Lafayette,Saint-Maur-des-Fossés,94100,1982-09-17,Solutions Stratégiques,Service Client,Sensible au budget
++33139278996,Honorine,Castro,388 Rue Victor Hugo,Aulnay-sous-Bois,93600,1978-10-14,Solutions Qualité,Production,Préfère la communication par email
++33178679903,Célestine,Cadwell,537 Boulevard Saint-Germain,Strasbourg,67000,1963-04-04,Services Elite,Management,Référence client
++33174257561,Henriette,Aguilar,23 Rue Gambetta,Paris,75001,2003-03-14,Groupe Professionnel,Juridique,Support technique requis
++33185493852,Nathalie,Vu,739 Rue de la Gare,Montreuil,93100,1959-08-24,Solutions Pro,Comptabilité,Préfère la communication par email
++33131475730,Fernand,Dominguez,463 Rue de la Liberté,Neuilly-sur-Seine,92200,1960-11-06,Services Premier,IT,Client VIP
++33171955817,Célestine,Cabrera,333 Rue Victor Hugo,Champigny-sur-Marne,94500,1988-11-05,Systèmes Supérieurs,Marketing,Référence d'un client existant
++33191378743,Séverin,Sandoval,388 Rue Lafayette,Grenoble,38000,1958-06-18,Services Premier,Recherche,Client premium
++33181865858,Céline,Cruz,152 Boulevard Saint-Michel,Nîmes,30000,1995-10-01,Entreprises Smart,Comptabilité,Client VIP
++33132443300,Apollinaire,Martin,568 Avenue des Champs,Colombes,92700,1988-03-23,Technologie Avancée,Recherche,Communication par email préférée
++33141861333,Germaine,Aguilar,512 Avenue Jean Jaurès,Bordeaux,33000,1978-12-16,Systèmes Efficaces,RH,Sensible au budget
++33145876879,Françoise,Vu,173 Place de la République,Metz,57000,1984-10-30,Services Fiables,Service Client,Nécessite suivi
++33127735414,Hippolyte,Aguilar,890 Boulevard Voltaire,Courbevoie,92400,1972-09-18,Technologies Avancées,Communication,Référence client
++33163316284,Apollinaire,Fernandez,797 Rue Montparnasse,Courbevoie,92400,1954-07-05,Technologies Modernes,Marketing,Volume potentiel
++33113993908,Théodore,Cao,867 Boulevard de la Mer,Boulogne-Billancourt,92100,1977-06-04,Technologies Smart,Opérations,Client premium
++33144066042,Théodore,Hoang,474 Boulevard Voltaire,Orléans,45000,1968-03-20,Solutions Stratégiques,Recherche,Client VIP

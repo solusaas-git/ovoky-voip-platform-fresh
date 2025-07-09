@@ -1,0 +1,54 @@
+{
+  "modal": {
+    "title": "Authentication Rules - Account #{accountId}",
+    "close": "Close"
+  },
+  "form": {
+    "title": "Add Authentication Rule",
+    "remoteIp": {
+      "label": "Remote IP Address *",
+      "placeholder": "e.g., 192.168.1.100 or 10.0.0.0/8",
+      "description": "Enter the IP address or CIDR range that should be allowed to authenticate. Other settings will use secure defaults (Protocol: SIP, Sessions: Unlimited, CPS: Unlimited)."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "addRule": "Add Rule",
+      "adding": "Adding..."
+    }
+  },
+  "table": {
+    "title": "Authentication Rules",
+    "headers": {
+      "protocol": "Protocol",
+      "remoteIp": "Remote IP",
+      "cli": "CLI",
+      "cld": "CLD",
+      "toDomain": "To Domain",
+      "fromDomain": "From Domain",
+      "maxSessions": "Max Sessions",
+      "maxCps": "Max CPS"
+    }
+  },
+  "states": {
+    "loading": "Loading authentication rules...",
+    "noRules": {
+      "title": "No authentication rules",
+      "description": "No authentication rules have been configured for this account.",
+      "addFirst": "Add First Rule"
+    },
+    "unlimited": "Unlimited"
+  },
+  "actions": {
+    "addRule": "Add Rule"
+  },
+  "errors": {
+    "fetchFailed": "Failed to fetch authentication rules",
+    "createFailed": "Failed to create authentication rule",
+    "remoteIpRequired": "Remote IP address is required"
+  },
+  "protocols": {
+    "sip": "SIP",
+    "iax2": "IAX2",
+    "callingCard": "Calling Card PIN"
+  }
+} 

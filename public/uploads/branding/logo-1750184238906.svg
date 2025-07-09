@@ -1,0 +1,34 @@
+<svg width="580" height="100" viewBox="0 0 580 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1_2843)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 20V40V60H0.0176523C22.1009 60.0095 40 77.9145 40 100H46.667H60C60 73.8756 43.3038 51.6508 20 43.4141V20H80V43.4141C70.9839 46.6008 62.9569 51.8814 56.5033 58.6715C60.7939 64.5276 64.1961 71.0755 66.5114 78.1166C73.655 67.2069 85.9859 60 100 60V40V20V0H80H20H0V20Z" fill="black" style="fill:black;fill-opacity:1;"/>
+</g>
+<g clip-path="url(#clip1_1_2843)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M120 0H140V43.4141C163.304 51.6508 180 73.8756 180 100H166.667H160C160 77.9145 142.101 60.0095 120.018 60H120V40V0ZM220 60C205.986 60 193.655 67.2069 186.511 78.1166C184.196 71.0755 180.794 64.5276 176.503 58.6715C182.957 51.8814 190.984 46.6008 200 43.4141V0H220V40V60Z" fill="black" style="fill:black;fill-opacity:1;"/>
+</g>
+<g clip-path="url(#clip2_1_2843)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M240 20V40V60H240.018C262.101 60.0095 280 77.9145 280 100H286.667H300C300 73.8756 283.304 51.6508 260 43.4141V20H320V43.4141C310.984 46.6008 302.957 51.8814 296.503 58.6715C300.794 64.5276 304.196 71.0755 306.511 78.1166C313.655 67.2069 325.986 60 340 60V40V20V0H320H260H240V20Z" fill="black" style="fill:black;fill-opacity:1;"/>
+</g>
+<g clip-path="url(#clip3_1_2843)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M380 100L380 60H400C433.137 60 460 33.1371 460 0H440C440 22.0914 422.091 40 400 40H380L380 0H360V40V60L360 100H380ZM441.329 56.5033C435.472 60.7939 428.925 64.1961 421.883 66.5114C432.793 73.655 440 85.9859 440 100H460C460 82.88 452.83 67.4347 441.329 56.5033Z" fill="black" style="fill:black;fill-opacity:1;"/>
+</g>
+<g clip-path="url(#clip4_1_2843)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M480 20V0C513.137 2.62268e-06 540 26.8629 540 60L540 100H520L520 60C520 37.9086 502.091 20 480 20ZM546.511 38.1166C553.655 27.2069 565.986 20 580 20V2.62268e-06C562.88 2.62268e-06 547.435 7.17023 536.503 18.6715C540.794 24.5276 544.196 31.0755 546.511 38.1166Z" fill="black" style="fill:black;fill-opacity:1;"/>
+</g>
+<defs>
+<clipPath id="clip0_1_2843">
+<rect width="100" height="100" fill="white" style="fill:white;fill-opacity:1;"/>
+</clipPath>
+<clipPath id="clip1_1_2843">
+<rect width="100" height="100" fill="white" style="fill:white;fill-opacity:1;" transform="translate(120)"/>
+</clipPath>
+<clipPath id="clip2_1_2843">
+<rect width="100" height="100" fill="white" style="fill:white;fill-opacity:1;" transform="translate(240)"/>
+</clipPath>
+<clipPath id="clip3_1_2843">
+<rect width="100" height="100" fill="white" style="fill:white;fill-opacity:1;" transform="translate(360)"/>
+</clipPath>
+<clipPath id="clip4_1_2843">
+<rect width="100" height="100" fill="white" style="fill:white;fill-opacity:1;" transform="translate(480)"/>
+</clipPath>
+</defs>
+</svg>

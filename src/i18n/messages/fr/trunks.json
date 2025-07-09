@@ -1,0 +1,108 @@
+{
+  "page": {
+    "title": "Mes Trunks",
+    "description": "Consultez vos trunks SIP assignés et leur configuration",
+    "breadcrumbs": {
+      "dashboard": "Tableau de Bord",
+      "services": "Services",
+      "trunks": "Trunks"
+    }
+  },
+  "stats": {
+    "totalTrunks": "Total des Trunks",
+    "sipRegistration": "Enregistrement SIP",
+    "accountStatus": "Statut du Compte",
+    "checkTable": "Voir Tableau"
+  },
+  "search": {
+    "title": "Rechercher des Trunks",
+    "placeholder": "Rechercher par nom, nom d'utilisateur ou domaine..."
+  },
+  "table": {
+    "title": "Vos Trunks",
+    "headers": {
+      "name": "Nom",
+      "username": "Nom d'utilisateur",
+      "domain": "Domaine",
+      "sessions": "Sessions",
+      "cps": "APS",
+      "accountStatus": "Statut du Compte",
+      "sipRegistration": "Enregistrement SIP",
+      "actions": "Actions"
+    }
+  },
+  "actions": {
+    "details": "Détails",
+    "viewRules": "Voir Règles",
+    "tryAgain": "Réessayer",
+    "back": "Retour",
+    "backToTrunks": "Retour aux Trunks",
+    "copy": "Copier",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe"
+  },
+  "states": {
+    "loading": "Chargement...",
+    "loadingDetails": "Chargement des détails du trunk",
+    "noTrunks": {
+      "title": "Aucun trunk assigné",
+      "description": "Vous n'avez encore aucun trunk SIP assigné à votre compte."
+    },
+    "error": "Échec de la récupération des trunks",
+    "errorDetails": "Échec du chargement des détails du trunk",
+    "trunkNotFound": "Trunk introuvable ou non assigné à votre compte",
+    "unlimited": "Illimité",
+    "notAvailable": "N/D",
+    "noIpAddresses": "Aucune adresse IP configurée",
+    "sipAccountNotConfigured": {
+      "title": "Compte SIP Non Configuré",
+      "description": "Les règles d'authentification seront disponibles une fois votre compte SIP correctement configuré."
+    }
+  },
+  "tooltips": {
+    "viewRules": "Voir les règles d'authentification (lecture seule)"
+  },
+  "details": {
+    "title": "Aperçu du Trunk",
+    "trunkName": "Nom du Trunk",
+    "assignedDate": "Date d'assignation",
+    "description": "Description",
+    "connectionConfig": {
+      "title": "Configuration de Connexion",
+      "pbxConfig": "Configuration PBX",
+      "pbxDescription": "Utilisez ces détails pour configurer votre PBX ou client SIP pour se connecter à ce trunk.",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "domain": "Domaine/Hôte",
+      "ipAddresses": "Adresses IP",
+      "port": "Port",
+      "authType": "Type d'authentification",
+      "registrationRequired": "Enregistrement requis",
+      "primary": "Primaire"
+    },
+    "authRules": {
+      "title": "Règles d'Authentification"
+    },
+    "codecs": {
+      "title": "Codecs Supportés",
+      "description": "Configurez votre PBX pour utiliser un ou plusieurs de ces codecs audio supportés :"
+    },
+    "quickSetup": {
+      "title": "Guide de Configuration Rapide",
+      "subtitle": "Étapes de Configuration de Base :",
+      "steps": {
+        "1": "Configurez votre PBX/client SIP avec les détails de connexion ci-dessus",
+        "2": "Utilisez le nom d'utilisateur et le mot de passe fournis (cliquez sur l'icône œil pour révéler le mot de passe)",
+        "3": "Définissez la méthode d'authentification sur \"{authType}\"",
+        "4": "Activez {registrationStatus}",
+        "5": "Configurez au moins un des codecs supportés : {codecs}"
+      },
+      "registration": "l'enregistrement",
+      "noRegistration": "aucun enregistrement"
+    },
+    "support": {
+      "title": "Besoin d'aide ?",
+      "description": "Si vous avez besoin d'aide pour configurer votre PBX ou si vous rencontrez des problèmes avec ce trunk, veuillez contacter notre équipe de support en mentionnant le nom du trunk \"{trunkName}\" comme référence."
+    }
+  }
+} 

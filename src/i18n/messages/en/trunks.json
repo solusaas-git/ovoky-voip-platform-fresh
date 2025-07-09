@@ -1,0 +1,108 @@
+{
+  "page": {
+    "title": "My Trunks",
+    "description": "View your assigned SIP trunks and their configuration",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "services": "Services",
+      "trunks": "Trunks"
+    }
+  },
+  "stats": {
+    "totalTrunks": "Total Trunks",
+    "sipRegistration": "SIP Registration",
+    "accountStatus": "Account Status",
+    "checkTable": "Check Table"
+  },
+  "search": {
+    "title": "Search Trunks",
+    "placeholder": "Search by name, username, or domain..."
+  },
+  "table": {
+    "title": "Your Trunks",
+    "headers": {
+      "name": "Name",
+      "username": "Username",
+      "domain": "Domain",
+      "sessions": "Sessions",
+      "cps": "CPS",
+      "accountStatus": "Account Status",
+      "sipRegistration": "SIP Registration",
+      "actions": "Actions"
+    }
+  },
+  "actions": {
+    "details": "Details",
+    "viewRules": "View Rules",
+    "tryAgain": "Try Again",
+    "back": "Back",
+    "backToTrunks": "Back to Trunks",
+    "copy": "Copy",
+    "showPassword": "Show Password",
+    "hidePassword": "Hide Password"
+  },
+  "states": {
+    "loading": "Loading...",
+    "loadingDetails": "Loading trunk details",
+    "noTrunks": {
+      "title": "No trunks assigned",
+      "description": "You don't have any SIP trunks assigned to your account yet."
+    },
+    "error": "Failed to fetch trunks",
+    "errorDetails": "Failed to load trunk details",
+    "trunkNotFound": "Trunk not found or not assigned to you",
+    "unlimited": "Unlimited",
+    "notAvailable": "N/A",
+    "noIpAddresses": "No IP addresses configured",
+    "sipAccountNotConfigured": {
+      "title": "SIP Account Not Configured",
+      "description": "Authentication rules will be available once your SIP account is properly configured."
+    }
+  },
+  "tooltips": {
+    "viewRules": "View authentication rules (read-only)"
+  },
+  "details": {
+    "title": "Trunk Overview",
+    "trunkName": "Trunk Name",
+    "assignedDate": "Assigned Date",
+    "description": "Description",
+    "connectionConfig": {
+      "title": "Connection Configuration",
+      "pbxConfig": "PBX Configuration",
+      "pbxDescription": "Use these details to configure your PBX or SIP client to connect to this trunk.",
+      "username": "Username",
+      "password": "Password",
+      "domain": "Domain/Host",
+      "ipAddresses": "IP Addresses",
+      "port": "Port",
+      "authType": "Authentication Type",
+      "registrationRequired": "Registration Required",
+      "primary": "Primary"
+    },
+    "authRules": {
+      "title": "Authentication Rules"
+    },
+    "codecs": {
+      "title": "Supported Codecs",
+      "description": "Configure your PBX to use one or more of these supported audio codecs:"
+    },
+    "quickSetup": {
+      "title": "Quick Setup Guide",
+      "subtitle": "Basic Configuration Steps:",
+      "steps": {
+        "1": "Configure your PBX/SIP client with the connection details above",
+        "2": "Use the username and password provided (click the eye icon to reveal password)",
+        "3": "Set the authentication method to \"{authType}\"",
+        "4": "Enable {registrationStatus}",
+        "5": "Configure at least one of the supported codecs: {codecs}"
+      },
+      "registration": "registration",
+      "noRegistration": "no registration"
+    },
+    "support": {
+      "title": "Need Help?",
+      "description": "If you need assistance configuring your PBX or have any issues with this trunk, please contact our support team with the trunk name \"{trunkName}\" for reference."
+    }
+  }
+} 

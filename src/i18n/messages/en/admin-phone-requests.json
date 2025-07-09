@@ -1,0 +1,140 @@
+{
+  "page": {
+    "title": "Phone Number Requests",
+    "description": "Manage user requests for phone number purchases, cancellations, and modifications",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "admin": "Admin",
+      "phoneNumberRequests": "Phone Number Requests"
+    }
+  },
+  "access": {
+    "denied": "Access Denied",
+    "deniedDescription": "You don't have permission to access this page",
+    "deniedMessage": "You don't have permission to access this page."
+  },
+  "loading": {
+    "title": "Loading...",
+    "description": "Checking permissions",
+    "initializing": "Initializing..."
+  },
+  "filters": {
+    "title": "Filters",
+    "search": "Search requests...",
+    "allStatuses": "All Statuses",
+    "allTypes": "All Types",
+    "allPriorities": "All Priorities"
+  },
+  "status": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "requestTypes": {
+    "backorder": "Purchase Request",
+    "cancellation": "Cancellation",
+    "transfer": "Transfer",
+    "suspend": "Suspend",
+    "modify": "Modify",
+    "purchaseRequests": "Purchase Requests",
+    "cancellations": "Cancellations",
+    "transfers": "Transfers",
+    "suspensions": "Suspensions",
+    "modifications": "Modifications"
+  },
+  "priority": {
+    "urgent": "Urgent",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "stats": {
+    "totalRequests": "Total Requests",
+    "purchaseRequests": "Purchase Requests",
+    "cancellations": "Cancellations",
+    "pending": "Pending",
+    "approved": "Approved",
+    "highPriority": "High Priority"
+  },
+  "table": {
+    "title": "Phone Number Requests",
+    "headers": {
+      "requestNumber": "Request #",
+      "phoneNumber": "Phone Number",
+      "user": "User",
+      "type": "Type",
+      "status": "Status",
+      "priority": "Priority",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "noCompany": "No company",
+    "pagination": {
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "results": "results",
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
+  "modals": {
+    "details": {
+      "title": "Request Details",
+      "description": "Complete information about request",
+      "fields": {
+        "requestNumber": "Request Number",
+        "status": "Status",
+        "phoneNumber": "Phone Number",
+        "requestType": "Request Type",
+        "priority": "Priority",
+        "created": "Created",
+        "user": "User",
+        "reason": "Reason",
+        "businessJustification": "Business Justification",
+        "description": "Description",
+        "expiresAt": "Expires At",
+        "scheduledDate": "Scheduled Date",
+        "reviewNotes": "Review Notes",
+        "processingNotes": "Processing Notes",
+        "reviewedBy": "Reviewed By",
+        "reviewedAt": "Reviewed At"
+      },
+      "noCompany": "No company",
+      "notAvailable": "N/A"
+    },
+    "approve": {
+      "title": "Approve Request",
+      "descriptionPurchase": "Approve purchase request for",
+      "descriptionOther": "Approve {type} request for",
+      "warningPurchase": "Approving this request will assign the phone number to the user and create billing records.",
+      "warningOther": "Approving this request will immediately process the requested action on the phone number.",
+      "reviewNotes": "Review Notes",
+      "reviewNotesPlaceholder": "Optional notes about your review decision...",
+      "processingNotes": "Processing Notes",
+      "processingNotesPlaceholder": "Optional notes about the processing...",
+      "cancel": "Cancel",
+      "approve": "Approve Request",
+      "approving": "Approving..."
+    },
+    "reject": {
+      "title": "Reject Request",
+      "descriptionPurchase": "Reject purchase request for",
+      "descriptionOther": "Reject {type} request for",
+      "reviewNotes": "Review Notes *",
+      "reviewNotesPlaceholder": "Please provide a reason for rejecting this request...",
+      "cancel": "Cancel",
+      "reject": "Reject Request",
+      "rejecting": "Rejecting..."
+    }
+  },
+  "messages": {
+    "approveSuccess": "Request approved successfully",
+    "approveError": "Failed to approve request",
+    "rejectSuccess": "Request rejected successfully",
+    "rejectError": "Failed to reject request",
+    "fetchError": "Failed to fetch requests"
+  }
+} 

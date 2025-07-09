@@ -1,0 +1,34 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of main pages
+Allow: /login
+Allow: /register
+Allow: /forgot-password
+Allow: /reset-password
+
+# Disallow admin and API routes
+Disallow: /admin/
+Disallow: /api/
+Disallow: /debug/
+Disallow: /test-*
+
+# Disallow user-specific pages
+Disallow: /account
+Disallow: /dashboard
+Disallow: /settings
+Disallow: /support/tickets/
+Disallow: /payments
+Disallow: /users/
+Disallow: /cdrs
+Disallow: /calls
+
+# Allow public pages
+Allow: /services/
+Allow: /rates/
+
+# Sitemap location
+Sitemap: https://ovoky.io/sitemap.xml
+
+# Crawl delay (optional - 1 second between requests)
+Crawl-delay: 1 

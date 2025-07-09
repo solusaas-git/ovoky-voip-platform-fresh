@@ -1,0 +1,468 @@
+{
+  "page": {
+    "title": "SMS Management",
+    "description": "Send SMS messages, manage campaigns, contacts and templates",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "sms": "SMS"
+    }
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "create": "Create",
+    "update": "Update",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "delete": "Delete",
+      "edit": "Edit",
+      "view": "View",
+      "create": "Create",
+      "update": "Update"
+    },
+    "messages": {
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success",
+      "saving": "Saving..."
+    },
+    "actions": "Actions"
+  },
+  "tabs": {
+    "send": "Send SMS",
+    "campaigns": "Campaigns",
+    "contacts": "Contacts",
+    "templates": "Templates",
+    "history": "History",
+    "settings": "Settings"
+  },
+  "send": {
+    "title": "Send SMS",
+    "description": "Send individual SMS messages",
+    "form": {
+      "recipient": {
+        "label": "Recipient",
+        "placeholder": "Enter phone number"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Type your message here...",
+        "charactersLeft": "{count} characters left",
+        "maxLength": "Maximum {max} characters"
+      },
+      "senderId": {
+        "label": "Sender ID",
+        "placeholder": "Select sender ID"
+      },
+      "gateway": {
+        "label": "SMS Gateway",
+        "placeholder": "Select gateway"
+      },
+      "preview": {
+        "title": "Preview",
+        "from": "From: {senderId}",
+        "to": "To: {recipient}",
+        "message": "Message: {message}",
+        "cost": "Estimated cost: {cost}"
+      },
+      "calculation": {
+        "empty": "No message",
+        "characters": "{count} characters",
+        "gsm": "GSM 7-bit encoding",
+        "unicode": "Unicode encoding (special characters)",
+        "singleSms": "1 SMS",
+        "multiSms": "{count} SMS",
+        "extendedChars": "{count} extended characters (count as 2)",
+        "unicodeChars": "{count} special characters",
+        "remaining": "{count} characters remaining",
+        "encoding": "Encoding: {encoding}",
+        "parts": "SMS parts: {count}"
+      }
+    },
+    "buttons": {
+      "send": "Send SMS",
+      "sending": "Sending...",
+      "preview": "Preview"
+    },
+    "messages": {
+      "success": "SMS sent successfully!",
+      "error": "Failed to send SMS. Please try again.",
+      "invalidPhone": "Please enter a valid phone number",
+      "emptyMessage": "Please enter a message",
+      "selectSender": "Please select a sender ID",
+      "selectGateway": "Please select a gateway"
+    }
+  },
+  "campaigns": {
+    "title": "SMS Campaigns",
+    "description": "Create and manage SMS campaigns to send bulk messages",
+    "list": {
+      "title": "Your Campaigns",
+      "empty": "No campaigns found",
+      "columns": {
+        "name": "Campaign Name",
+        "status": "Status",
+        "recipients": "Recipients",
+        "sent": "Sent",
+        "scheduled": "Scheduled",
+        "created": "Created"
+      }
+    },
+    "create": {
+      "button": "Create Campaign",
+      "title": "Create New Campaign",
+      "description": "Create a new SMS campaign to send messages to your contacts",
+      "form": {
+        "name": {
+          "label": "Campaign Name",
+          "placeholder": "Enter campaign name"
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Optional campaign description"
+        },
+        "contactList": {
+          "label": "Contact List",
+          "placeholder": "Select contact list"
+        },
+        "template": {
+          "label": "SMS Template",
+          "placeholder": "Select template"
+        },
+        "senderId": {
+          "label": "Sender ID",
+          "placeholder": "Select sender ID"
+        },
+        "gateway": {
+          "label": "SMS Gateway",
+          "placeholder": "Select gateway"
+        },
+        "country": {
+          "label": "Destination Country",
+          "placeholder": "Select destination country",
+          "description": "Select from countries available in your assigned SMS rate deck",
+          "noCountries": "No countries available in your assigned rate deck",
+          "validation": {
+            "required": "Please select a destination country"
+          }
+        },
+        "scheduling": {
+          "label": "Schedule for later",
+          "date": "Date",
+          "time": "Time"
+        }
+      },
+      "validation": {
+        "nameRequired": "Campaign name is required",
+        "contactListRequired": "Please select a contact list",
+        "templateRequired": "Please select a template",
+        "senderIdRequired": "Please select a sender ID",
+        "gatewayRequired": "Please select a gateway",
+        "countryRequired": "Please select a country",
+        "dateRequired": "Please select a date",
+        "timeRequired": "Please select a time",
+        "futureTime": "Scheduled time must be in the future"
+      }
+    },
+    "status": {
+      "draft": "Draft",
+      "scheduled": "Scheduled",
+      "sending": "Sending",
+      "sent": "Sent",
+      "paused": "Paused",
+      "failed": "Failed",
+      "stopped": "Stopped",
+      "completed": "Completed",
+      "archived": "Archived"
+    },
+    "actions": {
+      "start": "Start",
+      "pause": "Pause",
+      "stop": "Stop",
+      "archive": "Archive",
+      "restart": "Restart",
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View"
+    }
+  },
+  "contacts": {
+    "title": "Contact Lists",
+    "subtitle": "Manage your SMS contact lists and contacts",
+    "create": "Create List",
+    "createTitle": "Create Contact List",
+    "createDescription": "Create a new contact list to organize your SMS recipients",
+    "createFirst": "Create your first contact list to get started",
+    "editTitle": "Edit Contact List",
+    "editDescription": "Update contact list information",
+    "deleteTitle": "Delete Contact List",
+    "deleteDescription": "Are you sure you want to delete '{name}'?",
+    "deletingDescription": "Deleting '{name}' and all its contacts...",
+    "deleteWarning": "This action cannot be undone. All contacts in this list will be permanently deleted.",
+    "deletingProgress": "Deleting contact list and all contacts...",
+    "deletingSubtext": "Please wait while we remove the list and all associated contacts.",
+    "deleting": "Deleting...",
+    "name": "List Name",
+    "namePlaceholder": "Enter list name",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter list description (optional)",
+    "noDescription": "No description provided",
+    "searchPlaceholder": "Search contact lists...",
+    "noLists": "No contact lists found",
+    "noContacts": "No contacts in this list",
+    "loading": "Loading contact lists...",
+    "fetchError": "Failed to load contact lists",
+    "createError": "Failed to create contact list",
+    "createSuccess": "Contact list created successfully",
+    "updateError": "Failed to update contact list",
+    "updateSuccess": "Contact list updated successfully",
+    "deleteError": "Failed to delete contact list",
+    "deleteSuccess": "Contact list deleted successfully",
+    "update": "Update",
+    "delete": "Delete",
+    "inUse": "In Use",
+    "addContact": "Add Contact",
+    "addContactTitle": "Add New Contact",
+    "addContactDescription": "Add a new contact to this list",
+    "addContactSuccess": "Contact added successfully",
+    "addContactError": "Failed to add contact",
+    "editContactTitle": "Edit Contact",
+    "editContactDescription": "Update contact information",
+    "updateContact": "Update Contact",
+    "updateContactSuccess": "Contact updated successfully",
+    "updateContactError": "Failed to update contact",
+    "deleteContact": "Delete Contact",
+    "deleteContactTitle": "Delete Contact",
+    "deleteContactDescription": "Are you sure you want to delete {name}?",
+    "deleteContactSuccess": "Contact deleted successfully",
+    "deleteContactError": "Failed to delete contact",
+    "deleteContactWarning": "This action cannot be undone.",
+    "fields": {
+      "name": "Name",
+      "phone": "Phone Number",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "address": "Address",
+      "city": "City",
+      "zipCode": "Zip Code",
+      "dateOfBirth": "Date of Birth",
+      "firstNamePlaceholder": "Enter first name",
+      "lastNamePlaceholder": "Enter last name",
+      "addressPlaceholder": "Enter address",
+      "cityPlaceholder": "Enter city",
+      "zipCodePlaceholder": "Enter zip code"
+    }
+  },
+  "import": {
+    "title": "Import Contacts",
+    "description": "Upload a CSV file and map columns to contact fields",
+    "emptyFile": "The selected file is empty",
+    "error": "Failed to import contacts",
+    "columnMapping": "Column Mapping",
+    "selectColumn": "Select column",
+    "skipColumn": "Skip this column",
+    "column": "Column",
+    "options": "Import Options",
+    "updateDuplicates": "Update existing contacts with duplicate phone numbers",
+    "preview": "Data Preview",
+    "moreRows": "... and {count} more rows",
+    "start": "Import Contacts"
+  },
+  "templates": {
+    "title": "SMS Templates",
+    "description": "Create and manage reusable SMS templates",
+    "list": {
+      "title": "Your Templates",
+      "create": "Create Template",
+      "empty": "No templates found",
+      "emptySubtext": "Create your first SMS template to get started",
+      "available": {
+        "single": "template available",
+        "multiple": "templates available"
+      },
+      "columns": {
+        "name": "Template Name",
+        "category": "Category",
+        "variables": "Variables",
+        "used": "Times Used",
+        "created": "Created"
+      }
+    },
+    "form": {
+      "name": {
+        "label": "Template Name",
+        "placeholder": "Enter template name"
+      },
+      "category": {
+        "label": "Category",
+        "placeholder": "Select category"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Brief description of this template"
+      },
+      "message": {
+        "label": "Message Template",
+        "placeholder": "Type your template message...",
+        "variables": "Use variables like {firstName}, {lastName}, {company}"
+      }
+    },
+    "dialogs": {
+      "create": {
+        "title": "Create Template",
+        "description": "Create a new SMS template that you can reuse for campaigns and individual messages."
+      },
+      "edit": {
+        "title": "Edit Template",
+        "description": "Update your SMS template information and message content."
+      }
+    },
+    "editor": {
+      "specialChars": "Special chars",
+      "charsRemaining": "chars remaining",
+      "unicode": "Unicode",
+      "gsm": "GSM",
+      "sms": "SMS",
+      "customFieldsNote": "You can also use any custom fields from your contacts using the format:",
+      "none": "None"
+    },
+    "categories": {
+      "marketing": "Marketing",
+      "notification": "Notification",
+      "reminder": "Reminder",
+      "welcome": "Welcome",
+      "promotional": "Promotional",
+      "support": "Support",
+      "other": "Other",
+      "none": "No category"
+    },
+    "variables": {
+      "title": "Available Variables",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "address": "Address", 
+      "city": "City",
+      "zipCode": "Zip Code",
+      "dateOfBirth": "Date of Birth",
+      "company": "Company",
+      "department": "Department", 
+      "notes": "Notes",
+      "custom": "Custom Fields",
+      "usage": "Use variables like {firstName}, {lastName}, {phoneNumber}, {city}, etc."
+    }
+  },
+  "settings": {
+    "title": "SMS Settings",
+    "description": "Manage sender IDs and SMS configuration",
+    "senderIds": {
+      "title": "Sender IDs",
+      "description": "Manage your approved sender IDs",
+      "request": "Request New Sender ID",
+      "empty": "No sender IDs found",
+      "columns": {
+        "senderId": "Sender ID",
+        "status": "Status",
+        "type": "Type",
+        "requested": "Requested",
+        "approved": "Approved"
+      },
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      },
+      "form": {
+        "senderId": {
+          "label": "Sender ID",
+          "placeholder": "Enter sender ID (max 11 characters)"
+        },
+        "type": {
+          "label": "Type",
+          "alphanumeric": "Alphanumeric",
+          "numeric": "Numeric"
+        },
+        "justification": {
+          "label": "Justification",
+          "placeholder": "Explain why you need this sender ID"
+        }
+      }
+    },
+    "providers": {
+      "title": "SMS Gateways",
+      "description": "Available SMS gateways",
+      "empty": "No gateways assigned"
+    },
+    "blacklist": {
+      "title": "Blacklisted Numbers",
+      "description": "Manage phone numbers that should not receive SMS messages",
+      "empty": "No blacklisted numbers",
+      "emptyDescription": "Add phone numbers to prevent sending SMS to them",
+      "addButton": "Add to Blacklist",
+      "addTitle": "Add Phone Number to Blacklist",
+      "addDescription": "Add a phone number to prevent sending SMS messages to it.",
+      "phoneNumber": "Phone Number",
+      "reason": "Reason (optional)",
+      "reasonPlaceholder": "Explain why this number should be blacklisted...",
+      "addAction": "Add to Blacklist",
+      "adding": "Adding...",
+      "removeTitle": "Remove from Blacklist",
+      "removeDescription": "Are you sure you want to remove this phone number from the blacklist?",
+      "remove": "Remove",
+      "table": {
+        "phoneNumber": "Phone Number",
+        "reason": "Reason",
+        "type": "Type",
+        "added": "Added",
+        "actions": "Actions",
+        "noReason": "No reason provided",
+        "global": "Global",
+        "personal": "Personal"
+      }
+    }
+  },
+  "common": {
+    "actions": "Actions",
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "create": "Create",
+      "update": "Update",
+      "send": "Send",
+      "preview": "Preview",
+      "import": "Import",
+      "export": "Export",
+      "refresh": "Refresh",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous",
+      "close": "Close"
+    },
+    "messages": {
+      "success": "Operation completed successfully",
+      "error": "An error occurred. Please try again.",
+      "loading": "Loading...",
+      "saving": "Saving...",
+      "deleting": "Deleting...",
+      "noData": "No data available",
+      "confirmDelete": "Are you sure you want to delete this item?"
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidPhone": "Please enter a valid phone number",
+      "invalidEmail": "Please enter a valid email address",
+      "maxLength": "Maximum {max} characters allowed",
+      "minLength": "Minimum {min} characters required"
+    }
+  }
+} 

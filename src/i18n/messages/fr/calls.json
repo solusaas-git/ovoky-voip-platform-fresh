@@ -1,0 +1,95 @@
+{
+  "page": {
+    "title": "Appels Actifs",
+    "description": "Surveillez les appels en direct en temps réel avec actualisation automatique toutes les 5 secondes",
+    "breadcrumbs": {
+      "dashboard": "Tableau de Bord",
+      "activeCalls": "Appels Actifs"
+    }
+  },
+  "activeCalls": {
+    "loading": {
+      "title": "Chargement des Appels Actifs",
+      "description": "Récupération des données d'appels en temps réel..."
+    },
+    "error": {
+      "title": "Erreur de Chargement des Appels Actifs",
+      "description": "Une erreur s'est produite lors du chargement des données d'appels actifs",
+      "tryAgain": "Réessayer"
+    },
+    "noSippyAccount": {
+      "title": "Aucun ID de Compte Sippy",
+      "description": "Votre compte utilisateur n'a pas d'ID de compte Sippy configuré.",
+      "contactAdmin": "Veuillez contacter un administrateur pour configurer votre compte Sippy."
+    },
+    "header": {
+      "realTimeMonitoring": "Surveillance en Temps Réel",
+      "callCount": "{count} appel actif pour le compte {accountId}",
+      "callCountPlural": "{count} appels actifs pour le compte {accountId}",
+      "lastUpdated": "Dernière mise à jour {time}",
+      "refresh": "Actualiser",
+      "disconnectAll": "Déconnecter Tout"
+    },
+    "stats": {
+      "totalCalls": "Total Appels",
+      "connected": "Connectés",
+      "avgDuration": "Durée Moy",
+      "avgDelay": "Délai Moy",
+      "ofTotal": "{percentage}% du total"
+    },
+    "states": {
+      "title": "Distribution des États d'Appels",
+      "connected": {
+        "label": "Connecté",
+        "description": "L'appel est actif et en cours"
+      },
+      "arComplete": {
+        "label": "Connexion",
+        "description": "Authentification et routage terminés, établissement de la connexion"
+      },
+      "waitRoute": {
+        "label": "Routage",
+        "description": "En attente d'informations de routage"
+      },
+      "waitAuth": {
+        "label": "Authentification",
+        "description": "Authentification en cours"
+      },
+      "idle": {
+        "label": "Inactif",
+        "description": "Appel reçu, traitement démarré"
+      },
+      "disconnecting": {
+        "label": "Déconnexion",
+        "description": "L'appel est en cours de déconnexion"
+      },
+      "dead": {
+        "label": "Terminé",
+        "description": "L'appel s'est terminé ou a échoué"
+      },
+      "unknown": {
+        "label": "Inconnu",
+        "description": "État inconnu"
+      }
+    },
+    "emptyState": {
+      "title": "Aucun Appel Actif",
+      "description": "Il n'y a actuellement aucun appel actif pour le compte {accountId}"
+    },
+    "table": {
+      "title": "Détails des Appels Actifs",
+      "headers": {
+        "call": "Appel",
+        "state": "État",
+        "duration": "Durée",
+        "setupTime": "Heure d'Établissement",
+        "direction": "Direction",
+        "ips": "IPs",
+        "delay": "Délai",
+        "actions": ""
+      },
+      "disconnectCall": "Déconnecter l'Appel",
+      "noValidCallId": "Aucun ID d'appel valide trouvé"
+    }
+  }
+} 
