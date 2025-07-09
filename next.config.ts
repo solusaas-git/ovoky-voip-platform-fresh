@@ -42,7 +42,7 @@ const nextConfig: NextConfig = {
 
   // Environment variables
   env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY,
+    CUSTOM_KEY: process.env.CUSTOM_KEY || '',
   },
 
   // Output configuration for Vercel
