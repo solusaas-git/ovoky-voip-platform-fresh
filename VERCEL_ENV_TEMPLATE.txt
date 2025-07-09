@@ -1,0 +1,47 @@
+# Vercel Environment Configuration
+# Copy these variables to your Vercel project settings
+
+# Core Database & Auth
+MONGODB_URI=your-mongodb-connection-string
+JWT_SECRET=your-jwt-secret-key
+NEXTAUTH_SECRET=your-nextauth-secret-key
+
+# App URLs (Update with your actual Vercel domain)
+NEXT_PUBLIC_APP_URL=https://your-app-name.vercel.app
+NEXTAUTH_URL=https://your-app-name.vercel.app
+
+# Google OAuth (Optional - set if using Google Auth)
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# Sippy API
+NEXT_PUBLIC_SIPPY_HOST=https://sip2.ovoky.io
+
+# Push Notifications
+NEXT_PUBLIC_VAPID_PUBLIC_KEY=your-vapid-public-key
+VAPID_PRIVATE_KEY=your-vapid-private-key
+
+# Cron Configuration
+BALANCE_CHECK_CRON=0 */6 * * *
+TZ=Europe/London
+CRON_SECRET=your-cron-secret
+
+# Environment
+NODE_ENV=production
+
+# reCAPTCHA
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-recaptcha-site-key
+RECAPTCHA_SECRET_KEY=your-recaptcha-secret-key
+RECAPTCHA_MINIMUM_SCORE=0.5
+
+# CORS Configuration
+CORS_ORIGIN=https://your-app-name.vercel.app
+CORS_CREDENTIALS=true
+
+# CRITICAL: Missing variables that can cause build failures
+# Set these to prevent build-time errors
+INTERNAL_API_KEY=safe-default-key
+ENCRYPTION_KEY=0123456789abcdef0123456789abcdef
+WEB_PUSH_CONTACT=mailto:admin@your-domain.com
+WEBHOOK_BASE_URL=https://your-app-name.vercel.app
+GOOGLE_SITE_VERIFICATION=your-google-verification-code
